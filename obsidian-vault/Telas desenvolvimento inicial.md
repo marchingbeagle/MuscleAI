@@ -6,7 +6,7 @@
     - Links para "Esqueceu a senha" e redes sociais (se incluírem).
 
 ### 2. **Tela de Cadastro de Alunos (UI Mockup)**
-
+	
 - **Componentes visuais**:
     - Formulários para adicionar nome, idade, peso, altura (desabilitados).
     - Botão visual "Cadastrar Aluno".
