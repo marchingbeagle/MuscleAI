@@ -1,0 +1,201 @@
+{
+  "main": {
+    "id": "0786eda9d58cf7d6",
+    "type": "split",
+    "children": [
+      {
+        "id": "c7dc83be5d73d2da",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f701ac7980d17c19",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Telas necessárias.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "e3062dd917dbadcd",
+    "type": "split",
+    "children": [
+      {
+        "id": "f956473ce2de5996",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ced348b600baa27c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "cd6d6c6bd658599e",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "10b9fb7ba99d118f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 293.5
+  },
+  "right": {
+    "id": "84eac9745ed8cb79",
+    "type": "split",
+    "children": [
+      {
+        "id": "cc16caf245bd3603",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f8c592140f85a3f3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Telas necessárias.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": true,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              }
+            }
+          },
+          {
+            "id": "1e134feb2ba0e17c",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Telas necessárias.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "a5c13d6ba18f3fd4",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "8ffe5767a002ea87",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Telas necessárias.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 327.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "obsidian-git:Open Git source control": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false
+    }
+  },
+  "active": "f701ac7980d17c19",
+  "lastOpenFiles": [
+    "Telas necessárias.md",
+    "docs/Backend/extra01-criando_repositorio_remoto.pdf",
+    "docs/Backend/backend-2024-1-main/links.txt",
+    "docs/Backend/backend-2024-1-main/exemplos/semana13/turma02/exemplo-crud/exemplo-crud/src/main/java/com/example/exemplocrud/services/WeaponService.java",
+    "docs/Backend/backend-2024-1-main/exemplos/semana13/turma02/exemplo-crud/exemplo-crud/src/main/java/com/example/exemplocrud/repositories/WeaponRepository.java",
+    "docs/Backend/backend-2024-1-main/exemplos/semana13/turma02/exemplo-crud/exemplo-crud/src/main/java/com/example/exemplocrud/models/Weapon.java",
+    "docs/Backend/backend-2024-1-main/exemplos/semana13/turma02/exemplo-crud/exemplo-crud/src/main/java/com/example/exemplocrud/mappers/WeaponMapper.java",
+    "docs/Backend/backend-2024-1-main/exemplos/semana13/turma02/exemplo-crud/exemplo-crud/src/main/java/com/example/exemplocrud/exception/GlobalExceptionHandler.java",
+    "docs/Backend/backend-2024-1-main/exemplos/semana13/turma02/exemplo-crud/exemplo-crud/src/main/java/com/example/exemplocrud/dtos/WeaponDto.java",
+    "docs/Backend/backend-2024-1-main/exemplos/semana13/turma02/exemplo-crud/exemplo-crud/src/main/java/com/example/exemplocrud/dtos/ApiExceptionDto.java",
+    "docs/Backend/backend-2024-1-main/exemplos/semana13/turma02/exemplo-crud/exemplo-crud/src/main/java/com/example/exemplocrud/controllers/WeaponController.java",
+    "docs/Backend/backend-2024-1-main/avaliacoes/assets/exercicio03_class.svg",
+    "docs/Backend/backend-2024-1-main/avaliacoes/assets/exercicio03_activity.svg",
+    "docs/Backend/backend-2024-1-main/avaliacoes/avaliacao03_final.md",
+    "docs/Backend/backend-2024-1-main/avaliacoes/avaliacao02_intermediario.md",
+    "docs/Backend/backend-2024-1-main/avaliacoes/avaliacao01_lista.md",
+    "docs/Backend/backend-2024-1-main/avaliacoes/avaliacao01_exercicios.md",
+    "docs/Backend/backend-2024-1-main/aulas/extra/assets/pgadmin005.png",
+    "docs/Backend/backend-2024-1-main/aulas/extra/assets/pgadmin004.png",
+    "docs/Backend/backend-2024-1-main/aulas/extra/assets/pgadmin003.png",
+    "docs/Backend/backend-2024-1-main/aulas/extra/assets/pgadmin002.png",
+    "docs/Backend/backend-2024-1-main/aulas/extra/assets/pgadmin001.png",
+    "docs/Backend/backend-2024-1-main/aulas/extra/extra02-migrando_postgres.md",
+    "docs/Backend/backend-2024-1-main/aulas/extra/extra01-criando_repositorio_remoto.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula20/aula20-controle_acesso.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula19/assets/004-conta-servico.png",
+    "docs/Backend/backend-2024-1-main/aulas/aula19/assets/005-chave-servico.png",
+    "docs/Backend/backend-2024-1-main/aulas/aula19/assets/003-ativar-run.png",
+    "docs/Backend/backend-2024-1-main/aulas/aula19/aula19-implantacao.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula18/aula18-testes_unitarios.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula17/aula17-paginacao_ordenacao.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula16/aula16-repositorios.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula15/aula15-validacao.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula14/aula14-dto_mappers.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula13/aula13-rest.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula13/aula13-atividade01.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula12/aula12-api_enterprise.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula11/aula11-revisao_geral.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula10/aula10-integrando_apis.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula09/aula09-json.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula08/aula08-spring_web.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula07/aula07-protocolo_http.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula06/aula06-spring_framework.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula05/aula05-estudo_caso_java.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula04/aula04-revisao_java.md",
+    "docs/Backend/backend-2024-1-main/aulas/aula03/aula03-controle_de_versao.md",
+    "Untitled 1.canvas",
+    "Untitled.canvas"
+  ]
+}
