@@ -5,9 +5,12 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@services/*": ["src/services/*"],
+      "@assets/*": ["src/assets/*"]
     },
     "esModuleInterop": true,
     "types": ["@prisma/react-native"]
-  }
+  },
+  "include": ["src", "src/types"]
 }

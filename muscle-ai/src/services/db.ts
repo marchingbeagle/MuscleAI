@@ -8,7 +8,7 @@ const baseClient = new PrismaClient({
 
 export const prismaClient = baseClient.$extends(reactiveHooksExtension());
 
-export async function initializeDb() {
+export async function initializeDb(): Promise<void> {
   try {
     await baseClient.$connect();
   } catch (error) {
