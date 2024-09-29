@@ -2,10 +2,19 @@ import { View, Text } from "react-native";
 import React from "react";
 import { Button as ButtonAtom } from "@/components/button";
 import tailwind from "twrnc";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "@/types/navigationTypes";
 
+type WelcomeScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Welcome"
+>;
 export default function WelcomePage() {
+  const navigation = useNavigation<WelcomeScreenNavigationProp>();
+
   const onPressStartTraining = () => {
-    alert("Working on the weekend like usual");
+    navigation.navigate("Login");
   };
 
   return (
