@@ -10,7 +10,7 @@
       "@assets/*": ["src/assets/*"]
     },
     "esModuleInterop": true,
-    "types": ["@prisma/react-native"]
+    "types": ["@prisma/react-native", "node"]
   },
   "include": ["src", "src/types"]
 }

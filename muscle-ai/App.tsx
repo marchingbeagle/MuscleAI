@@ -6,6 +6,10 @@ import Routes from "./src/routes";
 import tailwind from "twrnc";
 import { initializeDb } from "./src/services/db";
 import "./gesture-handler";
+import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
+import { tokenCache } from "./src/services/tokenCache";
+
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
 export default function App() {
   const [isInitialized, setIsInitialized] = useState(false);
@@ -19,17 +23,21 @@ export default function App() {
   }, []);
 
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <StatusBar barStyle={"light-content"} />
-        {isInitialized ? (
-          <Routes />
-        ) : (
-          <SafeAreaView style={tailwind`flex items-center justify-center`}>
-            <Text>Loading...</Text>
-          </SafeAreaView>
-        )}
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
+      <ClerkLoaded>
+        <SafeAreaProvider>
+          <NavigationContainer>
+            <StatusBar barStyle={"light-content"} />
+            {isInitialized ? (
+              <Routes />
+            ) : (
+              <SafeAreaView style={tailwind`flex items-center justify-center`}>
+                <Text>Loading...</Text>
+              </SafeAreaView>
+            )}
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </ClerkLoaded>
+    </ClerkProvider>
   );
 }

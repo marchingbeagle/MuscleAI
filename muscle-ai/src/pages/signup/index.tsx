@@ -1,43 +1,58 @@
-import { View, Text } from "react-native";
-import React from "react";
-import RNBcrypt from "react-native-bcrypt";
-import { prismaClient } from "@/services/db";
+import React, { useState } from "react";
+import { View, Text, TextInput, Button } from "react-native";
+import { useSignUp } from "@clerk/clerk-expo";
+import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "@/types/navigationTypes";
+import { StackNavigationProp } from "@react-navigation/stack";
 
-export default function SignupPage() {
-  async function registerUser(email: string, password: string, name: string) {
+type SignupScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Login"
+>;
+
+export default function SignUpPage() {
+  const { signUp } = useSignUp();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigation = useNavigation<SignupScreenNavigationProp>();
+
+  const handleSignUp = async () => {
     try {
-      const saltRounds = 10;
-
-      RNBcrypt.hash(
-        password,
-        saltRounds,
-        async (error: Error, hashedPassword?: string) => {
-          if (error) {
-            console.error("Error hashing password:", error);
-            return;
-          }
-
-          try {
-            await prismaClient.user.create({
-              data: {
-                name: name,
-                email: email,
-                password: hashedPassword || "",
-              },
-            });
-            console.log("User registered successfully");
-          } catch (dbError) {
-            console.error("Error storing user in database:", dbError);
-          }
-        }
-      );
+      if (signUp) {
+        await signUp.create({
+          emailAddress: email,
+          password,
+        });
+        alert("Sign-up successful!");
+        navigation.navigate("Login");
+      } else {
+        alert("Sign-up service is not available.");
+      }
     } catch (error) {
-      console.error("Error hashing password:", error);
+      console.error("Sign-up error:", error);
+      alert("Sign-up failed.");
     }
-  }
+  };
+
+  const handleNavigateToLogin = () => {
+    navigation.navigate("Login");
+  };
+
   return (
     <View>
-      <Text>SignupPage</Text>
+      <Text>Sign Up</Text>
+      <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
+      <TextInput
+        placeholder="Password"
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
+      <Button title="Sign Up" onPress={handleSignUp} />
+      <Button
+        title="Already have an account? Login"
+        onPress={handleNavigateToLogin}
+      />
     </View>
   );
 }
