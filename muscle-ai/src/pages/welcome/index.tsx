@@ -11,6 +11,7 @@ type WelcomeScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "Welcome"
 >;
+
 export default function WelcomePage() {
   const navigation = useNavigation<WelcomeScreenNavigationProp>();
 

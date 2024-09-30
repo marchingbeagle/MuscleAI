@@ -3,6 +3,7 @@ import WelcomePage from "../pages/welcome";
 import LoginPage from "../pages/login";
 import SignupPage from "../pages/signup";
 import React from "react";
+import HomePage from "@/pages/home";
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,11 @@ export default function Routes() {
       <Stack.Screen
         name="Signup"
         component={SignupPage}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Home"
+        component={HomePage}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

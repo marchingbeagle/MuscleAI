@@ -3,16 +3,54 @@ import tailwind from "twrnc";
 import { View, Text, TouchableOpacity, TextInput, Switch } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button as ButtonAtom } from "@/components/button";
+import { prismaClient } from "@/services/db";
 import Icon from "react-native-vector-icons/Ionicons";
+import RNBcrypt from "react-native-bcrypt";
+import { RootStackParamList } from "@/types/navigationTypes";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+type LoginScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Home"
+>;
 
 export default function LoginPage() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<LoginScreenNavigationProp>();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleLogin = () => {
-    // navigation.navigate("Home");
+  const handleLogin = async () => {
+    try {
+      const user = await prismaClient.user.findUnique({
+        where: {
+          email,
+        },
+      });
+
+      if (!user) {
+        alert("Usuário não encontrado.");
+        return;
+      }
+
+      RNBcrypt.compare(password, user.password, (error, isPasswordValid) => {
+        if (error) {
+          console.error("Bcrypt error:", error);
+          alert("Ocorreu um erro ao verificar a senha.");
+          return;
+        }
+
+        if (!isPasswordValid) {
+          alert("Senha incorreta.");
+          return;
+        }
+
+        navigation.navigate("Home");
+      });
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Ocorreu um erro ao efetuar o login.");
+    }
   };
 
   return (
@@ -49,7 +87,7 @@ export default function LoginPage() {
           </View>
           <TouchableOpacity
             onPress={() => {
-              /* Handle forgot password */
+              alert("Funcionalidade ainda não implementada");
             }}
           >
             <Text style={tailwind`text-blue-500 mb-4`}>
