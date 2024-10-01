@@ -9,9 +9,10 @@ O Muscle AI é um aplicativo de treino de musculação que ajuda os Personal Tra
 1. Instalar o [Node.js](https://nodejs.org/en/download/) e o [Android Studio](https://developer.android.com/studio)
 2. cd muscle-ai
 3. npm install
-4. prisma generate
-5. npx expo prebuild --clean
-6. npx expo run:android
+4. npm i -g prisma
+5. prisma generate
+6. npx expo prebuild --clean
+7. npx expo run:android
 
 OBS: é necessario ter a variavel de ambiente ANDROID_HOME definida com o caminho do SDK do Java.
 
