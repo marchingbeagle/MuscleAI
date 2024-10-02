@@ -1,4 +1,3 @@
-import "@prisma/react-native";
 import { PrismaClient } from "@prisma/client/react-native";
 import { reactiveHooksExtension } from "@prisma/react-native";
 

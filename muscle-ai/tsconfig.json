@@ -1,16 +1,30 @@
 {
-  "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "jsx": "react",
-    "strict": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "@services/*": ["src/services/*"],
-      "@assets/*": ["src/assets/*"]
-    },
+    "target": "es2016",
+    "module": "commonjs",
     "esModuleInterop": true,
-    "types": ["@prisma/react-native", "node"]
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "paths": {
+      "@clerk/clerk-expo": [
+        "node_modules/@clerk/clerk-expo"
+      ],
+      "expo-router": [
+        "node_modules/expo-router"
+      ],
+      "@prisma/react-native": [
+        "node_modules/@prisma/react-native"
+      ]
+    }
   },
-  "include": ["src", "src/types"]
+  "include": [
+    "src/**/*",
+    "node_modules/@clerk/clerk-expo/**/*",
+    "node_modules/expo-router/**/*",
+    "node_modules/@prisma/react-native/**/*"
+  ],
+  "extends": "expo/tsconfig.base"
 }
