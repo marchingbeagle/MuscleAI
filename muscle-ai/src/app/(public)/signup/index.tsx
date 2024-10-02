@@ -1,7 +1,8 @@
 import * as React from "react";
-import { TextInput, Button, View } from "react-native";
+import { TextInput, Button, View, Text } from "react-native";
 import { useSignUp } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
+import { Input } from "src/components/Input";
 
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -11,6 +12,8 @@ export default function SignUpScreen() {
   const [password, setPassword] = React.useState("");
   const [pendingVerification, setPendingVerification] = React.useState(false);
   const [code, setCode] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [surname, setSurname] = React.useState("");
 
   const onSignUpPress = async () => {
     if (!isLoaded) {
@@ -56,6 +59,25 @@ export default function SignUpScreen() {
     <View>
       {!pendingVerification && (
         <>
+          <View>
+            <Text>Nome</Text>
+            <Input
+              autoCapitalize="none"
+              value={name}
+              placeholder="Name..."
+              onChangeText={(name) => setName(name)}
+            />
+          </View>
+
+          <View>
+            <Text>Sobrenome</Text>
+            <Input
+              autoCapitalize="none"
+              value={surname}
+              placeholder="Surname..."
+              onChangeText={(surname) => setSurname(surname)}
+            />
+          </View>
           <TextInput
             autoCapitalize="none"
             value={emailAddress}
