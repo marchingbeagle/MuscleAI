@@ -5,13 +5,12 @@ import React from "react";
 import { Button } from "src/components/Button";
 import { Input } from "src/components/Input";
 import logo from "src/assets/logo_sem_nome.png";
+import InputGreen from "src/components/mycomponents/InputGreen.";
 
 export default function Signin() {
   const { signIn, setActive, isLoaded } = useSignIn();
   const router = useRouter();
 
-  const [focusInputEmail, setFocusInputEmail] = React.useState(false);
-  const [focusInputPassword, setFocusInputPassword] = React.useState(false);
   const [emailAddress, setEmailAddress] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -45,29 +44,17 @@ export default function Signin() {
         </View>
         <Text className="mb-8 text-5xl font-bold text-center">Muscle AI</Text>
         <View>
-          <Input
-            autoCapitalize="none"
+          <InputGreen
             value={emailAddress}
+            setValue={setEmailAddress}
             placeholder="johndoe@example.com"
-            onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
-            className={`bg-gray-100 border-2 ${
-              focusInputEmail ? "border-green-500" : "border-gray-300"
-            } rounded-lg`}
-            onFocus={() => setFocusInputEmail(true)}
-            onEndEditing={() => setFocusInputEmail(false)}
           />
         </View>
         <View>
-          <Input
+          <InputGreen
             value={password}
+            setValue={setPassword}
             placeholder="**********"
-            secureTextEntry={true}
-            onChangeText={(password) => setPassword(password)}
-            className={`bg-gray-100 border-2 ${
-              focusInputPassword ? "border-green-500" : "border-gray-300"
-            } rounded-lg`}
-            onFocus={() => setFocusInputPassword(true)}
-            onEndEditing={() => setFocusInputPassword(false)}
           />
         </View>
       </View>

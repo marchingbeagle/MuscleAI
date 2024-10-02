@@ -20,7 +20,7 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={"light-content"} />
+      <StatusBar barStyle={"dark-content"} />
       {isInitialized ? (
         isSignedIn ? (
           <HomePage />

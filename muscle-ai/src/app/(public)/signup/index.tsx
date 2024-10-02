@@ -1,19 +1,20 @@
 import * as React from "react";
-import { TextInput, Button, View, Text } from "react-native";
+import { View, Text } from "react-native";
 import { useSignUp } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
-import { Input } from "src/components/Input";
+import InputGreen from "src/components/mycomponents/InputGreen.";
+import { Button } from "src/components/Button";
 
 export default function SignUpScreen() {
+  const [pendingVerification, setPendingVerification] = React.useState(false);
+  const [code, setCode] = React.useState("");
   const { isLoaded, signUp, setActive } = useSignUp();
   const router = useRouter();
 
-  const [emailAddress, setEmailAddress] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [pendingVerification, setPendingVerification] = React.useState(false);
-  const [code, setCode] = React.useState("");
   const [name, setName] = React.useState("");
   const [surname, setSurname] = React.useState("");
+  const [emailAddress, setEmailAddress] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   const onSignUpPress = async () => {
     if (!isLoaded) {
@@ -56,51 +57,49 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View>
+    <View className="flex flex-col justify-center h-full p-8 bg-gray-50">
+      <Text className="mb-8 text-2xl">Preencha seus dados</Text>
       {!pendingVerification && (
-        <>
+        <View className="flex flex-col gap-4">
           <View>
             <Text>Nome</Text>
-            <Input
-              autoCapitalize="none"
-              value={name}
-              placeholder="Name..."
-              onChangeText={(name) => setName(name)}
-            />
+            <InputGreen value={name} setValue={setName} placeholder="John" />
           </View>
-
           <View>
             <Text>Sobrenome</Text>
-            <Input
-              autoCapitalize="none"
+            <InputGreen
               value={surname}
-              placeholder="Surname..."
-              onChangeText={(surname) => setSurname(surname)}
+              setValue={setSurname}
+              placeholder="Doe"
             />
           </View>
-          <TextInput
-            autoCapitalize="none"
-            value={emailAddress}
-            placeholder="Email..."
-            onChangeText={(email) => setEmailAddress(email)}
+          <View>
+            <Text>Email</Text>
+            <InputGreen
+              value={emailAddress}
+              setValue={setEmailAddress}
+              placeholder="johndoe@example.com"
+            />
+          </View>
+          <View>
+            <Text>Senha</Text>
+            <InputGreen
+              value={password}
+              setValue={setPassword}
+              placeholder="**********"
+            />
+          </View>
+          <Button
+            className="text-white bg-green-800 rounded-full h-14 color-white"
+            label="Cadastrar-se"
+            onPress={onSignUpPress}
           />
-          <TextInput
-            value={password}
-            placeholder="Password..."
-            secureTextEntry={true}
-            onChangeText={(password) => setPassword(password)}
-          />
-          <Button title="Sign Up" onPress={onSignUpPress} />
-        </>
+        </View>
       )}
       {pendingVerification && (
         <>
-          <TextInput
-            value={code}
-            placeholder="Code..."
-            onChangeText={(code) => setCode(code)}
-          />
-          <Button title="Verify Email" onPress={onPressVerify} />
+          <InputGreen value={code} setValue={setCode} placeholder="Code" />
+          <Button label="Verify Email" onPress={onPressVerify} />
         </>
       )}
     </View>
