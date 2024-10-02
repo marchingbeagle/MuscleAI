@@ -3,7 +3,7 @@ import React from "react";
 
 export default function HomePage() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View className="flex items-center justify-center h-full">
       <Text>HomePage</Text>
     </View>
   );
