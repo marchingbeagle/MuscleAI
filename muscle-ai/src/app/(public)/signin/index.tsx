@@ -1,14 +1,17 @@
 import { useSignIn } from "@clerk/clerk-expo";
 import { Link, useRouter } from "expo-router";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import React from "react";
 import { Button } from "src/components/Button";
 import { Input } from "src/components/Input";
+import logo from "src/assets/logo_sem_nome.png";
 
 export default function Signin() {
   const { signIn, setActive, isLoaded } = useSignIn();
   const router = useRouter();
 
+  const [focusInputEmail, setFocusInputEmail] = React.useState(false);
+  const [focusInputPassword, setFocusInputPassword] = React.useState(false);
   const [emailAddress, setEmailAddress] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -35,41 +38,54 @@ export default function Signin() {
   }, [isLoaded, emailAddress, password]);
 
   return (
-    <View className="flex flex-col justify-center h-full p-8">
+    <View className="flex flex-col justify-between h-full p-8 bg-gray-50">
       <View className="flex flex-col gap-4">
+        <View className="flex items-center justify-center ">
+          <Image source={logo} className="w-28 h-28 mt-9" />
+        </View>
+        <Text className="mb-8 text-5xl font-bold text-center">Muscle AI</Text>
         <View>
-          <Text className="text-lg">Email</Text>
           <Input
             autoCapitalize="none"
             value={emailAddress}
-            placeholder="Email..."
+            placeholder="johndoe@example.com"
             onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
-            className="border-2 border-green-800 rounded-lg"
+            className={`bg-gray-100 border-2 ${
+              focusInputEmail ? "border-green-500" : "border-gray-300"
+            } rounded-lg`}
+            onFocus={() => setFocusInputEmail(true)}
+            onEndEditing={() => setFocusInputEmail(false)}
           />
         </View>
         <View>
-          <Text className="text-lg">Senha</Text>
           <Input
             value={password}
-            placeholder="Password..."
+            placeholder="**********"
             secureTextEntry={true}
             onChangeText={(password) => setPassword(password)}
-            className="border-2 border-green-800 rounded-lg"
+            className={`bg-gray-100 border-2 ${
+              focusInputPassword ? "border-green-500" : "border-gray-300"
+            } rounded-lg`}
+            onFocus={() => setFocusInputPassword(true)}
+            onEndEditing={() => setFocusInputPassword(false)}
           />
         </View>
       </View>
-      <Button
-        label="Entrar com sua conta"
-        variant={"secondary"}
-        onPress={onSignInPress}
-        className="my-4 bg-green-800 color-white"
-      />
-      <View>
+      <View className="flex gap-4 ">
         <Button
-          label="Não possui uma conta?"
-          variant={"link"}
-          onPress={() => router.push("/signup")}
+          label="Entrar"
+          variant={"secondary"}
+          onPress={onSignInPress}
+          className="text-white bg-green-800 rounded-full h-14 color-white"
         />
+        <View>
+          <Button
+            label="Criar conta"
+            variant={"secondary"}
+            onPress={() => router.push("/signup")}
+            className="bg-green-200 rounded-full h-14 color-white"
+          />
+        </View>
       </View>
     </View>
   );

@@ -14,12 +14,15 @@ export default function WelcomePage() {
           Seu parceiro para geração de treinos
         </Text>
       </View>
-      <Button
-        label="Começe os treinos"
-        onPress={() => {
-          router.navigate("/signin");
-        }}
-      />
+      <View className="flex ">
+        <Button
+          label="Começe os treinos"
+          onPress={() => {
+            router.navigate("/signin");
+          }}
+          className="px-24 text-white bg-green-800 rounded-full h-14 color-white"
+        />
+      </View>
     </View>
   );
 }
