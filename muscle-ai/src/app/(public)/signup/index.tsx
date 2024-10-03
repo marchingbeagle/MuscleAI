@@ -5,7 +5,7 @@ import { useRouter } from "expo-router";
 import InputGreen from "src/components/mycomponents/InputGreen.";
 import { Button } from "src/components/Button";
 
-export default function SignUpScreen() {
+export default function SignUp() {
   const [pendingVerification, setPendingVerification] = React.useState(false);
   const [code, setCode] = React.useState("");
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -87,6 +87,7 @@ export default function SignUpScreen() {
               value={password}
               setValue={setPassword}
               placeholder="**********"
+              secureTextEntry
             />
           </View>
           <Button

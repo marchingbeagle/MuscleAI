@@ -1,9 +1,9 @@
 import React from "react";
 import * as SecureStore from "expo-secure-store";
 import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
-import { Slot } from "expo-router";
 import { StatusBar } from "react-native";
 import "../styles/global.css";
+import { Stack } from "expo-router";
 
 export default function RootLayout() {
   const tokenCache = {
@@ -43,7 +43,10 @@ export default function RootLayout() {
     <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
       <ClerkLoaded>
         <StatusBar barStyle="light-content" />
-        <Slot />
+        <Stack>
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen name="(public)" options={{ headerShown: false }} />
+        </Stack>
       </ClerkLoaded>
     </ClerkProvider>
   );

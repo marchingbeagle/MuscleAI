@@ -9,5 +9,17 @@ export default function AuthRoutesLayout() {
     return <Redirect href={"/"} />;
   }
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <Stack screenOptions={{ headerShown: true }}>
+      <Stack.Screen
+        name="signin/index"
+        options={{ title: "Entrar com sua conta" }}
+      />
+      <Stack.Screen name="signup/index" options={{ title: "Criar conta" }} />
+      <Stack.Screen
+        name="welcome/index"
+        options={{ title: "Welcome", headerShown: false }}
+      />
+    </Stack>
+  );
 }

@@ -4,7 +4,7 @@ import { Button } from "src/components/Button";
 import { router } from "expo-router";
 import { useClerk } from "@clerk/clerk-expo";
 
-export default function HomePage() {
+export default function Home() {
   const { signOut } = useClerk();
   return (
     <View className="flex items-center justify-center h-full">

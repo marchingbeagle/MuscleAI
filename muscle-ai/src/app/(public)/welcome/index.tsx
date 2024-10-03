@@ -4,7 +4,7 @@ import { router } from "expo-router";
 import { Button } from "src/components/Button";
 import logo from "../../../assets/logo.png";
 
-export default function WelcomePage() {
+export default function Welcome() {
   return (
     <View className="flex items-center justify-around h-full">
       <View className="flex items-center justify-center">
