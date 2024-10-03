@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView, StatusBar, Text } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { initializeDb } from "../services/db";
-import WelcomePage from "./(public)/welcome";
+import Welcome from "./(public)/welcome";
 import { useAuth } from "@clerk/clerk-expo";
-import HomePage from "./(auth)/home";
+import Home from "./(auth)/(tabs)/dashboard/home";
 
 export default function App() {
   const [isInitialized, setIsInitialized] = useState(false);
@@ -23,9 +23,9 @@ export default function App() {
       <StatusBar barStyle={"dark-content"} />
       {isInitialized ? (
         isSignedIn ? (
-          <HomePage />
+          <Home />
         ) : (
-          <WelcomePage />
+          <Welcome />
         )
       ) : (
         <SafeAreaView className="flex items-center justify-center">

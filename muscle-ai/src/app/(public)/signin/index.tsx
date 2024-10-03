@@ -1,9 +1,8 @@
 import { useSignIn } from "@clerk/clerk-expo";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { Image, Text, View } from "react-native";
 import React from "react";
 import { Button } from "src/components/Button";
-import { Input } from "src/components/Input";
 import logo from "src/assets/logo_sem_nome.png";
 import InputGreen from "src/components/mycomponents/InputGreen.";
 
@@ -55,6 +54,7 @@ export default function Signin() {
             value={password}
             setValue={setPassword}
             placeholder="**********"
+            secureTextEntry
           />
         </View>
       </View>
