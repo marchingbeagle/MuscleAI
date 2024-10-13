@@ -1,2 +1,3 @@
 EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_ZW5vdWdoLW11bGxldC04My5jbGVyay5hY2NvdW50cy5kZXYk
 EXPO_PUBLIC_CLERK_FRONTEND_API=https://enough-mullet-83.clerk.accounts.dev
+DB_URL=
