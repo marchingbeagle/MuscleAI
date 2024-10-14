@@ -24,5 +24,5 @@ npx expo prebuild --clean // Rodar o projeto com a build se torna necessário de
 npx expo run:android
 ```
 
-> [!IMPORTANTE]  
+> [!IMPORTANT]  
 > É Necessario ter a variavel de ambiente ANDROID_HOME e JAVA_HOME definida com o caminho do SDK do Java.
