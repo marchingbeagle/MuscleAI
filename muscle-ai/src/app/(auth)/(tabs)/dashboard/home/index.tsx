@@ -4,6 +4,7 @@ import { useClerk } from "@clerk/clerk-expo";
 
 export default function Home() {
   const { signOut } = useClerk();
+
   return (
     <View className="p-6">
       <View className="flex-row items-center gap-2">
@@ -11,8 +12,6 @@ export default function Home() {
         <Text className="text-base font-bold text-[#2f855a]">
           Olá! Gabriel Rodrigues
         </Text>
-
-        
       </View>
 
       <Text className="text-lg font-bold text-[#35383f] py-4">
