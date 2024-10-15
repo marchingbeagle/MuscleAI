@@ -8,11 +8,28 @@ datasource db {
   url      = "file:./app.db"
 }
 
-model User {
-  id           Int     @id @default(autoincrement())
-  name         String
-  email        String @unique
-  password     String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+model Aluno {
+  id_aluno           Int      @id @default(autoincrement())
+  nm_aluno           String
+  email_aluno        String    @unique
+  numero_aluno       String
+  idade_aluno        Int
+  data_nascimento    DateTime
+  peso               Float
+  altura             Float
+  genero_aluno       String
+  metas_aluno        String?
+  deficiencias_aluno String?
+  id_personal        Int
+  nm_personal        String
+  Treinos            Treino[]  @relation("AlunoTreinos")
+}
+
+model Treino {
+  treino_gerado Int      @id @default(autoincrement())
+  id_aluno      Int
+  aluno         Aluno    @relation("AlunoTreinos", fields: [id_aluno], references: [id_aluno])
+  nm_aluno      String
+  id_personal   Int
+  nm_personal   String
 }
