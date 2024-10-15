@@ -4,9 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { initializeDb } from "../services/db";
 import Welcome from "./(public)/welcome";
 import { useAuth } from "@clerk/clerk-expo";
-import Home from "./(auth)/(tabs)/dashboard/home";
-import TabLayout from "./(auth)/(tabs)/dashboard/_layout";
-import TreinoPage from "./(auth)/(tabs)/dashboard/treino";
+import { Redirect } from "expo-router/build/exports";
 
 export default function App() {
   const [isInitialized, setIsInitialized] = useState(false);
@@ -28,7 +26,7 @@ export default function App() {
       {isInitialized ? (
         // Verifica se está iniciado
         isSignedIn ? (
-          <TreinoPage />
+          <Redirect href="/home" />
         ) : (
           <Welcome />
         )
