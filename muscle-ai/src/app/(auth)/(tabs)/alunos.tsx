@@ -1,5 +1,11 @@
-import React from "react";
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import { useRouter } from "expo-router";
 import { Feather } from "@expo/vector-icons";
 
@@ -15,16 +21,66 @@ const students = [
 
 export default function AlunosPage() {
   const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredStudents, setFilteredStudents] = useState(students);
 
+  // Função para filtrar alunos conforme o nome
+  const handleSearch = (text) => {
+    setSearchQuery(text);
+    const filtered = students.filter((student) =>
+      student.name.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredStudents(filtered);
+  };
+
+  // Função para limpar a barra de pesquisa
+  const clearSearch = () => {
+    setSearchQuery("");
+    setFilteredStudents(students);
+  };
   return (
     <View className="flex-1 bg-white">
+      {/* Barra de pesquisa */}
+      <View className="flex-row items-center p-4">
+        {/* Ícone de pesquisa e campo de texto */}
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            backgroundColor: "#F5F6F7",
+            borderRadius: 20,
+            paddingHorizontal: 10,
+            flex: 1,
+            height: 40,
+          }}
+        >
+          <Feather name="search" size={18} color="gray" />
+          <TextInput
+            value={searchQuery}
+            onChangeText={handleSearch}
+            placeholder="Pesquisa"
+            style={{
+              marginLeft: 8,
+              fontSize: 16,
+              color: "#6C7072",
+              flex: 1,
+            }}
+          />
+        </View>
+
+        {/* Botão Cancel */}
+        <TouchableOpacity onPress={clearSearch} style={{ marginLeft: 10 }}>
+          <Text style={{ color: "black", fontSize: 16 }}>Cancel</Text>
+        </TouchableOpacity>
+      </View>
+
       <View className="p-4">
         <Text className="text-xl font-bold text-center">
           Alunos cadastrados
         </Text>
         <View className="mt-4">
           <ScrollView>
-            {students.map((student, index) => (
+            {filteredStudents.map((student, index) => (
               <View
                 key={index}
                 className="flex-row justify-between items-center py-2 px-4 border-b"
