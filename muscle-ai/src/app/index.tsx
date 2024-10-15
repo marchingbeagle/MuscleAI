@@ -6,7 +6,7 @@ import Welcome from "./(public)/welcome";
 import { useAuth } from "@clerk/clerk-expo";
 import Home from "./(auth)/(tabs)/dashboard/home";
 import TabLayout from "./(auth)/(tabs)/dashboard/_layout";
-import AlunosPage from "./(auth)/(tabs)/dashboard/alunos";
+import TreinoPage from "./(auth)/(tabs)/dashboard/treino";
 
 export default function App() {
   const [isInitialized, setIsInitialized] = useState(false);
@@ -28,7 +28,7 @@ export default function App() {
       {isInitialized ? (
         // Verifica se está iniciado
         isSignedIn ? (
-          <Home />
+          <TreinoPage />
         ) : (
           <Welcome />
         )
