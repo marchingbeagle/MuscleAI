@@ -8,3 +8,4 @@ export default function TreinoPage() {
     </View>
   );
 }
+//tela de gerar treino
