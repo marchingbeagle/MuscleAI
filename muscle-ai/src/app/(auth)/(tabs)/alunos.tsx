@@ -24,8 +24,7 @@ export default function AlunosPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredStudents, setFilteredStudents] = useState(students);
 
-  // Função para filtrar alunos conforme o nome
-  const handleSearch = (text) => {
+  const handleSearch = (text: string) => {
     setSearchQuery(text);
     const filtered = students.filter((student) =>
       student.name.toLowerCase().includes(text.toLowerCase())
@@ -33,7 +32,6 @@ export default function AlunosPage() {
     setFilteredStudents(filtered);
   };
 
-  // Função para limpar a barra de pesquisa
   const clearSearch = () => {
     setSearchQuery("");
     setFilteredStudents(students);
