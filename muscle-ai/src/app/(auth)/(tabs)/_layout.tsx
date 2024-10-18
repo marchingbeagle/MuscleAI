@@ -25,13 +25,21 @@ export default function Layout() {
           ),
         }}
       />
-      <Tabs.Screen name="treinos" options={{ title: "Treino" }} />
+      <Tabs.Screen
+        name="treinos"
+        options={{
+          title: "Treino",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome6 size={22} name="dumbbell" color={color} />
+          ),
+        }}
+      />
       <Tabs.Screen
         name="configuracoes"
         options={{
           title: "Configurações",
           tabBarIcon: ({ color }) => (
-            <FontAwesome6 size={22} name="dumbbell" color={color} />
+            <FontAwesome6 size={22} name="gear" color={color} />
           ),
         }}
       />
