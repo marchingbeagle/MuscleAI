@@ -23,6 +23,8 @@ export default function SignUp() {
 
     try {
       await signUp.create({
+        firstName: name,
+        lastName: surname,
         emailAddress,
         password,
       });
