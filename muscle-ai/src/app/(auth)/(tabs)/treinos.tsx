@@ -26,7 +26,7 @@ export default function TreinoPage() {
 
       {/* Avatar e inputs de nome/metas */}
       <View className="flex items-center mb-6">
-        <View className="w-24 h-24 rounded-full bg-gray-300 mb-4" />
+        <View className="w-32 h-32 rounded-full bg-[#38a169]" />
         <View className="w-full mb-4">
           <Text className="text-base">Nome</Text>
           <InputGreen value={name} setValue={setName} placeholder="John" />
