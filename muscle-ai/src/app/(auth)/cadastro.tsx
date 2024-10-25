@@ -14,12 +14,16 @@ export default function AlunosPage() {
   const [altura, setAltura] = React.useState("");
   const [deficiencia, setdeficiência] = React.useState("");
 
-  const sendToDB = (
-    name: string,
-    peso: any,
-    altura: any,
-    deficiencia: string
-  ) => {};
+  const sendToDB = async (name: string, peso: any, altura: any, deficiencia: string) => {
+    try {
+      const newAluno = await prisma.aluno.create({
+        data: {
+          nm_aluno: name,
+          peso: parseFloat(peso),
+          altura: parseFloat(altura), 
+          deficiencias_aluno: deficiencia,
+        },
+      });
 
   return (
     <View className="flex items-center mb-6 p-6">
