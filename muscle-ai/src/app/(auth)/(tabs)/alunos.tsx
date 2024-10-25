@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,26 +9,34 @@ import {
 import { useRouter } from "expo-router";
 import { Feather } from "@expo/vector-icons";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { PrismaClient } from "@prisma/client"; // Importar o PrismaClient
 
-const students = [
-  { name: "Ana", age: 20 },
-  { name: "John", age: 18 },
-  { name: "Lilian", age: 32 },
-  { name: "Fábio", age: 41 },
-  { name: "Lucas", age: 14 },
-  { name: "Carol", age: 56 },
-  { name: "Júlia", age: 20 },
-];
+const prisma = new PrismaClient(); // Instanciar o PrismaClient
 
 export default function AlunosPage() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredStudents, setFilteredStudents] = useState(students);
+  const [filteredStudents, setFilteredStudents] = useState([]);
+  const [students, setStudents] = useState([]);
 
-  const handleSearch = (text: string) => {
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const studentsPrisma = await prisma.aluno.findMany(); // Buscar alunos do Prisma
+        setStudents(studentsPrisma);
+        setFilteredStudents(studentsPrisma);
+      } catch (error) {
+        console.error("Erro ao buscar alunos:", error);
+      }
+    };
+
+    fetchStudents();
+  }, []);
+
+  const handleSearch = (text) => {
     setSearchQuery(text);
     const filtered = students.filter((student) =>
-      student.name.toLowerCase().includes(text.toLowerCase())
+      student.nm_aluno.toLowerCase().includes(text.toLowerCase())
     );
     setFilteredStudents(filtered);
   };
@@ -37,6 +45,7 @@ export default function AlunosPage() {
     setSearchQuery("");
     setFilteredStudents(students);
   };
+
   return (
     <View className="flex-1 bg-white">
       {/* Barra de pesquisa */}
@@ -79,9 +88,9 @@ export default function AlunosPage() {
         </Text>
         <View className="mt-4">
           <ScrollView>
-            {filteredStudents.map((student, index) => (
+            {filteredStudents.map((student) => (
               <View
-                key={index}
+                key={student.id_aluno}
                 className="flex-row items-center justify-between px-4 py-2 border-b"
                 style={{
                   borderColor: "#6C7072",
@@ -92,7 +101,7 @@ export default function AlunosPage() {
                   {/* Avatar */}
                   <View className="w-10 h-10 mr-4 bg-gray-300 rounded-full" />
                   <Text className="text-lg" style={{ color: "#6C7072" }}>
-                    {student.name}, {student.age}
+                    {student.nm_aluno}, {student.data_nascimento?.toString()}
                   </Text>
                 </View>
                 <View className="flex-row">
@@ -100,7 +109,7 @@ export default function AlunosPage() {
                   <TouchableOpacity
                     onPress={() =>
                       router.push(
-                        `/addStudent?name=${student.name}&age=${student.age}`
+                        `/addStudent?name=${student.nm_aluno}&age=${student.data_nascimento}`
                       )
                     }
                     className="mr-4"
@@ -110,7 +119,7 @@ export default function AlunosPage() {
                   {/* Botão de configuração */}
                   <TouchableOpacity
                     onPress={() =>
-                      router.push(`/editarAluno?name=${student.name}`)
+                      router.push(`/editarAluno?name=${student.nm_aluno}`)
                     }
                   >
                     <Feather name="edit" size={24} color="#198155" />
