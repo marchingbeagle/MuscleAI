@@ -4,13 +4,13 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { initializeDb } from "../services/db";
 import Welcome from "./(public)/welcome";
 import { useAuth } from "@clerk/clerk-expo";
-import Home from "./(auth)/(tabs)/dashboard/home";
+import { Redirect } from "expo-router/build/exports";
 
 export default function App() {
   const [isInitialized, setIsInitialized] = useState(false);
   const { isSignedIn } = useAuth();
 
-    // Inicia o Banco de Dados
+  // Inicia o Banco de Dados
   useEffect(() => {
     const setup = async () => {
       await initializeDb();
@@ -19,14 +19,14 @@ export default function App() {
     setup();
   }, []);
 
-    // Componente que renderiza ao abrir o APP
+  // Componente que renderiza ao abrir o APP
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={"dark-content"} />
       {isInitialized ? (
         // Verifica se está iniciado
         isSignedIn ? (
-          <Home />
+          <Redirect href="/home" />
         ) : (
           <Welcome />
         )
