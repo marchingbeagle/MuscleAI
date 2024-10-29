@@ -4,15 +4,31 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./app.db"
+  provider = "postgresql"
+  url      = env("DB_URL")
 }
 
-model User {
-  id           Int     @id @default(autoincrement())
-  name         String
-  email        String @unique
-  password     String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+model Aluno {
+  id_aluno           BigInt   @id @default(autoincrement())
+  nm_aluno           String
+  email_aluno        String   @unique
+  numero_aluno       String
+  data_nascimento    DateTime 
+  peso               Float    
+  altura             Float    
+  genero_aluno       String
+  metas_aluno        String?  
+  deficiencias_aluno String?  
+  id_personal        BigInt
+  nm_personal        String
+  id_treino          BigInt
+  treino             Treino[] @relation("AlunoTreinos")
+}
+
+model Treino {
+  id_treino     BigInt  @id @default(autoincrement())
+  treino_gerado String  
+  id_aluno      BigInt
+  aluno         Aluno   @relation("AlunoTreinos", fields: [id_aluno], references: [id_aluno])
+  id_personal   BigInt
 }
