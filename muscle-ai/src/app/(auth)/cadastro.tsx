@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInputComponent,
-  TextInput,
-} from "react-native";
+import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import React from "react";
 import InputGreen from "src/components/mycomponents/InputGreen.";
 
@@ -14,19 +8,26 @@ export default function AlunosPage() {
   const [altura, setAltura] = React.useState("");
   const [deficiencia, setdeficiência] = React.useState("");
 
-  const sendToDB = async (name: string, peso: any, altura: any, deficiencia: string) => {
+  const sendToDB = async (
+    name: string,
+    peso: any,
+    altura: any,
+    deficiencia: string
+  ) => {
     try {
       const newAluno = await prisma.aluno.create({
         data: {
           nm_aluno: name,
           peso: parseFloat(peso),
-          altura: parseFloat(altura), 
+          altura: parseFloat(altura),
           deficiencias_aluno: deficiencia,
         },
       });
+    } catch {}
+  };
 
   return (
-    <View className="flex items-center mb-6 p-6">
+    <View className="flex items-center p-6 mb-6">
       <View className="w-32 h-32 rounded-full bg-[#38a169]" />
       <View className="w-full mb-4">
         <Text className="text-base">Nome</Text>
@@ -72,7 +73,7 @@ export default function AlunosPage() {
         }}
         className="bg-[#198155] py-4 rounded-full w-full"
       >
-        <Text className="text-white text-center font-bold">Salvar Aluno</Text>
+        <Text className="font-bold text-center text-white">Salvar Aluno</Text>
       </TouchableOpacity>
     </View>
   );
