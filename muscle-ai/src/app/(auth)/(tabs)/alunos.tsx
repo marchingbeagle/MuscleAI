@@ -9,20 +9,21 @@ import {
 import { useRouter } from "expo-router";
 import { Feather } from "@expo/vector-icons";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { PrismaClient } from "@prisma/client"; // Importar o PrismaClient
+import { PrismaClient } from "@prisma/client";
+import { Student } from "src/types/student";
 
-const prisma = new PrismaClient(); // Instanciar o PrismaClient
+const prisma = new PrismaClient();
 
 export default function AlunosPage() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredStudents, setFilteredStudents] = useState([]);
-  const [students, setStudents] = useState([]);
+  const [filteredStudents, setFilteredStudents] = useState<Student[]>([]);
+  const [students, setStudents] = useState<Student[]>([]);
 
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const studentsPrisma = await prisma.aluno.findMany(); // Buscar alunos do Prisma
+        const studentsPrisma = await prisma.aluno.findMany();
         setStudents(studentsPrisma);
         setFilteredStudents(studentsPrisma);
       } catch (error) {
@@ -33,7 +34,7 @@ export default function AlunosPage() {
     fetchStudents();
   }, []);
 
-  const handleSearch = (text) => {
+  const handleSearch = (text: string) => {
     setSearchQuery(text);
     const filtered = students.filter((student) =>
       student.nm_aluno.toLowerCase().includes(text.toLowerCase())

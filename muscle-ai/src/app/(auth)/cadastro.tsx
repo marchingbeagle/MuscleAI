@@ -18,13 +18,19 @@ export default function AlunosPage() {
     deficiencia: string
   ) => {
     try {
-      const newAluno = await prismaClient.Aluno.create({
+      const newAluno = await prismaClient.aluno.create({
         data: {
           nm_aluno: name,
           peso: parseFloat(peso),
           altura: parseFloat(altura),
           deficiencias_aluno: deficiencia,
           id_personal: userId as string,
+          email_aluno: "",
+          numero_aluno: "",
+          data_nascimento: new Date(),
+          genero_aluno: "",
+          nm_personal: "",
+          id_treino: "",
         },
       });
     } catch (error) {
