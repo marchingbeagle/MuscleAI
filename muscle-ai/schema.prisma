@@ -1,18 +1,19 @@
 generator client {
   provider = "prisma-client-js"
   previewFeatures = ["reactNative"]
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+  output = "./node_modules/.prisma/client"
 }
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./app.db"
+  url      = "file:app.db"
 }
 
 model Aluno {
   id_aluno           String   @id @default(uuid())
   nm_aluno           String
   email_aluno        String   @unique
-  numero_aluno       String
   data_nascimento    DateTime 
   peso               Float    
   altura             Float    
@@ -20,8 +21,7 @@ model Aluno {
   metas_aluno        String?  
   deficiencias_aluno String?  
   id_personal        String
-  nm_personal        String
-  id_treino          String
+  id_treino          String?  
   treino             Treino[] @relation("AlunoTreinos")
 
   @@map("aluno")
@@ -30,7 +30,7 @@ model Aluno {
 model Treino {
   id_treino     String  @id @default(uuid())
   treino_gerado String  
-  id_aluno      String
-  aluno         Aluno   @relation("AlunoTreinos", fields: [id_aluno], references: [id_aluno])
+  id_aluno      String?
+  aluno         Aluno?  @relation("AlunoTreinos", fields: [id_aluno], references: [id_aluno])
   id_personal   String
 }
