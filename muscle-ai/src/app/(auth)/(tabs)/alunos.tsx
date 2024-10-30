@@ -16,35 +16,45 @@ const prisma = new PrismaClient();
 
 export default function AlunosPage() {
   const router = useRouter();
+  // Hook para gerenciar a consulta de pesquisa
   const [searchQuery, setSearchQuery] = useState("");
+  // Hook para armazenar alunos filtrados
   const [filteredStudents, setFilteredStudents] = useState<Student[]>([]);
+  // Hook para armazenar todos os alunos
   const [students, setStudents] = useState<Student[]>([]);
 
   useEffect(() => {
+    // Função assíncrona para buscar alunos do banco de dados
     const fetchStudents = async () => {
       try {
+        // Busca alunos usando Prisma
         const studentsPrisma = await prisma.aluno.findMany();
+        // Atualiza o estado com os alunos buscados
         setStudents(studentsPrisma);
         setFilteredStudents(studentsPrisma);
       } catch (error) {
+        // Log de erro caso a busca falhe
         console.error("Erro ao buscar alunos:", error);
       }
     };
 
-    fetchStudents();
+    fetchStudents(); // Chama a função para buscar alunos
   }, []);
 
+  // Função para lidar com a pesquisa de alunos
   const handleSearch = (text: string) => {
-    setSearchQuery(text);
+    setSearchQuery(text); // Atualiza a consulta de pesquisa
+    // Filtra alunos com base na consulta
     const filtered = students.filter((student) =>
       student.nm_aluno.toLowerCase().includes(text.toLowerCase())
     );
-    setFilteredStudents(filtered);
+    setFilteredStudents(filtered); // Atualiza alunos filtrados
   };
 
+  // Função para limpar a pesquisa
   const clearSearch = () => {
-    setSearchQuery("");
-    setFilteredStudents(students);
+    setSearchQuery(""); // Reseta a consulta de pesquisa
+    setFilteredStudents(students); // Restaura a lista de alunos
   };
 
   return (
@@ -66,7 +76,7 @@ export default function AlunosPage() {
           <Feather name="search" size={18} color="gray" />
           <TextInput
             value={searchQuery}
-            onChangeText={handleSearch}
+            onChangeText={handleSearch} // Atualiza a pesquisa ao digitar
             placeholder="Pesquisa"
             style={{
               marginLeft: 8,
