@@ -1,29 +1,35 @@
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import React from "react";
 import InputGreen from "src/components/mycomponents/InputGreen.";
+import { useAuth } from "@clerk/clerk-expo";
+import { prismaClient } from "src/services/db";
 
 export default function AlunosPage() {
-  const [name, setName] = React.useState("");
-  const [peso, setPeso] = React.useState("");
-  const [altura, setAltura] = React.useState("");
-  const [deficiencia, setdeficiência] = React.useState("");
+  const { userId } = useAuth();
+  const [name, setName] = React.useState<string>("");
+  const [peso, setPeso] = React.useState<string>("");
+  const [altura, setAltura] = React.useState<string>("");
+  const [deficiencia, setDeficiencia] = React.useState<string>("");
 
   const sendToDB = async (
     name: string,
-    peso: any,
-    altura: any,
+    peso: string,
+    altura: string,
     deficiencia: string
   ) => {
     try {
-      const newAluno = await prisma.aluno.create({
+      const newAluno = await prismaClient.Aluno.create({
         data: {
           nm_aluno: name,
           peso: parseFloat(peso),
           altura: parseFloat(altura),
           deficiencias_aluno: deficiencia,
+          id_personal: userId as string,
         },
       });
-    } catch {}
+    } catch (error) {
+      console.error("Error saving to database:", error);
+    }
   };
 
   return (
@@ -62,7 +68,7 @@ export default function AlunosPage() {
         <Text className="text-base">Deficiências do aluno</Text>
         <InputGreen
           value={deficiencia}
-          setValue={setdeficiência}
+          setValue={setDeficiencia}
           placeholder="Descreva as deficiências do Aluno"
         />
       </View>

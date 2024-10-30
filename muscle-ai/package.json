@@ -11,8 +11,8 @@
   "dependencies": {
     "@clerk/clerk-expo": "^2.2.18",
     "@expo/metro-runtime": "~3.2.3",
-    "@prisma/client": "5.20.0",
-    "@prisma/react-native": "^5.20.0",
+    "@prisma/client": "5.21.1",
+    "@prisma/react-native": "5.21.1",
     "@react-native-masked-view/masked-view": "0.3.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
