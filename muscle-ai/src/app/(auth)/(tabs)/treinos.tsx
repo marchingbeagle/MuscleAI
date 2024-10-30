@@ -10,6 +10,7 @@ import { Feather } from "@expo/vector-icons";
 import InputGreen from "src/components/mycomponents/InputGreen.";
 
 export default function TreinoPage() {
+  // Estado para armazenar o nome, metas e script do treino
   const [name, setName] = useState("");
   const [metas, setMetas] = useState("");
   const [treinoScript, setTreinoScript] = useState("");
