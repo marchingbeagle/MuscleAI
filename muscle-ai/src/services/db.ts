@@ -2,7 +2,7 @@ import "@prisma/react-native";
 import { PrismaClient } from "@prisma/client/react-native";
 import { reactiveQueriesExtension } from "@prisma/react-native";
 
-const baseClient = new PrismaClient();
+const baseClient = new PrismaClient({ log: ["query", "info", "warn"] });
 export const prismaClient = baseClient.$extends(reactiveQueriesExtension());
 
 export const initializeDb = async () => {

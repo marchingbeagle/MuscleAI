@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Feather } from "@expo/vector-icons";
-import InputGreen from "src/components/mycomponents/InputGreen."; // Supondo que você já tenha esse componente criado
+import InputGreen from "src/components/mycomponents/InputGreen.";
 
 export default function TreinoPage() {
   const [name, setName] = useState("");
@@ -15,7 +15,7 @@ export default function TreinoPage() {
   const [treinoScript, setTreinoScript] = useState("");
 
   return (
-    <ScrollView className="flex-1 bg-white p-6">
+    <ScrollView className="flex-1 p-6 bg-white">
       {/* Barra de pesquisa */}
       <View className="flex-row items-center mb-4">
         <View className="flex-row items-center bg-[#F5F6F7] rounded-3xl px-3 flex-1 h-10">
@@ -50,12 +50,12 @@ export default function TreinoPage() {
       {/* Botões "Gerar Novo Treino" e "Editar" */}
       <View className="flex-row justify-between w-full mb-6">
         <TouchableOpacity className="bg-[#198155] flex-1 py-4 rounded-full mr-2">
-          <Text className="text-white text-center font-bold">
+          <Text className="font-bold text-center text-white">
             Gerar Novo Treino
           </Text>
         </TouchableOpacity>
         <TouchableOpacity className="bg-[#FBBF24] flex-1 py-4 rounded-full ml-2">
-          <Text className="text-white text-center font-bold">Editar</Text>
+          <Text className="font-bold text-center text-white">Editar</Text>
         </TouchableOpacity>
       </View>
 
@@ -74,7 +74,7 @@ export default function TreinoPage() {
 
       {/* Botão "Salvar treino" */}
       <TouchableOpacity className="bg-[#198155] py-4 rounded-full w-full">
-        <Text className="text-white text-center font-bold">Salvar treino</Text>
+        <Text className="font-bold text-center text-white">Salvar treino</Text>
       </TouchableOpacity>
     </ScrollView>
   );
