@@ -11,14 +11,16 @@
   "dependencies": {
     "@clerk/clerk-expo": "^2.2.18",
     "@expo/metro-runtime": "~3.2.3",
-    "@prisma/client": "5.21.1",
+    "@prisma/client": "^5.21.1",
     "@prisma/react-native": "5.21.1",
     "@react-native-masked-view/masked-view": "0.3.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "expo": "~51.0.28",
+    "expo-file-system": "^17.0.1",
     "expo-router": "^3.5.23",
     "expo-secure-store": "^13.0.2",
+    "expo-sqlite": "~14.0.6",
     "expo-status-bar": "~1.12.1",
     "expo-web-browser": "^13.0.3",
     "nativewind": "^2.0.11",
@@ -32,8 +34,7 @@
     "react-native-screens": "^3.34.0",
     "react-native-vector-icons": "^10.2.0",
     "react-native-web": "~0.19.10",
-    "tailwind-merge": "^2.5.2",
-    "expo-sqlite": "~14.0.6"
+    "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
