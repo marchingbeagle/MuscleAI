@@ -19,8 +19,8 @@ model Aluno {
   metas_aluno        String?  
   deficiencias_aluno String?  
   id_personal        String
-  id_treino          String?  
-  treino             Treino[] @relation("AlunoTreinos")
+
+  treinos            Treino[] @relation("AlunoTreinos")
 
   @@map("aluno")
 }
@@ -28,7 +28,7 @@ model Aluno {
 model Treino {
   id_treino     String  @id @default(uuid())
   treino_gerado String  
-  id_aluno      String?
-  aluno         Aluno?  @relation("AlunoTreinos", fields: [id_aluno], references: [id_aluno])
+  id_aluno      String
+  aluno         Aluno   @relation("AlunoTreinos", fields: [id_aluno], references: [id_aluno])
   id_personal   String
 }
