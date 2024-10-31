@@ -2,17 +2,15 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  ScrollView,
   TouchableOpacity,
   TextInput,
+  FlatList,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Feather } from "@expo/vector-icons";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import { PrismaClient } from "@prisma/client";
+import ListaAlunos from "src/components/mycomponents/ListaAlunos";
+import { prismaClient } from "src/services/db";
 import { Student } from "src/types/student";
-
-const prisma = new PrismaClient();
 
 export default function AlunosPage() {
   const router = useRouter();
@@ -23,12 +21,12 @@ export default function AlunosPage() {
   // Hook para armazenar todos os alunos
   const [students, setStudents] = useState<Student[]>([]);
 
+  const studentsPrisma = prismaClient.aluno.findMany();
   useEffect(() => {
     // Função assíncrona para buscar alunos do banco de dados
-    const fetchStudents = async () => {
+    const fetchStudents = () => {
       try {
         // Busca alunos usando Prisma
-        const studentsPrisma = await prisma.aluno.findMany();
         // Atualiza o estado com os alunos buscados
         setStudents(studentsPrisma);
         setFilteredStudents(studentsPrisma);
@@ -37,10 +35,8 @@ export default function AlunosPage() {
         console.error("Erro ao buscar alunos:", error);
       }
     };
-
     fetchStudents(); // Chama a função para buscar alunos
   }, []);
-
   // Função para lidar com a pesquisa de alunos
   const handleSearch = (text: string) => {
     setSearchQuery(text); // Atualiza a consulta de pesquisa
@@ -98,47 +94,11 @@ export default function AlunosPage() {
           Alunos cadastrados
         </Text>
         <View className="mt-4">
-          <ScrollView>
-            {filteredStudents.map((student) => (
-              <View
-                key={student.id_aluno}
-                className="flex-row items-center justify-between px-4 py-2 border-b"
-                style={{
-                  borderColor: "#6C7072",
-                  width: "100%",
-                }}
-              >
-                <View className="flex-row items-center">
-                  {/* Avatar */}
-                  <View className="w-10 h-10 mr-4 bg-gray-300 rounded-full" />
-                  <Text className="text-lg" style={{ color: "#6C7072" }}>
-                    {student.nm_aluno}, {student.data_nascimento?.toString()}
-                  </Text>
-                </View>
-                <View className="flex-row">
-                  {/* Botão de adicionar */}
-                  <TouchableOpacity
-                    onPress={() =>
-                      router.push(
-                        `/addStudent?name=${student.nm_aluno}&age=${student.data_nascimento}`
-                      )
-                    }
-                    className="mr-4"
-                  >
-                    <AntDesign name="bars" size={24} color="#767A7B" />
-                  </TouchableOpacity>
-                  {/* Botão de configuração */}
-                  <TouchableOpacity
-                    onPress={() =>
-                      router.push(`/editarAluno?name=${student.nm_aluno}`)
-                    }
-                  >
-                    <Feather name="edit" size={24} color="#198155" />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            ))}
-          </ScrollView>
+          <FlatList
+            data={studentsPrisma}
+            keyExtractor={(item) => String(item.id_aluno)}
+            renderItem={({ item }) => <ListaAlunos data={item} />}
+          />
         </View>
       </View>
       {/* Botão de adicionar aluno */}
