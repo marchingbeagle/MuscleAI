@@ -9,45 +9,32 @@ import {
 import { useRouter } from "expo-router";
 import { Feather } from "@expo/vector-icons";
 import ListaAlunos from "src/components/mycomponents/ListaAlunos";
-import { prismaClient } from "src/services/db";
 import { Student } from "src/types/student";
 
 export default function AlunosPage() {
   const router = useRouter();
-  // Hook para gerenciar a consulta de pesquisa
   const [searchQuery, setSearchQuery] = useState("");
-  // Hook para armazenar alunos filtrados
   const [filteredStudents, setFilteredStudents] = useState<Student[]>([]);
-  // Hook para armazenar todos os alunos
   const [students, setStudents] = useState<Student[]>([]);
 
-  const studentsPrisma = prismaClient.aluno.findMany();
   useEffect(() => {
-    // Função assíncrona para buscar alunos do banco de dados
-    const fetchStudents = () => {
-      try {
-        // Busca alunos usando Prisma
-        // Atualiza o estado com os alunos buscados
-        setStudents(studentsPrisma);
-        setFilteredStudents(studentsPrisma);
-      } catch (error) {
-        // Log de erro caso a busca falhe
-        console.error("Erro ao buscar alunos:", error);
-      }
-    };
-    fetchStudents(); // Chama a função para buscar alunos
+    const fetchStudents = async () => {
+        const querySnapshot = await getDocs(collection(db, "alunos"));
+        const studentsData = querySnapshot.docs.map(doc => doc.data());
+        setStudents(studentsData);
+        setFilteredStudents(studentsData);
+      };
+    fetchStudents(); 
   }, []);
-  // Função para lidar com a pesquisa de alunos
+
   const handleSearch = (text: string) => {
-    setSearchQuery(text); // Atualiza a consulta de pesquisa
-    // Filtra alunos com base na consulta
-    const filtered = students.filter((student) =>
+    setSearchQuery(text);  
+      const filtered = students.filter((student) =>
       student.nm_aluno.toLowerCase().includes(text.toLowerCase())
     );
     setFilteredStudents(filtered); // Atualiza alunos filtrados
   };
 
-  // Função para limpar a pesquisa
   const clearSearch = () => {
     setSearchQuery(""); // Reseta a consulta de pesquisa
     setFilteredStudents(students); // Restaura a lista de alunos
