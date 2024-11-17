@@ -1,10 +1,10 @@
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import React from "react";
 import InputGreen from "src/components/mycomponents/InputGreen.";
-import { useAuth, useUser } from "@clerk/clerk-expo";
+import { useAuth } from "@clerk/clerk-expo";
 import { prismaClient } from "src/services/db";
-import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { Picker } from "@react-native-picker/picker";
 
 export default function AlunosPage() {
   const { userId } = useAuth(); // Obtém o ID do usuário autenticado
@@ -134,15 +134,17 @@ export default function AlunosPage() {
       </View>
       <View className="w-full mb-4">
         <Text className="text-base">Gênero</Text>
-        <Picker
-          selectedValue={genero}
-          onValueChange={(itemValue) => setGenero(itemValue as string)}
-          className="p-4 border-2 border-input py-2.5 px-4 rounded-lg border-gray-300"
-        >
-          <Picker.Item label="Masculino" value="masculino" />
-          <Picker.Item label="Feminino" value="feminino" />
-          <Picker.Item label="Outro" value="outro" />
-        </Picker>
+        <View className="border-2 border-gray-300 rounded-lg">
+          <Picker
+            selectedValue={genero}
+            onValueChange={(itemValue) => setGenero(itemValue as string)}
+            style={{ height: 50 }}
+          >
+            <Picker.Item label="Masculino" value="masculino" />
+            <Picker.Item label="Feminino" value="feminino" />
+            <Picker.Item label="Outro" value="outro" />
+          </Picker>
+        </View>
       </View>
       <TouchableOpacity
         onPress={() => {

@@ -29,6 +29,7 @@ model Treino {
   id_treino     String  @id @default(uuid())
   treino_gerado String  
   id_aluno      String
-  aluno         Aluno   @relation("AlunoTreinos", fields: [id_aluno], references: [id_aluno])
   id_personal   String
+
+  aluno         Aluno   @relation(fields: [id_aluno], references: [id_aluno], name: "AlunoTreinos")
 }
