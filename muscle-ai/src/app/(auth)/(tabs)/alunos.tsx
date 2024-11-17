@@ -10,44 +10,37 @@ import { useRouter } from "expo-router";
 import { Feather } from "@expo/vector-icons";
 import ListaAlunos from "src/components/mycomponents/ListaAlunos";
 import { prismaClient } from "src/services/db";
-import { Student } from "src/types/student";
+import { Aluno } from "@prisma/client";
 
 export default function AlunosPage() {
   const router = useRouter();
-  // Hook para gerenciar a consulta de pesquisa
   const [searchQuery, setSearchQuery] = useState("");
-  // Hook para armazenar alunos filtrados
-  const [filteredStudents, setFilteredStudents] = useState<Student[]>([]);
-  // Hook para armazenar todos os alunos
-  const [students, setStudents] = useState<Student[]>([]);
+  const [filteredStudents, setFilteredStudents] = useState<Aluno[]>([]);
+  const [students, setStudents] = useState<Aluno[]>([]);
 
-  const studentsPrisma = prismaClient.aluno.findMany();
   useEffect(() => {
-    // Função assíncrona para buscar alunos do banco de dados
-    const fetchStudents = () => {
+    const fetchStudents = async () => {
       try {
-        // Busca alunos usando Prisma
-        // Atualiza o estado com os alunos buscados
+        const studentsPrisma = await prismaClient.aluno.findMany();
+
         setStudents(studentsPrisma);
-        setFilteredStudents(studentsPrisma);
+        setFilteredStudents(students);
       } catch (error) {
-        // Log de erro caso a busca falhe
         console.error("Erro ao buscar alunos:", error);
       }
     };
     fetchStudents(); // Chama a função para buscar alunos
   }, []);
-  // Função para lidar com a pesquisa de alunos
+
   const handleSearch = (text: string) => {
     setSearchQuery(text); // Atualiza a consulta de pesquisa
-    // Filtra alunos com base na consulta
+
     const filtered = students.filter((student) =>
       student.nm_aluno.toLowerCase().includes(text.toLowerCase())
     );
     setFilteredStudents(filtered); // Atualiza alunos filtrados
   };
 
-  // Função para limpar a pesquisa
   const clearSearch = () => {
     setSearchQuery(""); // Reseta a consulta de pesquisa
     setFilteredStudents(students); // Restaura a lista de alunos
@@ -95,7 +88,7 @@ export default function AlunosPage() {
         </Text>
         <View className="mt-4">
           <FlatList
-            data={studentsPrisma}
+            data={students}
             keyExtractor={(item) => String(item.id_aluno)}
             renderItem={({ item }) => <ListaAlunos data={item} />}
           />

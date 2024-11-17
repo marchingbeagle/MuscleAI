@@ -1,13 +1,13 @@
-export interface Student {
+export interface Aluno {
+  id_aluno: string;
+  nm_aluno: string;
+  email_aluno: string;
+  data_nascimento: Date;
   peso: number;
   altura: number;
-  nm_aluno: string;
-  deficiencias_aluno: string | null;
-  email_aluno: string;
   genero_aluno: string;
-  id_treino: string | null;
-  data_nascimento: Date;
-  id_aluno: string;
-  metas_aluno: string | null;
+  metas_aluno?: string;
+  deficiencias_aluno?: string;
   id_personal: string;
+  treinos: Treino[];
 }
