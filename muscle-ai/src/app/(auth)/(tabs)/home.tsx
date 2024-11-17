@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import React from "react";
 import { useUser } from "@clerk/clerk-expo";
 
@@ -6,7 +6,7 @@ export default function Home() {
   const { user } = useUser();
 
   return (
-    <View className="p-6 pt-20">
+    <ScrollView className="p-6 pt-20">
       <View className="flex-row items-center gap-2">
         <View className="h-12 w-12 rounded-full bg-[#2f855a]" />
         <Text className="text-xl font-bold text-[#2f855a]">
@@ -69,6 +69,6 @@ export default function Home() {
           </Text>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }

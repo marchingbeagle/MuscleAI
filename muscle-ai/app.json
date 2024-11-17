@@ -7,14 +7,18 @@
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "light",
-    "plugins": ["@prisma/react-native", "expo-router"],
+    "plugins": [
+      "@prisma/react-native",
+      "expo-router"
+    ],
     "splash": {
       "image": "./src/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.muscleai"
     },
     "android": {
       "adaptiveIcon": {
