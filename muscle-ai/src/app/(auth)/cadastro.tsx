@@ -11,16 +11,23 @@ import { useAuth } from "@clerk/clerk-expo";
 import { prismaClient } from "src/services/db";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
+import { useRouter } from "expo-router";
+
+interface ValidationResult {
+  isValid: boolean;
+  message: string;
+}
 
 export default function AlunosPage() {
   const { userId } = useAuth();
+  const router = useRouter();
   const [name, setName] = useState("");
   const [peso, setPeso] = useState("");
   const [altura, setAltura] = useState("");
   const [deficiencia, setDeficiencia] = useState("");
   const [email, setEmail] = useState("");
-  const [genero, setGenero] = useState("");
-  const [meta, setMeta] = useState("");
+  const [genero, setGenero] = useState("Masculino");
+  const [meta, setMeta] = useState("Emagrecimento");
   const [dataNascimento, setDataNascimento] = useState<Date>(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
 
@@ -37,14 +44,20 @@ export default function AlunosPage() {
     return `${year}-${month}-${day}`;
   };
 
-  const handleSubmit = async () => {
-    try {
-      const birthDate = dataNascimento;
-      if (isNaN(birthDate.getTime())) {
-        throw new Error(`Data de nascimento inválida: ${dataNascimento}`);
-      }
+  const resetForm = () => {
+    setName("");
+    setPeso("");
+    setAltura("");
+    setDeficiencia("");
+    setEmail("");
+    setGenero("");
+    setMeta("");
+    setDataNascimento(new Date());
+  };
 
-      const newAluno = await prismaClient.aluno.create({
+  const saveAluno = async () => {
+    try {
+      await prismaClient.aluno.create({
         data: {
           nm_aluno: name,
           peso: parseFloat(peso),
@@ -52,13 +65,67 @@ export default function AlunosPage() {
           deficiencias_aluno: deficiencia,
           id_personal: userId as string,
           email_aluno: email,
-          data_nascimento: birthDate.toISOString(),
+          data_nascimento: dataNascimento.toISOString(),
           genero_aluno: genero,
           metas_aluno: meta,
         },
       });
     } catch (error) {
       console.error("Erro ao salvar no banco de dados:", error);
+    }
+  };
+
+  const validateFields = (): ValidationResult => {
+    if (!name.trim()) {
+      return { isValid: false, message: "Nome é obrigatório" };
+    }
+    if (!peso.trim()) {
+      return { isValid: false, message: "Peso é obrigatório" };
+    }
+    if (!altura.trim()) {
+      return { isValid: false, message: "Altura é obrigatória" };
+    }
+    if (!deficiencia.trim()) {
+      return { isValid: false, message: "Deficiência é obrigatória" };
+    }
+    if (!email.trim()) {
+      return { isValid: false, message: "Email é obrigatório" };
+    }
+    if (!genero.trim()) {
+      return { isValid: false, message: "Gênero é obrigatório" };
+    }
+    if (!meta.trim()) {
+      return { isValid: false, message: "Meta é obrigatória" };
+    }
+
+    if (isNaN(parseFloat(peso)) || isNaN(parseFloat(altura))) {
+      return {
+        isValid: false,
+        message: "Peso e altura devem ser números válidos",
+      };
+    }
+
+    if (isNaN(dataNascimento.getTime())) {
+      return { isValid: false, message: "Data de nascimento inválida" };
+    }
+
+    return { isValid: true, message: "" };
+  };
+
+  const handleSubmit = async () => {
+    const validation = validateFields();
+    try {
+      if (!validation.isValid) {
+        alert(validation.message);
+        return;
+      }
+      saveAluno();
+      resetForm();
+      alert("Aluno cadastrado com sucesso!");
+
+      router.push("/alunos");
+    } catch (error) {
+      console.error("Erro ao salvar aluno:", error);
     }
   };
 
