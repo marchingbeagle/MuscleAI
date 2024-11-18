@@ -14,13 +14,13 @@ import { Picker } from "@react-native-picker/picker";
 
 export default function AlunosPage() {
   const { userId } = useAuth();
-  const [name, setName] = useState<string>("");
-  const [peso, setPeso] = useState<string>("");
-  const [altura, setAltura] = useState<string>("");
-  const [deficiencia, setDeficiencia] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [genero, setGenero] = useState<string>("");
-  const [meta, setMeta] = useState<string>("");
+  const [name, setName] = useState("");
+  const [peso, setPeso] = useState("");
+  const [altura, setAltura] = useState("");
+  const [deficiencia, setDeficiencia] = useState("");
+  const [email, setEmail] = useState("");
+  const [genero, setGenero] = useState("");
+  const [meta, setMeta] = useState("");
   const [dataNascimento, setDataNascimento] = useState<Date>(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
 

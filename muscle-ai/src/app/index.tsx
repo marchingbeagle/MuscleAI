@@ -21,17 +21,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={"dark-content"} />
-      {isInitialized ? (
-        isSignedIn ? (
-          <Redirect href="/home" />
-        ) : (
-          <Welcome />
-        )
-      ) : (
-        <SafeAreaView className="flex items-center justify-center">
-          <Text>Loading...</Text>
-        </SafeAreaView>
-      )}
+      {isInitialized && isSignedIn ? <Redirect href="/home" /> : <Welcome />}
     </SafeAreaProvider>
   );
 }
