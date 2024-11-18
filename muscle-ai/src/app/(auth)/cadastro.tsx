@@ -5,7 +5,7 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import InputGreen from "src/components/mycomponents/InputGreen.";
 import { useAuth } from "@clerk/clerk-expo";
 import { prismaClient } from "src/services/db";
@@ -13,17 +13,16 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
 
 export default function AlunosPage() {
-  const { userId } = useAuth(); // Obtém o ID do usuário autenticado
-  const [name, setName] = React.useState<string>(""); // Estado para o nome do aluno
-  const [peso, setPeso] = React.useState<string>(""); // Estado para o peso do aluno
-  const [altura, setAltura] = React.useState<string>(""); // Estado para a altura do aluno
-  const [deficiencia, setDeficiencia] = React.useState<string>(""); // Estado para deficiências do aluno
-  const [email, setEmail] = React.useState<string>(""); // Estado para deficiências do aluno
-  const [genero, setGenero] = React.useState<string>(""); // Estado para o valor selecionado no dropdown
-  const [meta, setMeta] = React.useState<string>("");
-
-  const [dataNascimento, setDataNascimento] = React.useState<Date>(new Date());
-  const [showDatePicker, setShowDatePicker] = React.useState(false);
+  const { userId } = useAuth();
+  const [name, setName] = useState<string>("");
+  const [peso, setPeso] = useState<string>("");
+  const [altura, setAltura] = useState<string>("");
+  const [deficiencia, setDeficiencia] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [genero, setGenero] = useState<string>("");
+  const [meta, setMeta] = useState<string>("");
+  const [dataNascimento, setDataNascimento] = useState<Date>(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   const handleDateChange = (event: any, selectedDate: any | undefined) => {
     const currentDate = selectedDate || dataNascimento;
@@ -38,36 +37,28 @@ export default function AlunosPage() {
     return `${year}-${month}-${day}`;
   };
 
-  const handleSubmit = async (
-    name: string,
-    peso: string,
-    altura: string,
-    deficiencia: string,
-    email: string,
-    dataNascimento: Date,
-    genero: string,
-    meta: string
-  ) => {
+  const handleSubmit = async () => {
     try {
       const birthDate = dataNascimento;
       if (isNaN(birthDate.getTime())) {
-        throw new Error("Invalid date format");
+        throw new Error(`Data de nascimento inválida: ${dataNascimento}`);
       }
 
       const newAluno = await prismaClient.aluno.create({
         data: {
-          nm_aluno: name, // Nome do aluno
-          peso: parseFloat(peso), // Peso convertido para número
-          altura: parseFloat(altura), // Altura convertida para número
-          deficiencias_aluno: deficiencia, // Deficiências do aluno
-          id_personal: userId as string, // ID do personal trainer
-          email_aluno: email, // Email do aluno
-          data_nascimento: birthDate.toISOString(), // Format the date as ISO 8601 string
-          genero_aluno: genero, // Gênero do aluno
+          nm_aluno: name,
+          peso: parseFloat(peso),
+          altura: parseFloat(altura),
+          deficiencias_aluno: deficiencia,
+          id_personal: userId as string,
+          email_aluno: email,
+          data_nascimento: birthDate.toISOString(),
+          genero_aluno: genero,
+          metas_aluno: meta,
         },
       });
     } catch (error) {
-      console.error("Error saving to database:", error);
+      console.error("Erro ao salvar no banco de dados:", error);
     }
   };
 
@@ -172,16 +163,7 @@ export default function AlunosPage() {
         </View>
         <TouchableOpacity
           onPress={() => {
-            handleSubmit(
-              name,
-              peso,
-              altura,
-              deficiencia,
-              email,
-              dataNascimento,
-              genero,
-              meta
-            );
+            handleSubmit();
           }}
           className="bg-[#198155] py-4 rounded-full w-full"
         >
