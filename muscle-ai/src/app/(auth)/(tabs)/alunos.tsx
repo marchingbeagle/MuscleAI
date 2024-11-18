@@ -1,42 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  ScrollView,
   TouchableOpacity,
   TextInput,
+  FlatList,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Feather } from "@expo/vector-icons";
-import AntDesign from "@expo/vector-icons/AntDesign";
-
-const students = [
-  { name: "Ana", age: 20 },
-  { name: "John", age: 18 },
-  { name: "Lilian", age: 32 },
-  { name: "Fábio", age: 41 },
-  { name: "Lucas", age: 14 },
-  { name: "Carol", age: 56 },
-  { name: "Júlia", age: 20 },
-];
+import ListaAlunos from "src/components/mycomponents/ListaAlunos";
+import { prismaClient } from "src/services/db";
+import { Aluno } from "@prisma/client";
 
 export default function AlunosPage() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredStudents, setFilteredStudents] = useState(students);
+  const [filteredStudents, setFilteredStudents] = useState<Aluno[]>([]);
+  const [students, setStudents] = useState<Aluno[]>([]);
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const studentsPrisma = await prismaClient.aluno.findMany();
+
+        setStudents(studentsPrisma);
+        setFilteredStudents(students);
+      } catch (error) {
+        console.error("Erro ao buscar alunos:", error);
+      }
+    };
+    fetchStudents(); // Chama a função para buscar alunos
+  }, []);
 
   const handleSearch = (text: string) => {
-    setSearchQuery(text);
+    setSearchQuery(text); // Atualiza a consulta de pesquisa
+
     const filtered = students.filter((student) =>
-      student.name.toLowerCase().includes(text.toLowerCase())
+      student.nm_aluno.toLowerCase().includes(text.toLowerCase())
     );
-    setFilteredStudents(filtered);
+    setFilteredStudents(filtered); // Atualiza alunos filtrados
   };
 
   const clearSearch = () => {
-    setSearchQuery("");
-    setFilteredStudents(students);
+    setSearchQuery(""); // Reseta a consulta de pesquisa
+    setFilteredStudents(students); // Restaura a lista de alunos
   };
+
   return (
     <View className="flex-1 bg-white">
       {/* Barra de pesquisa */}
@@ -56,7 +65,7 @@ export default function AlunosPage() {
           <Feather name="search" size={18} color="gray" />
           <TextInput
             value={searchQuery}
-            onChangeText={handleSearch}
+            onChangeText={handleSearch} // Atualiza a pesquisa ao digitar
             placeholder="Pesquisa"
             style={{
               marginLeft: 8,
@@ -78,47 +87,11 @@ export default function AlunosPage() {
           Alunos cadastrados
         </Text>
         <View className="mt-4">
-          <ScrollView>
-            {filteredStudents.map((student, index) => (
-              <View
-                key={index}
-                className="flex-row items-center justify-between px-4 py-2 border-b"
-                style={{
-                  borderColor: "#6C7072",
-                  width: "100%",
-                }}
-              >
-                <View className="flex-row items-center">
-                  {/* Avatar */}
-                  <View className="w-10 h-10 mr-4 bg-gray-300 rounded-full" />
-                  <Text className="text-lg" style={{ color: "#6C7072" }}>
-                    {student.name}, {student.age}
-                  </Text>
-                </View>
-                <View className="flex-row">
-                  {/* Botão de adicionar */}
-                  <TouchableOpacity
-                    onPress={() =>
-                      router.push(
-                        `/addStudent?name=${student.name}&age=${student.age}`
-                      )
-                    }
-                    className="mr-4"
-                  >
-                    <AntDesign name="bars" size={24} color="#767A7B" />
-                  </TouchableOpacity>
-                  {/* Botão de configuração */}
-                  <TouchableOpacity
-                    onPress={() =>
-                      router.push(`/editarAluno?name=${student.name}`)
-                    }
-                  >
-                    <Feather name="edit" size={24} color="#198155" />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            ))}
-          </ScrollView>
+          <FlatList
+            data={students}
+            keyExtractor={(item) => String(item.id_aluno)}
+            renderItem={({ item }) => <ListaAlunos data={item} />}
+          />
         </View>
       </View>
       {/* Botão de adicionar aluno */}

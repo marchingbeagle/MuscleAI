@@ -10,7 +10,6 @@ export default function App() {
   const [isInitialized, setIsInitialized] = useState(false);
   const { isSignedIn } = useAuth();
 
-  // Inicia o Banco de Dados
   useEffect(() => {
     const setup = async () => {
       await initializeDb();
@@ -19,23 +18,10 @@ export default function App() {
     setup();
   }, []);
 
-  // Componente que renderiza ao abrir o APP
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={"dark-content"} />
-      {isInitialized ? (
-        // Verifica se está iniciado
-        isSignedIn ? (
-          <Redirect href="/home" />
-        ) : (
-          <Welcome />
-        )
-      ) : (
-        // Caso não inicie ele irá exibir uma tela de Loading
-        <SafeAreaView className="flex items-center justify-center">
-          <Text>Loading...</Text>
-        </SafeAreaView>
-      )}
+      {isInitialized && isSignedIn ? <Redirect href="/home" /> : <Welcome />}
     </SafeAreaProvider>
   );
 }
