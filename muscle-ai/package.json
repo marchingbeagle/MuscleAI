@@ -21,6 +21,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "expo": "~51.0.28",
+    "expo-crypto": "^14.0.1",
     "expo-file-system": "^17.0.1",
     "expo-router": "^3.5.23",
     "expo-secure-store": "^13.0.2",

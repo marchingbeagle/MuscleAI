@@ -1,4 +1,10 @@
-import { View, Text, TouchableOpacity, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  ScrollView,
+} from "react-native";
 import React from "react";
 import InputGreen from "src/components/mycomponents/InputGreen.";
 import { useAuth } from "@clerk/clerk-expo";
@@ -14,6 +20,7 @@ export default function AlunosPage() {
   const [deficiencia, setDeficiencia] = React.useState<string>(""); // Estado para deficiências do aluno
   const [email, setEmail] = React.useState<string>(""); // Estado para deficiências do aluno
   const [genero, setGenero] = React.useState<string>(""); // Estado para o valor selecionado no dropdown
+  const [meta, setMeta] = React.useState<string>("");
 
   const [dataNascimento, setDataNascimento] = React.useState<Date>(new Date());
   const [showDatePicker, setShowDatePicker] = React.useState(false);
@@ -38,7 +45,8 @@ export default function AlunosPage() {
     deficiencia: string,
     email: string,
     dataNascimento: Date,
-    genero: string
+    genero: string,
+    meta: string
   ) => {
     try {
       const birthDate = dataNascimento;
@@ -64,104 +72,122 @@ export default function AlunosPage() {
   };
 
   return (
-    <View className="flex items-center p-6 mb-6">
-      <View className="w-full mb-4">
-        <Text className="text-2xl font-bold">Adicionar Aluno</Text>
-      </View>
-      <View className="w-full mb-4">
-        <Text className="text-base">Nome</Text>
-        <InputGreen value={name} setValue={setName} placeholder="John" />
-      </View>
-      <View className="w-full mb-4">
-        <Text className="text-base">Peso</Text>
-        <TextInput
-          value={peso}
-          onChangeText={(value) => {
-            setPeso(value);
-          }}
-          className="p-4 border-2 border-input py-2.5 px-4 rounded-lg border-gray-300"
-          placeholder="67kg"
-          keyboardType="number-pad"
-        />
-      </View>
-      <View className="w-full mb-4">
-        <Text className="text-base">Altura</Text>
-        <TextInput
-          value={altura}
-          onChangeText={(value) => {
-            setAltura(value);
-          }}
-          className="p-4 border-2 border-input py-2.5 px-4 rounded-lg border-gray-300"
-          placeholder="175cm"
-          keyboardType="number-pad"
-        />
-      </View>
-
-      <View className="w-full mb-4">
-        <Text className="text-base">Data de Nascimento</Text>
-        <TextInput
-          value={formatDate(dataNascimento)}
-          onFocus={() => setShowDatePicker(true)}
-          className="p-4 border-2 border-input py-2.5 px-4 rounded-lg border-gray-300"
-          placeholder="YYYY-MM-DD"
-        />
-        {showDatePicker && (
-          <DateTimePicker
-            value={dataNascimento}
-            mode="date"
-            display="default"
-            onChange={handleDateChange}
-          />
-        )}
-      </View>
-
-      <View className="w-full mb-4">
-        <Text className="text-base">Deficiências do aluno</Text>
-        <InputGreen
-          value={deficiencia}
-          setValue={setDeficiencia}
-          placeholder="Descreva as deficiências do Aluno"
-        />
-      </View>
-
-      <View className="w-full mb-4">
-        <Text className="text-base">Email</Text>
-        <InputGreen
-          value={email}
-          setValue={setEmail}
-          placeholder="Email do aluno"
-        />
-      </View>
-      <View className="w-full mb-4">
-        <Text className="text-base">Gênero</Text>
-        <View className="border-2 border-gray-300 rounded-lg">
-          <Picker
-            selectedValue={genero}
-            onValueChange={(itemValue) => setGenero(itemValue as string)}
-            style={{ height: 50 }}
-          >
-            <Picker.Item label="Masculino" value="masculino" />
-            <Picker.Item label="Feminino" value="feminino" />
-            <Picker.Item label="Outro" value="outro" />
-          </Picker>
+    <ScrollView>
+      <View className="flex items-center p-6 mb-6">
+        <View className="w-full mb-4">
+          <Text className="text-2xl font-bold">Adicionar Aluno</Text>
         </View>
+        <View className="w-full mb-4">
+          <Text className="text-base">Nome</Text>
+          <InputGreen value={name} setValue={setName} placeholder="John" />
+        </View>
+        <View className="w-full mb-4">
+          <Text className="text-base">Peso</Text>
+          <TextInput
+            value={peso}
+            onChangeText={(value) => {
+              setPeso(value);
+            }}
+            className="p-4 border-2 border-input py-2.5 px-4 rounded-lg border-gray-300"
+            placeholder="67kg"
+            keyboardType="number-pad"
+          />
+        </View>
+        <View className="w-full mb-4">
+          <Text className="text-base">Altura</Text>
+          <TextInput
+            value={altura}
+            onChangeText={(value) => {
+              setAltura(value);
+            }}
+            className="p-4 border-2 border-input py-2.5 px-4 rounded-lg border-gray-300"
+            placeholder="175cm"
+            keyboardType="number-pad"
+          />
+        </View>
+
+        <View className="w-full mb-4">
+          <Text className="text-base">Data de Nascimento</Text>
+          <TextInput
+            value={formatDate(dataNascimento)}
+            onFocus={() => setShowDatePicker(true)}
+            className="p-4 border-2 border-input py-2.5 px-4 rounded-lg border-gray-300"
+            placeholder="YYYY-MM-DD"
+          />
+          {showDatePicker && (
+            <DateTimePicker
+              value={dataNascimento}
+              mode="date"
+              display="default"
+              onChange={handleDateChange}
+            />
+          )}
+        </View>
+
+        <View className="w-full mb-4">
+          <Text className="text-base">Deficiências do aluno</Text>
+          <InputGreen
+            value={deficiencia}
+            setValue={setDeficiencia}
+            placeholder="Descreva as deficiências do Aluno"
+          />
+        </View>
+
+        <View className="w-full mb-4">
+          <Text className="text-base">Email</Text>
+          <InputGreen
+            value={email}
+            setValue={setEmail}
+            placeholder="Email do aluno"
+          />
+        </View>
+        <View className="w-full mb-4">
+          <Text className="text-base">Gênero</Text>
+          <View className="border-2 border-gray-300 rounded-lg">
+            <Picker
+              selectedValue={genero}
+              onValueChange={(itemValue) => setGenero(itemValue as string)}
+              style={{ height: 50 }}
+            >
+              <Picker.Item label="Masculino" value="masculino" />
+              <Picker.Item label="Feminino" value="feminino" />
+              <Picker.Item label="Outro" value="outro" />
+            </Picker>
+          </View>
+        </View>
+        <View className="w-full mb-4">
+          <Text className="text-base">Metas do Aluno</Text>
+          <View className="border-2 border-gray-300 rounded-lg">
+            <Picker
+              selectedValue={meta}
+              onValueChange={(itemValue) => setMeta(itemValue as string)}
+              style={{ height: 50 }}
+            >
+              <Picker.Item label="Emagrecimento" value="emagrecimento" />
+              <Picker.Item label="Ganho de Massa" value="ganhom" />
+              <Picker.Item label="Definição" value="definicao" />
+              <Picker.Item label="Manter" value="manter" />
+            </Picker>
+          </View>
+        </View>
+        <TouchableOpacity
+          onPress={() => {
+            handleSubmit(
+              name,
+              peso,
+              altura,
+              deficiencia,
+              email,
+              dataNascimento,
+              genero,
+              meta
+            );
+          }}
+          className="bg-[#198155] py-4 rounded-full w-full"
+        >
+          <Text className="font-bold text-center text-white">Salvar Aluno</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          handleSubmit(
-            name,
-            peso,
-            altura,
-            deficiencia,
-            email,
-            dataNascimento,
-            genero
-          );
-        }}
-        className="bg-[#198155] py-4 rounded-full w-full"
-      >
-        <Text className="font-bold text-center text-white">Salvar Aluno</Text>
-      </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
