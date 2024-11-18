@@ -1,19 +1,12 @@
 import axios from "axios";
-import { API_GEMINI } from "@env"; // Importa a variável do .env
+import { API_GEMINI } from "@env";
 
-// Endpoint correto baseado no exemplo cURL
 const GEMINI_API_URL =
-"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent";
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent";
 
-/**
- * Gera um plano de treino personalizado utilizando a API do Gemini.
- * @param prompt O texto que será enviado para a IA.
- * @returns O treino gerado pela IA.
- */
 export const generateWorkout = async (prompt: string): Promise<string> => {
   try {
     console.log("Enviando prompt para a API do Gemini:", prompt);
-    // Payload baseado no exemplo cURL
     const payload = {
       contents: [
         {
