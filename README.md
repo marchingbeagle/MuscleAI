@@ -18,21 +18,17 @@ O Muscle AI é um aplicativo de treino de musculação que ajuda os Personal Tra
 ### Database e Auth
 
 1. Prisma ORM
-2. Supabase
+2. SQLite
 3. Clerk
 
 ## Como rodar o projeto localmente
 
 1. Instalar o [Node.js](https://nodejs.org/en/download/) e o [Android Studio](https://developer.android.com/studio)
 
-```bash
-cd muscle-ai
-```
-
 ```node
 npm install
 npm i -g prisma
-prisma generate // (Caso não funcione rode npx prima generate)
+npx prisma generate
 npx expo prebuild --clean // Rodar o projeto com a build se torna necessário devido ao uso do Prisma para manipular o banco de dados SQLite.
 ```
 
@@ -40,6 +36,10 @@ npx expo prebuild --clean // Rodar o projeto com a build se torna necessário de
 
 ```nodejs
 npx expo run:android
+
+ou
+
+npx expo run:ios
 ```
 
 ## Como configurar as varíaveis JAVA_HOME E ANDROID_HOME
