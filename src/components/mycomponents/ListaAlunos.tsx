@@ -25,17 +25,13 @@ export default function ListaAlunos({ data }: Props) {
         {/* Avatar */}
         <View className="w-10 h-10 mr-4 bg-gray-300 rounded-full" />
         <Text className="text-lg" style={{ color: "#6C7072" }}>
-          {data.nm_aluno}, {data.data_nascimento?.toString()}
+          {data.nm_aluno}
         </Text>
       </View>
       <View className="flex-row">
         {/* Botão de adicionar */}
         <TouchableOpacity
-          onPress={() =>
-            router.push(
-              `/addStudent?name=${data.nm_aluno}&age=${data.data_nascimento}`
-            )
-          }
+          onPress={() => router.push(`/treinos?nomeAluno=${data.nm_aluno}`)}
           className="mr-4"
         >
           <AntDesign name="bars" size={24} color="#767A7B" />

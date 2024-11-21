@@ -14,14 +14,8 @@ export default function Configuracoes() {
   };
 
   return (
-    <ScrollView
-      contentContainerStyle={{
-        flexGrow: 1,
-        padding: 20,
-        backgroundColor: "#f5f5f5",
-      }}
-    >
-      <Text className="mb-5 text-2xl font-bold">Configurações</Text>
+    <ScrollView className="flex-1 px-8 pt-12 bg-white">
+      <Text className="mb-5 text-xl font-bold">Configurações</Text>
       <View className="flex flex-row items-center justify-between gap-5 mb-5">
         <Text className="mb-2 text-lg">Perfil</Text>
         <Button

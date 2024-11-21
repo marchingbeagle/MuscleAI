@@ -20,17 +20,9 @@ export default function Layout() {
         name="alunos"
         options={{
           title: "Alunos",
+          headerShown: false,
           tabBarIcon: ({ color }) => (
             <FontAwesome size={22} name="users" color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="treinos"
-        options={{
-          title: "Treino",
-          tabBarIcon: ({ color }) => (
-            <FontAwesome6 size={22} name="dumbbell" color={color} />
           ),
         }}
       />
@@ -38,6 +30,7 @@ export default function Layout() {
         name="configuracoes"
         options={{
           title: "Configurações",
+          headerShown: false,
           tabBarIcon: ({ color }) => (
             <FontAwesome6 size={22} name="gear" color={color} />
           ),
