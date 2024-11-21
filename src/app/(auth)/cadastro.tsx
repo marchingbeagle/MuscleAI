@@ -27,7 +27,6 @@ export default function AlunosPage() {
   const [deficiencia, setDeficiencia] = useState("");
   const [email, setEmail] = useState("");
   const [genero, setGenero] = useState("Masculino");
-  const [meta, setMeta] = useState("Emagrecimento");
   const [dataNascimento, setDataNascimento] = useState<Date>(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
 
@@ -51,7 +50,6 @@ export default function AlunosPage() {
     setDeficiencia("");
     setEmail("");
     setGenero("");
-    setMeta("");
     setDataNascimento(new Date());
   };
 
@@ -67,7 +65,6 @@ export default function AlunosPage() {
           email_aluno: email,
           data_nascimento: dataNascimento.toISOString(),
           genero_aluno: genero,
-          metas_aluno: meta,
         },
       });
     } catch (error) {
@@ -93,9 +90,6 @@ export default function AlunosPage() {
     }
     if (!genero.trim()) {
       return { isValid: false, message: "Gênero é obrigatório" };
-    }
-    if (!meta.trim()) {
-      return { isValid: false, message: "Meta é obrigatória" };
     }
 
     if (isNaN(parseFloat(peso)) || isNaN(parseFloat(altura))) {
@@ -210,21 +204,6 @@ export default function AlunosPage() {
               <Picker.Item label="Masculino" value="masculino" />
               <Picker.Item label="Feminino" value="feminino" />
               <Picker.Item label="Outro" value="outro" />
-            </Picker>
-          </View>
-        </View>
-        <View className="w-full mb-4">
-          <Text className="text-base">Metas do Aluno</Text>
-          <View className="border-2 border-gray-300 rounded-lg">
-            <Picker
-              selectedValue={meta}
-              onValueChange={(itemValue) => setMeta(itemValue as string)}
-              style={{ height: 50 }}
-            >
-              <Picker.Item label="Emagrecimento" value="emagrecimento" />
-              <Picker.Item label="Ganho de Massa" value="ganhom" />
-              <Picker.Item label="Definição" value="definicao" />
-              <Picker.Item label="Manter" value="manter" />
             </Picker>
           </View>
         </View>

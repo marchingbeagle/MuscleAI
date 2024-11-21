@@ -16,7 +16,6 @@ model Aluno {
   peso               Float    
   altura             Float    
   genero_aluno       String
-  metas_aluno        String?  
   deficiencias_aluno String?  
   id_personal        String
 
