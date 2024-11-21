@@ -47,42 +47,23 @@ export default function AlunosPage() {
   };
 
   return (
-    <View className="flex-1 bg-white">
-      {/* Barra de pesquisa */}
-      <View className="flex-row items-center p-4">
-        {/* Ícone de pesquisa e campo de texto */}
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            backgroundColor: "#F5F6F7",
-            borderRadius: 20,
-            paddingHorizontal: 10,
-            flex: 1,
-            height: 40,
-          }}
-        >
+    <View className="flex-1 p-4 pt-12 bg-white">
+      <View className="flex-row items-center">
+        <View className="flex-row items-center bg-[#F5F6F7] rounded-full px-4 flex-1 h-10">
           <Feather name="search" size={18} color="gray" />
           <TextInput
             value={searchQuery}
-            onChangeText={handleSearch} // Atualiza a pesquisa ao digitar
+            onChangeText={handleSearch}
             placeholder="Pesquisa"
-            style={{
-              marginLeft: 8,
-              fontSize: 16,
-              color: "#6C7072",
-              flex: 1,
-            }}
+            className="flex-1 pl-2 text-lg text-gray-300"
           />
         </View>
-
-        {/* Botão Cancel */}
-        <TouchableOpacity onPress={clearSearch} style={{ marginLeft: 10 }}>
-          <Text style={{ color: "black", fontSize: 16 }}>Cancel</Text>
+        <TouchableOpacity onPress={clearSearch} className="ml-4">
+          <Text className="text-base text-black">Cancel</Text>
         </TouchableOpacity>
       </View>
 
-      <View className="p-4">
+      <View className="mt-6">
         <Text className="text-xl font-bold text-center">
           Alunos cadastrados
         </Text>
@@ -94,7 +75,6 @@ export default function AlunosPage() {
           />
         </View>
       </View>
-      {/* Botão de adicionar aluno */}
       <TouchableOpacity
         onPress={() => router.push("/cadastro")}
         className="absolute bottom-4 right-4 bg-[#198155] p-4 rounded-full"

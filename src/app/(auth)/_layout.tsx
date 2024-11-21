@@ -6,6 +6,13 @@ export default function Layout() {
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="cadastro" options={{ title: "Cadastro" }} />
+      <Stack.Screen name="treinos" options={{ title: "Treinos" }} />
+      <Stack.Screen name="editarAluno" options={{ title: "Editar Aluno" }} />
+      <Stack.Screen name="editarTreino" options={{ title: "Editar Treino" }} />
+      <Stack.Screen
+        name="detalhesTreino"
+        options={{ title: "Detalhes do Treino" }}
+      />
     </Stack>
   );
 }
