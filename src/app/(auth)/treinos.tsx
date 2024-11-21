@@ -18,7 +18,7 @@ export default function TreinoPage() {
   const [treinoScript, setTreinoScript] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { nomeAluno } = useLocalSearchParams();
+  const { nomeAluno, metasAluno } = useLocalSearchParams();
 
   if (!nomeAluno) {
     return (
@@ -51,6 +51,7 @@ export default function TreinoPage() {
 
   useEffect(() => {
     setName(nomeAluno as string);
+    setMetas(metasAluno as string);
   }, [nomeAluno]);
 
   return (
