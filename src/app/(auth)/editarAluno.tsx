@@ -125,10 +125,6 @@ export default function EditarAluno() {
     <ScrollView>
       <View className="flex items-center p-6 mb-6">
         <View className="w-full mb-4">
-          <Text className="text-2xl font-bold">Editar Aluno</Text>
-        </View>
-
-        <View className="w-full mb-4">
           <Text className="text-base">Nome</Text>
           <InputGreen value={name} setValue={setName} placeholder="Nome" />
         </View>
