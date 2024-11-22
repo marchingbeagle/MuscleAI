@@ -1,12 +1,20 @@
-import { View, Text, ScrollView } from "react-native";
+import { Text, ScrollView } from "react-native";
 import React from "react";
-import { Button } from "src/components/Button";
 import { useClerk } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
+import ConfigItem from "src/components/mycomponents/ConfigItem";
 
 export default function Configuracoes() {
   const { signOut } = useClerk();
   const router = useRouter();
+
+  const handlePerfil = () => {
+    router.push("/perfil");
+  };
+
+  const handlePrivacidadeESeguranca = () => {
+    router.push("/privacidadeESeguranca");
+  };
 
   const handleSignOut = async () => {
     await signOut();
@@ -14,40 +22,19 @@ export default function Configuracoes() {
   };
 
   return (
-    <ScrollView className="flex-1 px-8 pt-12 bg-white">
+    <ScrollView className="p-4 pt-12 bg-white ">
       <Text className="mb-5 text-xl font-bold">Configurações</Text>
-      <View className="flex flex-row items-center justify-between gap-5 mb-5">
-        <Text className="mb-2 text-lg">Perfil</Text>
-        <Button
-          label="Editar Perfil"
-          onPress={() => router.push("/editarPerfil")}
-          className="px-24 text-white bg-green-800 rounded-full h-14 color-white"
-        />
-      </View>
-      <View className="flex flex-row items-center justify-between gap-5 mb-5">
-        <Text className="mb-2 text-lg">Notificações</Text>
-        <Button
-          label="Configurar Notificações"
-          onPress={() => router.push("/configurarNotificacoes")}
-          className="flex-1 text-white bg-green-800 rounded-full h-14 color-white"
-        />
-      </View>
-      <View className="flex flex-row items-center justify-between gap-8 mb-5">
-        <Text className="mb-2 text-lg">Segurança</Text>
-        <Button
-          label="Alterar Senha"
-          onPress={() => router.push("/alterarSenha")}
-          className="flex-1 text-white bg-green-800 rounded-full h-14 color-white"
-        />
-      </View>
-      <View className="flex flex-row items-center mb-5">
-        <Text className="mb-2 text-lg basis-1/2">Conta</Text>
-        <Button
-          label="Sair da conta"
-          className="flex-1 text-white bg-green-800 rounded-full h-14 color-white"
-          onPress={handleSignOut}
-        />
-      </View>
+      <ConfigItem
+        text="Perfil"
+        onPress={handlePerfil}
+        label="Entrar no Perfil"
+      />
+      <ConfigItem
+        text="Privacidade e Segurança"
+        onPress={handlePrivacidadeESeguranca}
+        label="Acessar Detalhes"
+      />
+      <ConfigItem text="Sair" onPress={handleSignOut} label="Sair da conta" />
     </ScrollView>
   );
 }
