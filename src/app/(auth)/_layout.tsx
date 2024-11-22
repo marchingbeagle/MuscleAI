@@ -13,6 +13,11 @@ export default function Layout() {
         name="detalhesTreino"
         options={{ title: "Detalhes do Treino" }}
       />
+      <Stack.Screen name="perfil" options={{ title: "Perfil" }} />
+      <Stack.Screen
+        name="privacidadeESeguranca"
+        options={{ title: "Privacidade e Segurança" }}
+      />
     </Stack>
   );
 }

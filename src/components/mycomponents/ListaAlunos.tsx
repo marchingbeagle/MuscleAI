@@ -38,7 +38,7 @@ export default function ListaAlunos({ data }: Props) {
         </TouchableOpacity>
         {/* Botão de configuração */}
         <TouchableOpacity
-          onPress={() => router.push(`/editarAluno?name=${data.nm_aluno}`)}
+          onPress={() => router.push(`/editarAluno?id=${data.id_aluno}`)}
         >
           <Feather name="edit" size={24} color="#198155" />
         </TouchableOpacity>
