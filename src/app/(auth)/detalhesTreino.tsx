@@ -4,6 +4,7 @@ import {
   ScrollView,
   ActivityIndicator,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useLocalSearchParams, useRouter, useFocusEffect } from "expo-router";
@@ -49,6 +50,37 @@ export default function DetalhesTreino() {
     }, [idAluno])
   );
 
+  const handleDeleteTreino = async (idTreino: string) => {
+    Alert.alert(
+      "Confirmar exclusão",
+      "Tem certeza que deseja excluir este treino?",
+      [
+        { text: "Cancelar", style: "cancel" },
+        {
+          text: "Excluir",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              await prismaClient.treino.delete({
+                where: {
+                  id_treino: idTreino,
+                },
+              });
+              // Refresh treinos list
+              const updatedTreinos = treinos.filter(
+                (t) => t.id_treino !== idTreino
+              );
+              setTreinos(updatedTreinos);
+            } catch (error) {
+              console.error("Erro ao deletar treino:", error);
+              Alert.alert("Erro", "Não foi possível excluir o treino");
+            }
+          },
+        },
+      ]
+    );
+  };
+
   if (loading) {
     return (
       <View className="items-center justify-center flex-1 bg-white">
@@ -77,33 +109,45 @@ export default function DetalhesTreino() {
                 </Text>
               </View>
             ) : (
-              treinos.map((treino) => (
+              treinos.map((treino, index) => (
                 <View
                   key={treino.id_treino}
-                  className="p-4 bg-gray-50 rounded-xl"
+                  className="mb-4 overflow-hidden bg-gray-50 rounded-xl"
                 >
-                  <Text className="text-gray-800">{treino.treino_gerado}</Text>
+                  <View className="flex-row items-center justify-between p-3 bg-gray-100 border-b border-gray-200">
+                    <Text className="font-medium text-gray-800">
+                      Treino {treinos.length - index}
+                    </Text>
+                    <View className="flex-row space-x-2">
+                      <TouchableOpacity
+                        onPress={() =>
+                          router.push(
+                            `/editarTreino?idTreino=${treino.id_treino}`
+                          )
+                        }
+                        className="items-center justify-center w-8 h-8 bg-green-100 rounded-full"
+                      >
+                        <Feather name="edit-2" size={16} color="#2f855a" />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => handleDeleteTreino(treino.id_treino)}
+                        className="items-center justify-center w-8 h-8 bg-red-100 rounded-full"
+                      >
+                        <Feather name="trash-2" size={16} color="#dc2626" />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <View className="p-4">
+                    <Text className="text-gray-800">
+                      {treino.treino_gerado}
+                    </Text>
+                  </View>
                 </View>
               ))
             )}
           </View>
         </View>
       </ScrollView>
-      <TouchableOpacity
-        onPress={() =>
-          router.push(`/editarTreino?idTreino=${treinos[0]?.id_treino}`)
-        }
-        className="absolute bottom-6 right-6 bg-[#2f855a] w-14 h-14 rounded-full items-center justify-center shadow-lg"
-        style={{
-          elevation: 4,
-          shadowColor: "#000",
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.25,
-          shadowRadius: 3.84,
-        }}
-      >
-        <Feather name="edit-2" size={28} color="white" />
-      </TouchableOpacity>
     </View>
   );
 }

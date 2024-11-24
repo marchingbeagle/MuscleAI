@@ -48,7 +48,7 @@ export default function TreinoPage() {
 
     setLoading(true);
     try {
-      const prompt = `Nome do aluno: ${name}. Metas: ${metas} - Crie um plano de treino personalizado. Retorne separado por dias da semana, incluindo sabado e domingo (Gere numero de series e repeticoes, não use Markdown)`;
+      const prompt = `Nome do aluno: ${name}. Metas: ${metas} - Crie um plano de treino personalizado. Retorne separado por dias da semana, incluindo sabado e domingo (Gere numero de series e repeticoes, não use Markdown). No topo da sua mensagem, inclua as metas do treino.`;
       const generatedText = await generateWorkout(prompt);
       setTreinoScript(generatedText);
       Alert.alert("Treino Gerado!", "O treino foi gerado com sucesso!");

@@ -11,7 +11,7 @@ import { prismaClient } from "src/services/db";
 import { Aluno } from "@prisma/client";
 import { Ionicons } from "@expo/vector-icons";
 import AlunoHomePage from "src/components/mycomponents/AlunoHomePage";
-import { useRouter } from "expo-router";
+import { useRouter, useFocusEffect } from "expo-router";
 
 export default function Home() {
   const { user } = useUser();
@@ -52,31 +52,29 @@ export default function Home() {
     return router.push("/alunos");
   };
 
-  useEffect(() => {
-    async function fetchLastAlunos() {
-      try {
-        const last4Alunos = await prismaClient.aluno.findMany({
-          take: 4,
-          orderBy: {
-            id_aluno: "desc",
-          },
-        });
-        if (last4Alunos && last4Alunos.length > 0) {
+  useFocusEffect(
+    React.useCallback(() => {
+      async function fetchLastAlunos() {
+        setIsLoading(true);
+        try {
+          const last4Alunos = await prismaClient.aluno.findMany({
+            take: 4,
+            orderBy: {
+              id_aluno: "desc",
+            },
+          });
           setAlunos(last4Alunos);
-        } else {
+        } catch (error) {
+          console.error("Erro ao encontrar alunos:", error);
           setAlunos([]);
+        } finally {
           setIsLoading(false);
         }
-      } catch (error) {
-        console.error("Erro ao encontrar alunos:", error);
-        setAlunos([]);
-      } finally {
-        setIsLoading(false);
       }
-    }
 
-    fetchLastAlunos();
-  }, []);
+      fetchLastAlunos();
+    }, [])
+  );
 
   const handleTemplateTreino = (item: any) => {
     setTemplatesTreino((prev) =>

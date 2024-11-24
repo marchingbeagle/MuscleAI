@@ -229,6 +229,41 @@ export default function EditarAluno() {
               Salvar Alterações
             </Text>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => {
+              Alert.alert(
+                "Confirmar exclusão",
+                "Tem certeza que deseja excluir este aluno? Esta ação não pode ser desfeita.",
+                [
+                  { text: "Cancelar", style: "cancel" },
+                  {
+                    text: "Excluir",
+                    style: "destructive",
+                    onPress: async () => {
+                      try {
+                        await prismaClient.aluno.delete({
+                          where: {
+                            id_aluno: alunoId,
+                          },
+                        });
+                        Alert.alert("Sucesso", "Aluno excluído com sucesso");
+                        router.back();
+                      } catch (error) {
+                        console.error("Erro ao deletar aluno:", error);
+                        Alert.alert("Erro", "Não foi possível excluir o aluno");
+                      }
+                    },
+                  },
+                ]
+              );
+            }}
+            className="px-6 py-4 mt-4 bg-red-300 rounded-xl"
+          >
+            <Text className="font-medium text-center text-gray-900">
+              Excluir Aluno
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
