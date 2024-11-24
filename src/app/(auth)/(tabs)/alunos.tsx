@@ -7,7 +7,7 @@ import {
   TextInput,
   FlatList,
 } from "react-native";
-import { useRouter } from "expo-router";
+import { useRouter, useFocusEffect } from "expo-router";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import ListaAlunos from "src/components/mycomponents/ListaAlunos";
 import { prismaClient } from "src/services/db";
@@ -19,11 +19,14 @@ export default function Alunos() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(() => {
-    loadStudents();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      loadStudents();
+    }, [])
+  );
 
   async function loadStudents() {
+    setIsLoading(true);
     try {
       const data = await prismaClient.aluno.findMany({
         orderBy: {

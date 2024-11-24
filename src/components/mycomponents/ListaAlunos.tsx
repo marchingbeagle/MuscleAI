@@ -15,9 +15,19 @@ export default function ListaAlunos({ data }: Props) {
     router.push(`/editarAluno?id=${data.id_aluno}`);
   };
 
+  const handleGerarTreinoRoute = () => {
+    router.push(`/treinos?nomeAluno=${data.nm_aluno}&idAluno=${data.id_aluno}`);
+  };
+
+  const handleDetalhesTreinoRoute = () => {
+    router.push(
+      `/detalhesTreino?nomeAluno=${data.nm_aluno}&idAluno=${data.id_aluno}`
+    );
+  };
+
   return (
     <TouchableOpacity
-      onPress={handleStudentPress}
+      onPress={handleDetalhesTreinoRoute}
       className="flex-row items-center p-4 mb-3 bg-gray-50 rounded-xl"
     >
       {/* Avatar Section */}
@@ -35,32 +45,24 @@ export default function ListaAlunos({ data }: Props) {
       {/* Action Buttons */}
       <View className="flex-row items-center">
         <TouchableOpacity
-          onPress={() =>
-            router.push(
-              `/treinos?nomeAluno=${data.nm_aluno}&idAluno=${data.id_aluno}`
-            )
-          }
-          className="items-center justify-center w-10 h-10 mr-2 bg-green-100 rounded-full"
-        >
-          <Ionicons name="barbell-outline" size={20} color="#2f855a" />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() =>
-            router.push(
-              `/detalhesTreino?nomeAluno=${data.nm_aluno}&idAluno=${data.id_aluno}`
-            )
-          }
-          className="items-center justify-center w-10 h-10 mr-2 bg-green-100 rounded-full"
-        >
-          <Ionicons name="list-outline" size={20} color="#2f855a" />
-        </TouchableOpacity>
-
-        <TouchableOpacity
           onPress={handleStudentPress}
           className="items-center justify-center w-10 h-10 bg-gray-100 rounded-full"
         >
-          <Ionicons name="chevron-forward" size={20} color="#6b7280" />
+          <Ionicons name="pencil-outline" size={20} color="#2f855a" />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={handleGerarTreinoRoute}
+          className="items-center justify-center w-10 h-10 mx-2 bg-green-100 rounded-full"
+        >
+          <Ionicons name="add-outline" size={20} color="#2f855a" />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={handleDetalhesTreinoRoute}
+          className="items-center justify-center w-10 h-10 mr-2 bg-green-100 rounded-full"
+        >
+          <Ionicons name="barbell-outline" size={20} color="#2f855a" />
         </TouchableOpacity>
       </View>
     </TouchableOpacity>

@@ -23,7 +23,7 @@ export default function Configuracoes() {
 
   return (
     <ScrollView className="p-4 pt-12 bg-white ">
-      <Text className="mb-5 text-xl font-bold">Configurações</Text>
+      <Text className="mb-5 text-xl font-bold">Ajustes</Text>
       <ConfigItem
         text="Perfil"
         onPress={handlePerfil}
