@@ -6,9 +6,11 @@ import { Ionicons } from "@expo/vector-icons";
 export default function AlunoHomePage({
   nomeAluno,
   metaAluno,
+  idAluno,
 }: {
   nomeAluno: string;
   metaAluno: string;
+  idAluno: string;
 }) {
   const router = useRouter();
 
@@ -37,6 +39,7 @@ export default function AlunoHomePage({
           params: {
             nomeAluno: nomeAluno,
             metaAluno: metaAluno,
+            idAluno: idAluno,
           },
         })
       }

@@ -73,7 +73,6 @@ export default function PrivacidadeESeguranca() {
   return (
     <ScrollView className="flex-1 bg-white">
       <View className="p-6">
-        {/* Header */}
         <View className="mb-6">
           <Text className="text-2xl font-bold text-gray-800">
             Privacidade e Segurança
@@ -84,7 +83,6 @@ export default function PrivacidadeESeguranca() {
           </Text>
         </View>
 
-        {/* Privacy Sections */}
         {sections.map((section, index) => (
           <PrivacySection
             key={index}
@@ -94,7 +92,6 @@ export default function PrivacidadeESeguranca() {
           />
         ))}
 
-        {/* Contact Section */}
         <TouchableOpacity className="flex-row items-center p-4 mt-4 bg-green-50 rounded-xl">
           <Ionicons name="mail-outline" size={24} color="#2f855a" />
           <View className="flex-1 ml-4">

@@ -35,11 +35,27 @@ export default function ListaAlunos({ data }: Props) {
       {/* Action Buttons */}
       <View className="flex-row items-center">
         <TouchableOpacity
-          onPress={() => router.push(`/treinos?nomeAluno=${data.nm_aluno}`)}
+          onPress={() =>
+            router.push(
+              `/treinos?nomeAluno=${data.nm_aluno}&idAluno=${data.id_aluno}`
+            )
+          }
           className="items-center justify-center w-10 h-10 mr-2 bg-green-100 rounded-full"
         >
           <Ionicons name="barbell-outline" size={20} color="#2f855a" />
         </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() =>
+            router.push(
+              `/detalhesTreino?nomeAluno=${data.nm_aluno}&idAluno=${data.id_aluno}`
+            )
+          }
+          className="items-center justify-center w-10 h-10 mr-2 bg-green-100 rounded-full"
+        >
+          <Ionicons name="list-outline" size={20} color="#2f855a" />
+        </TouchableOpacity>
+
         <TouchableOpacity
           onPress={handleStudentPress}
           className="items-center justify-center w-10 h-10 bg-gray-100 rounded-full"

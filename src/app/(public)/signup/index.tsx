@@ -82,7 +82,6 @@ export default function SignUp() {
   return (
     <View className="flex-1 bg-white">
       <View className="flex-1 p-6 pt-0">
-        {/* Header */}
         <View className="items-center mt-4 mb-4">
           <Image source={logo} className="w-32 h-32 " />
           <Text className="text-3xl font-bold text-[#2f855a] mb-2">
@@ -94,7 +93,6 @@ export default function SignUp() {
         </View>
 
         {!pendingVerification ? (
-          /* Registration Form */
           <View className="space-y-4">
             <View>
               <Text className="mb-2 font-medium text-gray-800">Nome</Text>
@@ -184,8 +182,6 @@ export default function SignUp() {
             </TouchableOpacity>
           </View>
         )}
-
-        {/* Footer */}
         <TouchableOpacity
           onPress={() => router.push("/signin")}
           className="p-4 mt-8"

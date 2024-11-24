@@ -9,7 +9,6 @@ export default function Perfil() {
   return (
     <ScrollView className="flex-1 bg-white">
       <View className="p-6">
-        {/* Header Section */}
         <View className="items-center mb-6">
           <View className="w-32 h-32 mb-4 overflow-hidden rounded-full">
             <Image
@@ -26,7 +25,6 @@ export default function Perfil() {
           </Text>
         </View>
 
-        {/* Profile Info Section */}
         <View className="p-4 mb-6 bg-gray-50 rounded-xl">
           <Text className="mb-4 text-lg font-bold text-gray-800">
             Informações da Conta

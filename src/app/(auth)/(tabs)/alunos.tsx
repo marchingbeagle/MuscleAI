@@ -44,13 +44,11 @@ export default function Alunos() {
 
   return (
     <View className="flex-1 bg-white">
-      {/* Header */}
       <View className="p-6 border-b border-gray-100">
         <Text className="text-2xl font-bold text-gray-800">Alunos</Text>
         <Text className="text-gray-500">Gerencie seus alunos</Text>
       </View>
 
-      {/* Search Bar */}
       <View className="px-6 py-3">
         <View className="flex-row items-center px-4 bg-gray-50 rounded-xl">
           <Ionicons name="search-outline" size={20} color="#9ca3af" />
@@ -107,7 +105,6 @@ export default function Alunos() {
         </View>
       )}
 
-      {/* FAB Button */}
       <TouchableOpacity
         onPress={() => router.push("/cadastro")}
         className="absolute bottom-6 right-6 bg-[#2f855a] w-14 h-14 rounded-full items-center justify-center shadow-lg"

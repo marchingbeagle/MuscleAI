@@ -123,7 +123,6 @@ export default function EditarAluno() {
   return (
     <ScrollView className="flex-1 bg-white">
       <View className="p-6">
-        {/* Header Section */}
         <View className="flex-row items-center mb-8">
           <View className="flex-1">
             <Text className="text-2xl font-bold text-[#2f855a]">
@@ -132,7 +131,6 @@ export default function EditarAluno() {
           </View>
         </View>
 
-        {/* Form Fields */}
         <View className="space-y-4">
           <View>
             <Text className="mb-2 font-medium text-gray-800">Nome</Text>

@@ -96,7 +96,6 @@ export default function Home() {
   ) : (
     <ScrollView className="flex-1 bg-white">
       <View className="p-6">
-        {/* Header Section */}
         <View className="flex-row items-center mb-8">
           <View className="flex-1">
             <Text className="mb-1 text-gray-600">Bem vindo de volta!</Text>
@@ -109,7 +108,6 @@ export default function Home() {
           </TouchableOpacity>
         </View>
 
-        {/* Training Options Section */}
         <View className="mb-8">
           <View className="flex-row items-center justify-between mb-4">
             <Text className="text-lg font-bold text-gray-800">
@@ -154,7 +152,6 @@ export default function Home() {
           </View>
         </View>
 
-        {/* Recent Students Section */}
         <View>
           <View className="flex-row items-center justify-between mb-4">
             <Text className="text-lg font-bold text-gray-800">
@@ -179,6 +176,7 @@ export default function Home() {
                   <AlunoHomePage
                     nomeAluno={item.nm_aluno}
                     metaAluno={metaSelected}
+                    idAluno={item.id_aluno}
                   />
                 </View>
               ))

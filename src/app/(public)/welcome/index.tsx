@@ -7,9 +7,7 @@ import logo from "../../../assets/logo.png";
 export default function Welcome() {
   return (
     <View className="flex-1 bg-white">
-      {/* Main Content Container */}
       <View className="items-center justify-between flex-1 px-6 py-12">
-        {/* Logo and Title Section */}
         <View className="items-center mt-12">
           <Image source={logo} className="w-48 h-48 mb-8" />
           <Text className="text-3xl font-bold text-[#2f855a] text-center mb-2">
@@ -20,7 +18,6 @@ export default function Welcome() {
           </Text>
         </View>
 
-        {/* Features Section */}
         <View className="w-full space-y-4">
           <View className="flex-row items-center p-4 bg-gray-50 rounded-xl">
             <View className="w-10 h-10 items-center justify-center bg-[#2f855a] rounded-full">
@@ -41,7 +38,6 @@ export default function Welcome() {
           </View>
         </View>
 
-        {/* Button Section */}
         <View className="w-full px-6">
           <TouchableOpacity
             onPress={() => router.navigate("/signin")}
