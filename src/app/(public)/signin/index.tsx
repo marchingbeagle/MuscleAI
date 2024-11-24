@@ -52,7 +52,6 @@ export default function Signin() {
   return (
     <View className="flex-1 bg-white">
       <View className="justify-between flex-1 p-6">
-        {/* Header Section */}
         <View className="items-center mt-12 mb-8">
           <Image source={logo} className="w-32 h-32 mb-4" />
           <Text className="text-3xl font-bold text-[#2f855a] mb-2">
@@ -63,7 +62,6 @@ export default function Signin() {
           </Text>
         </View>
 
-        {/* Form Section */}
         <View className="space-y-4">
           <View>
             <Text className="mb-2 font-medium text-gray-800">Email</Text>
@@ -105,7 +103,6 @@ export default function Signin() {
           </TouchableOpacity>
         </View>
 
-        {/* Footer Section */}
         <View className="mt-8">
           <TouchableOpacity
             onPress={() => router.push("/signup")}

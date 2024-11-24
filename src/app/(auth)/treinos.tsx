@@ -11,15 +11,24 @@ import React, { useEffect, useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { generateWorkout } from "src/services/gemini";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { prismaClient } from "src/services/db";
+import { useAuth } from "@clerk/clerk-expo";
 
 export default function TreinoPage() {
+  const { userId } = useAuth();
+  const router = useRouter();
   const [name, setName] = useState("");
   const [metas, setMetas] = useState("");
+  const [alunoId, setAlunoId] = useState<string>("");
   const [treinoScript, setTreinoScript] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const { nomeAluno, metaAluno, idAluno } = useLocalSearchParams();
 
-  const { nomeAluno, metaAluno } = useLocalSearchParams();
+  useEffect(() => {
+    setAlunoId(idAluno as string);
+  }, [idAluno]);
 
   if (!nomeAluno) {
     return (
@@ -39,7 +48,7 @@ export default function TreinoPage() {
 
     setLoading(true);
     try {
-      const prompt = `Nome do aluno: ${name}. Metas: ${metas} - Crie um plano de treino personalizado. Retorne separado por dias da semana, incluindo sabado e domingo (faça curto, não quero texto grande, não use Markdown)`;
+      const prompt = `Nome do aluno: ${name}. Metas: ${metas} - Crie um plano de treino personalizado. Retorne separado por dias da semana, incluindo sabado e domingo (Gere numero de series e repeticoes, não use Markdown)`;
       const generatedText = await generateWorkout(prompt);
       setTreinoScript(generatedText);
       Alert.alert("Treino Gerado!", "O treino foi gerado com sucesso!");
@@ -47,6 +56,32 @@ export default function TreinoPage() {
       Alert.alert("Erro", "Não foi possível gerar o treino. Tente novamente.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSaveTreino = async () => {
+    if (!treinoScript || !nomeAluno) {
+      Alert.alert("Erro", "Dados do treino incompletos");
+      return;
+    }
+
+    setIsSaving(true);
+    try {
+      await prismaClient.treino.create({
+        data: {
+          treino_gerado: treinoScript,
+          id_aluno: alunoId,
+          id_personal: userId as string,
+        },
+      });
+
+      Alert.alert("Sucesso", "Treino salvo com sucesso!");
+      router.back();
+    } catch (error) {
+      console.error("Erro ao salvar treino:", error);
+      Alert.alert("Erro", "Não foi possível salvar o treino");
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -117,9 +152,25 @@ export default function TreinoPage() {
             </TouchableOpacity>
 
             {treinoScript && (
-              <View className="p-4 mt-6 bg-gray-50 rounded-xl">
-                <Text className="text-gray-800">{treinoScript}</Text>
-              </View>
+              <>
+                <View className="p-4 mt-6 bg-gray-50 rounded-xl">
+                  <Text className="text-gray-800">{treinoScript}</Text>
+                </View>
+
+                <TouchableOpacity
+                  onPress={handleSaveTreino}
+                  disabled={isSaving}
+                  className="mt-4 bg-[#2f855a] py-4 px-6 rounded-xl"
+                >
+                  {isSaving ? (
+                    <ActivityIndicator color="white" />
+                  ) : (
+                    <Text className="font-medium text-center text-white">
+                      Salvar Treino
+                    </Text>
+                  )}
+                </TouchableOpacity>
+              </>
             )}
           </View>
         )}
