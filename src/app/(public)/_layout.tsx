@@ -23,21 +23,21 @@ export default function AuthRoutesLayout() {
       }}
     >
       <Stack.Screen
-        name="signin/index"
+        name="signin"
         options={{
           title: "Entrar",
           headerTitle: "Muscle AI",
         }}
       />
       <Stack.Screen
-        name="signup/index"
+        name="signup"
         options={{
           title: "Criar Conta",
           headerTitle: "Muscle AI",
         }}
       />
       <Stack.Screen
-        name="welcome/index"
+        name="welcome"
         options={{
           headerShown: false,
         }}

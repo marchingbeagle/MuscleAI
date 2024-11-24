@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "muscle-ai",
-    "slug": "muscle-ai",
-    "scheme": "muscle-ai",
+    "name": "Muscle AI",
+    "slug": "MuscleAI",
+    "scheme": "Muscle AI",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",

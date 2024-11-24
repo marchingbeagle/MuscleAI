@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import logo from "../../../assets/logo.png";
+import logo from "../../assets/logo.png";
 
 export default function Welcome() {
   return (

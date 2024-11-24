@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useSignUp } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
-import logo from "../../../assets/logo.png";
+import logo from "../../assets/logo.png";
 
 export default function SignUp() {
   const [pendingVerification, setPendingVerification] = React.useState(false);
