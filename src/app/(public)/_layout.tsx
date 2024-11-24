@@ -10,15 +10,37 @@ export default function AuthRoutesLayout() {
   }
 
   return (
-    <Stack screenOptions={{ headerShown: true }}>
+    <Stack
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#2f855a",
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+        headerShadowVisible: false,
+      }}
+    >
       <Stack.Screen
         name="signin/index"
-        options={{ title: "Entrar com sua conta" }}
+        options={{
+          title: "Entrar",
+          headerTitle: "Muscle AI",
+        }}
       />
-      <Stack.Screen name="signup/index" options={{ title: "Criar conta" }} />
+      <Stack.Screen
+        name="signup/index"
+        options={{
+          title: "Criar Conta",
+          headerTitle: "Muscle AI",
+        }}
+      />
       <Stack.Screen
         name="welcome/index"
-        options={{ title: "Welcome", headerShown: false }}
+        options={{
+          headerShown: false,
+        }}
       />
     </Stack>
   );

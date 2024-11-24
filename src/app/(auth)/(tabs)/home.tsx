@@ -1,12 +1,21 @@
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { useUser } from "@clerk/clerk-expo";
 import { prismaClient } from "src/services/db";
 import { Aluno } from "@prisma/client";
+import { Ionicons } from "@expo/vector-icons";
 import AlunoHomePage from "src/components/mycomponents/AlunoHomePage";
+import { useRouter } from "expo-router";
 
 export default function Home() {
   const { user } = useUser();
+  const router = useRouter();
   const [alunos, setAlunos] = useState<Aluno[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [metaSelected, setMetaSelected] = useState("");
@@ -14,25 +23,34 @@ export default function Home() {
   const [templatesTreino, setTemplatesTreino] = useState([
     {
       title: "Treino de Mobilidade e Flexibilidade",
+      icon: "body-outline",
       selected: false,
     },
     {
       title: "Treino de Força",
+      icon: "barbell-outline",
       selected: false,
     },
     {
       title: "Treino de Hipertrofia",
+      icon: "fitness-outline",
       selected: false,
     },
     {
       title: "Treino de Resistência",
+      icon: "timer-outline",
       selected: false,
     },
     {
       title: "Treino de Potência",
+      icon: "flash-outline",
       selected: false,
     },
   ]);
+
+  const handleVerTodosAlunos = () => {
+    return router.push("/alunos");
+  };
 
   useEffect(() => {
     async function fetchLastAlunos() {
@@ -71,48 +89,102 @@ export default function Home() {
   };
 
   return isLoading ? (
-    <Text>Carregando...</Text>
+    <View className="items-center justify-center flex-1 bg-white">
+      <ActivityIndicator size="large" color="#2f855a" />
+      <Text className="mt-4 text-gray-600">Carregando...</Text>
+    </View>
   ) : (
-    <ScrollView className="p-4 pt-12">
-      <View className="flex-row items-center gap-2">
-        <Text className="text-xl font-bold text-[#2f855a]">
-          Olá! {user?.firstName}, bem vindo de volta!
-        </Text>
-      </View>
-
-      <Text className="text-lg font-bold text-[#35383f] py-4">
-        Opções de treinos sugeridas:
-      </Text>
-
-      <View className="flex flex-col gap-4">
-        {templatesTreino.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => handleTemplateTreino(item)}
-            className={`${
-              item.selected ? "bg-green-800" : "bg-[#38a169]"
-            } rounded-xl h-14 flex items-center justify-center`}
-          >
-            <Text className="text-base font-bold text-white">{item.title}</Text>
+    <ScrollView className="flex-1 bg-white">
+      <View className="p-6">
+        {/* Header Section */}
+        <View className="flex-row items-center mb-8">
+          <View className="flex-1">
+            <Text className="mb-1 text-gray-600">Bem vindo de volta!</Text>
+            <Text className="text-2xl font-bold text-[#2f855a]">
+              {user?.firstName} 👋
+            </Text>
+          </View>
+          <TouchableOpacity className="items-center justify-center w-10 h-10 rounded-full bg-gray-50">
+            <Ionicons name="notifications-outline" size={24} color="#2f855a" />
           </TouchableOpacity>
-        ))}
-      </View>
+        </View>
 
-      <Text className="text-lg font-bold text-[#35383f] py-4">
-        Selecione um aluno recente:
-      </Text>
-      <View className="flex-row flex-wrap justify-between gap-4 py-4">
-        {alunos.length == 0 ? (
-          <Text>Nenhum Aluno Encontrado</Text>
-        ) : (
-          alunos.map((item, index) => (
-            <AlunoHomePage
-              key={index}
-              nomeAluno={item.nm_aluno}
-              metaAluno={metaSelected}
-            />
-          ))
-        )}
+        {/* Training Options Section */}
+        <View className="mb-8">
+          <View className="flex-row items-center justify-between mb-4">
+            <Text className="text-lg font-bold text-gray-800">
+              Opções de Treinos
+            </Text>
+          </View>
+
+          <View className="space-y-3">
+            {templatesTreino.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handleTemplateTreino(item)}
+                className={`${
+                  item.selected ? "bg-green-800" : "bg-gray-50"
+                } rounded-xl p-4 flex-row items-center`}
+              >
+                <View
+                  className={`${
+                    item.selected ? "bg-green-700" : "bg-white"
+                  } w-12 h-12 rounded-full items-center justify-center`}
+                >
+                  <Ionicons
+                    name={item.icon as any}
+                    size={24}
+                    color={item.selected ? "#fff" : "#2f855a"}
+                  />
+                </View>
+                <Text
+                  className={`flex-1 ml-4 font-medium ${
+                    item.selected ? "text-white" : "text-gray-800"
+                  }`}
+                >
+                  {item.title}
+                </Text>
+                <Ionicons
+                  name="chevron-forward"
+                  size={20}
+                  color={item.selected ? "#fff" : "#2f855a"}
+                />
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+
+        {/* Recent Students Section */}
+        <View>
+          <View className="flex-row items-center justify-between mb-4">
+            <Text className="text-lg font-bold text-gray-800">
+              Alunos Recentes
+            </Text>
+            <TouchableOpacity onPress={handleVerTodosAlunos}>
+              <Text className="text-[#2f855a]">Ver todos</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View className="flex-row flex-wrap justify-between">
+            {alunos.length === 0 ? (
+              <View className="items-center w-full p-6 bg-gray-50 rounded-xl">
+                <Ionicons name="people-outline" size={32} color="#9ca3af" />
+                <Text className="mt-2 text-gray-500">
+                  Nenhum Aluno Encontrado
+                </Text>
+              </View>
+            ) : (
+              alunos.map((item, index) => (
+                <View key={index} className="w-[48%] mb-4">
+                  <AlunoHomePage
+                    nomeAluno={item.nm_aluno}
+                    metaAluno={metaSelected}
+                  />
+                </View>
+              ))
+            )}
+          </View>
+        </View>
       </View>
     </ScrollView>
   );

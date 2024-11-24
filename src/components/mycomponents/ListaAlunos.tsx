@@ -1,10 +1,8 @@
-import { View, Text } from "react-native";
-import { Feather } from "@expo/vector-icons";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
+import { useRouter } from "expo-router";
 import { Aluno } from "@prisma/client";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { useRouter } from "expo-router/build/exports";
+import { Ionicons } from "@expo/vector-icons";
 
 interface Props {
   data: Aluno;
@@ -12,37 +10,43 @@ interface Props {
 
 export default function ListaAlunos({ data }: Props) {
   const router = useRouter();
+
+  const handleStudentPress = () => {
+    router.push(`/editarAluno?id=${data.id_aluno}`);
+  };
+
   return (
-    <View
-      key={data.id_aluno}
-      className="flex-row items-center justify-between px-4 py-2 border-b"
-      style={{
-        borderColor: "#6C7072",
-        width: "100%",
-      }}
+    <TouchableOpacity
+      onPress={handleStudentPress}
+      className="flex-row items-center p-4 mb-3 bg-gray-50 rounded-xl"
     >
-      <View className="flex-row items-center">
-        {/* Avatar */}
-        <View className="w-10 h-10 mr-4 bg-gray-300 rounded-full" />
-        <Text className="text-lg" style={{ color: "#6C7072" }}>
+      {/* Avatar Section */}
+      <View className="items-center justify-center w-12 h-12 mr-4 bg-white rounded-full">
+        <Ionicons name="person-outline" size={24} color="#2f855a" />
+      </View>
+
+      {/* Info Section */}
+      <View className="flex-1">
+        <Text className="text-base font-medium text-gray-800">
           {data.nm_aluno}
         </Text>
       </View>
-      <View className="flex-row">
-        {/* Botão de adicionar */}
+
+      {/* Action Buttons */}
+      <View className="flex-row items-center">
         <TouchableOpacity
           onPress={() => router.push(`/treinos?nomeAluno=${data.nm_aluno}`)}
-          className="mr-4"
+          className="items-center justify-center w-10 h-10 mr-2 bg-green-100 rounded-full"
         >
-          <AntDesign name="bars" size={24} color="#767A7B" />
+          <Ionicons name="barbell-outline" size={20} color="#2f855a" />
         </TouchableOpacity>
-        {/* Botão de configuração */}
         <TouchableOpacity
-          onPress={() => router.push(`/editarAluno?id=${data.id_aluno}`)}
+          onPress={handleStudentPress}
+          className="items-center justify-center w-10 h-10 bg-gray-100 rounded-full"
         >
-          <Feather name="edit" size={24} color="#198155" />
+          <Ionicons name="chevron-forward" size={20} color="#6b7280" />
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

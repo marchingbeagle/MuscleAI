@@ -28,13 +28,20 @@ export default function Configuracoes() {
         text="Perfil"
         onPress={handlePerfil}
         label="Entrar no Perfil"
+        icon="person-outline"
       />
       <ConfigItem
         text="Privacidade e Segurança"
         onPress={handlePrivacidadeESeguranca}
         label="Acessar Detalhes"
+        icon="shield-checkmark-outline"
       />
-      <ConfigItem text="Sair" onPress={handleSignOut} label="Sair da conta" />
+      <ConfigItem
+        text="Sair"
+        onPress={handleSignOut}
+        label="Sair da conta"
+        icon="log-out-outline"
+      />
     </ScrollView>
   );
 }

@@ -7,7 +7,6 @@ import {
   Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import InputGreen from "src/components/mycomponents/InputGreen.";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { prismaClient } from "src/services/db";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -122,89 +121,117 @@ export default function EditarAluno() {
   };
 
   return (
-    <ScrollView>
-      <View className="flex items-center p-6 mb-6">
-        <View className="w-full mb-4">
-          <Text className="text-base">Nome</Text>
-          <InputGreen value={name} setValue={setName} placeholder="Nome" />
-        </View>
-
-        <View className="w-full mb-4">
-          <Text className="text-base">Peso</Text>
-          <TextInput
-            value={peso}
-            onChangeText={setPeso}
-            className="p-4 border-2 border-input py-2.5 px-4 rounded-lg border-gray-300"
-            placeholder="67kg"
-            keyboardType="numeric"
-          />
-        </View>
-
-        <View className="w-full mb-4">
-          <Text className="text-base">Altura</Text>
-          <TextInput
-            value={altura}
-            onChangeText={setAltura}
-            className="p-4 border-2 border-input py-2.5 px-4 rounded-lg border-gray-300"
-            placeholder="175cm"
-            keyboardType="numeric"
-          />
-        </View>
-
-        <View className="w-full mb-4">
-          <Text className="text-base">Data de Nascimento</Text>
-          <TextInput
-            value={formatDate(dataNascimento)}
-            onFocus={() => setShowDatePicker(true)}
-            className="p-4 border-2 border-input py-2.5 px-4 rounded-lg border-gray-300"
-          />
-          {showDatePicker && (
-            <DateTimePicker
-              value={dataNascimento}
-              mode="date"
-              display="default"
-              onChange={handleDateChange}
-            />
-          )}
-        </View>
-
-        <View className="w-full mb-4">
-          <Text className="text-base">Deficiências</Text>
-          <InputGreen
-            value={deficiencia}
-            setValue={setDeficiencia}
-            placeholder="Deficiências do aluno"
-          />
-        </View>
-
-        <View className="w-full mb-4">
-          <Text className="text-base">Email</Text>
-          <InputGreen value={email} setValue={setEmail} placeholder="Email" />
-        </View>
-
-        <View className="w-full mb-4">
-          <Text className="text-base">Gênero</Text>
-          <View className="border-2 border-gray-300 rounded-lg">
-            <Picker
-              selectedValue={genero}
-              onValueChange={setGenero}
-              style={{ height: 50 }}
-            >
-              <Picker.Item label="Masculino" value="masculino" />
-              <Picker.Item label="Feminino" value="feminino" />
-              <Picker.Item label="Outro" value="outro" />
-            </Picker>
+    <ScrollView className="flex-1 bg-white">
+      <View className="p-6">
+        {/* Header Section */}
+        <View className="flex-row items-center mb-8">
+          <View className="flex-1">
+            <Text className="text-2xl font-bold text-[#2f855a]">
+              Atualize os dados do aluno
+            </Text>
           </View>
         </View>
 
-        <TouchableOpacity
-          onPress={handleUpdate}
-          className="bg-[#198155] py-4 rounded-full w-full"
-        >
-          <Text className="font-bold text-center text-white">
-            Atualizar Aluno
-          </Text>
-        </TouchableOpacity>
+        {/* Form Fields */}
+        <View className="space-y-4">
+          <View>
+            <Text className="mb-2 font-medium text-gray-800">Nome</Text>
+            <TextInput
+              value={name}
+              onChangeText={setName}
+              className="p-4 border border-gray-200 bg-gray-50 rounded-xl"
+              placeholder="Nome do aluno"
+            />
+          </View>
+
+          <View>
+            <Text className="mb-2 font-medium text-gray-800">Peso</Text>
+            <TextInput
+              value={peso}
+              onChangeText={setPeso}
+              className="p-4 border border-gray-200 bg-gray-50 rounded-xl"
+              placeholder="67kg"
+              keyboardType="number-pad"
+            />
+          </View>
+
+          <View>
+            <Text className="mb-2 font-medium text-gray-800">Altura</Text>
+            <TextInput
+              value={altura}
+              onChangeText={setAltura}
+              className="p-4 border border-gray-200 bg-gray-50 rounded-xl"
+              placeholder="175cm"
+              keyboardType="number-pad"
+            />
+          </View>
+
+          <View>
+            <Text className="mb-2 font-medium text-gray-800">
+              Data de Nascimento
+            </Text>
+            <TouchableOpacity
+              onPress={() => setShowDatePicker(true)}
+              className="p-4 border border-gray-200 bg-gray-50 rounded-xl"
+            >
+              <Text>{formatDate(dataNascimento)}</Text>
+            </TouchableOpacity>
+            {showDatePicker && (
+              <DateTimePicker
+                value={dataNascimento}
+                mode="date"
+                display="default"
+                onChange={handleDateChange}
+              />
+            )}
+          </View>
+
+          <View>
+            <Text className="mb-2 font-medium text-gray-800">Deficiências</Text>
+            <TextInput
+              value={deficiencia}
+              onChangeText={setDeficiencia}
+              className="p-4 border border-gray-200 bg-gray-50 rounded-xl"
+              placeholder="Deficiências do aluno"
+              multiline={true}
+            />
+          </View>
+
+          <View>
+            <Text className="mb-2 font-medium text-gray-800">Email</Text>
+            <TextInput
+              value={email}
+              onChangeText={setEmail}
+              className="p-4 border border-gray-200 bg-gray-50 rounded-xl"
+              placeholder="Email do aluno"
+              keyboardType="email-address"
+            />
+          </View>
+
+          <View>
+            <Text className="mb-2 font-medium text-gray-800">Gênero</Text>
+            <View className="border border-gray-200 bg-gray-50 rounded-xl">
+              <Picker
+                selectedValue={genero}
+                onValueChange={(itemValue) => setGenero(itemValue as string)}
+                style={{ height: 50 }}
+              >
+                <Picker.Item label="Masculino" value="masculino" />
+                <Picker.Item label="Feminino" value="feminino" />
+                <Picker.Item label="Outro" value="outro" />
+              </Picker>
+            </View>
+          </View>
+
+          <TouchableOpacity
+            onPress={handleUpdate}
+            className="mt-6 bg-[#2f855a] py-4 px-6 rounded-xl"
+          >
+            <Text className="font-medium text-center text-white">
+              Salvar Alterações
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
