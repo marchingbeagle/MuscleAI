@@ -1,18 +1,33 @@
 import React from "react";
 import { Tabs } from "expo-router";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function Layout() {
   return (
-    <Tabs screenOptions={{ headerShown: true, tabBarActiveTintColor: "green" }}>
+    <Tabs
+      screenOptions={{
+        headerShown: true,
+        tabBarActiveTintColor: "#2f855a",
+        tabBarInactiveTintColor: "#9ca3af",
+        tabBarStyle: {
+          backgroundColor: "white",
+          height: 65,
+          paddingBottom: 10,
+          paddingTop: 10,
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: "500",
+        },
+      }}
+    >
       <Tabs.Screen
         name="home"
         options={{
           title: "Home",
           headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="home" color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home-outline" size={24} color={color} />
           ),
         }}
       />
@@ -21,8 +36,8 @@ export default function Layout() {
         options={{
           title: "Alunos",
           headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <FontAwesome size={22} name="users" color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="people-outline" size={24} color={color} />
           ),
         }}
       />
@@ -31,8 +46,8 @@ export default function Layout() {
         options={{
           title: "Configurações",
           headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <FontAwesome6 size={22} name="gear" color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="settings-outline" size={24} color={color} />
           ),
         }}
       />

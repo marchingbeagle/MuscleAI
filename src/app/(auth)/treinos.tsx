@@ -5,10 +5,11 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
-import InputGreen from "src/components/mycomponents/InputGreen.";
 import { generateWorkout } from "src/services/gemini";
 import { useLocalSearchParams } from "expo-router";
 
@@ -38,7 +39,7 @@ export default function TreinoPage() {
 
     setLoading(true);
     try {
-      const prompt = `Nome do aluno: ${name}. Metas: ${metas} - Crie um plano de treino personalizado.(faça curto, poucas palvras, não quero texto grande, não user Markdown)`;
+      const prompt = `Nome do aluno: ${name}. Metas: ${metas} - Crie um plano de treino personalizado. Retorne separado por dias da semana, incluindo sabado e domingo (faça curto, não quero texto grande, não use Markdown)`;
       const generatedText = await generateWorkout(prompt);
       setTreinoScript(generatedText);
       Alert.alert("Treino Gerado!", "O treino foi gerado com sucesso!");
@@ -55,50 +56,74 @@ export default function TreinoPage() {
   }, [nomeAluno]);
 
   return (
-    <ScrollView className="flex-1 p-4 bg-white">
-      <View className="flex items-center mb-6">
-        <View className="w-full mb-4">
-          <Text className="py-4 text-lg">
-            Nome: {Array.isArray(nomeAluno) ? nomeAluno.join(", ") : nomeAluno}
-          </Text>
+    <ScrollView className="flex-1 bg-white">
+      <View className="p-6">
+        {/* Header Section */}
+        <View className="flex-row items-center mb-8">
+          <View className="flex-1">
+            <Text className="text-2xl font-bold text-[#2f855a]">
+              Gerar Treino
+            </Text>
+            <Text className="text-gray-600">
+              Crie um treino personalizado para seu aluno
+            </Text>
+          </View>
         </View>
-        <View className="w-full mb-4">
-          <Text className="text-base">Metas do aluno</Text>
-          <InputGreen
-            value={metas}
-            setValue={setMetas}
-            placeholder="Metas do aluno"
-          />
-        </View>
-      </View>
 
-      <View className="flex-row justify-between w-full mb-6">
-        <TouchableOpacity
-          className="bg-[#198155] flex-1 py-4 rounded-full mr-2"
-          onPress={handleGenerateWorkout}
-          disabled={loading}
-        >
-          <Text className="font-bold text-center text-white">
-            {loading ? "Gerando o seu treino..." : "Gerar Treino"}
-          </Text>
-        </TouchableOpacity>
-      </View>
+        {!nomeAluno ? (
+          <View className="items-center justify-center p-6 bg-gray-50 rounded-xl">
+            <Ionicons name="barbell-outline" size={32} color="#9ca3af" />
+            <Text className="mt-2 text-gray-500">Nenhum aluno selecionado</Text>
+          </View>
+        ) : (
+          <View className="space-y-4">
+            <View>
+              <Text className="mb-2 font-medium text-gray-800">
+                Nome do Aluno
+              </Text>
+              <TextInput
+                value={name}
+                onChangeText={setName}
+                className="p-4 border border-gray-200 bg-gray-50 rounded-xl"
+                placeholder="Nome do aluno"
+              />
+            </View>
 
-      <View className="w-full mb-4">
-        <Text className="text-base">Treino:</Text>
-        <TextInput
-          value={treinoScript}
-          onChangeText={setTreinoScript}
-          placeholder="Seu treino irá aparecer aqui"
-          className="w-full h-64 border border-[#6C7072] rounded-lg p-2"
-          multiline
-          style={{ textAlignVertical: "top" }}
-        />
-      </View>
+            <View>
+              <Text className="mb-2 font-medium text-gray-800">
+                Metas do Treino
+              </Text>
+              <TextInput
+                value={metas}
+                onChangeText={setMetas}
+                className="p-4 border border-gray-200 bg-gray-50 rounded-xl"
+                placeholder="Descreva as metas do treino"
+                multiline={true}
+              />
+            </View>
 
-      <TouchableOpacity className="bg-[#198155] py-4 rounded-full w-full">
-        <Text className="font-bold text-center text-white">Salvar treino</Text>
-      </TouchableOpacity>
+            <TouchableOpacity
+              onPress={handleGenerateWorkout}
+              className="mt-6 bg-[#2f855a] py-4 px-6 rounded-xl"
+              disabled={loading}
+            >
+              {loading ? (
+                <ActivityIndicator color="white" />
+              ) : (
+                <Text className="font-medium text-center text-white">
+                  Gerar Treino
+                </Text>
+              )}
+            </TouchableOpacity>
+
+            {treinoScript && (
+              <View className="p-4 mt-6 bg-gray-50 rounded-xl">
+                <Text className="text-gray-800">{treinoScript}</Text>
+              </View>
+            )}
+          </View>
+        )}
+      </View>
     </ScrollView>
   );
 }

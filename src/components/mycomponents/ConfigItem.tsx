@@ -1,23 +1,32 @@
 import { View, Text } from "react-native";
 import React from "react";
+import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 interface ConfigItemProps {
   text: string;
   label: string;
+  icon: keyof typeof Ionicons.glyphMap;
   onPress: () => void;
 }
 
-export default function ConfigItem({ text, label, onPress }: ConfigItemProps) {
+export default function ConfigItem({
+  text,
+  label,
+  onPress,
+  icon,
+}: ConfigItemProps) {
   return (
-    <View className="flex flex-row items-center justify-between mb-5">
-      <Text className="w-1/2 text-base">{text}</Text>
-      <TouchableOpacity
-        onPress={onPress}
-        className="px-4 py-2 bg-green-500 rounded-full "
-      >
-        <Text className="text-base font-medium text-white">{label}</Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity
+      className="flex-row items-center p-4 mb-4 bg-gray-50 rounded-xl"
+      onPress={onPress}
+    >
+      <Ionicons name={icon} size={24} color="#2f855a" />
+      <View className="flex-1 ml-4">
+        <Text className="font-medium text-gray-800">{text}</Text>
+        <Text className="text-sm text-gray-500">{label}</Text>
+      </View>
+      <Ionicons name="chevron-forward" size={24} color="#2f855a" />
+    </TouchableOpacity>
   );
 }

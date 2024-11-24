@@ -1,10 +1,15 @@
 import { useSignIn } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
-import { Image, Text, View } from "react-native";
+import {
+  Image,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import React from "react";
-import { Button } from "src/components/Button";
 import logo from "src/assets/logo_sem_nome.png";
-import InputGreen from "src/components/mycomponents/InputGreen.";
 
 export default function Signin() {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -12,11 +17,16 @@ export default function Signin() {
 
   const [emailAddress, setEmailAddress] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState("");
 
   const onSignInPress = React.useCallback(async () => {
     if (!isLoaded) {
       return;
     }
+
+    setLoading(true);
+    setError("");
 
     try {
       const signInAttempt = await signIn.create({
@@ -29,49 +39,82 @@ export default function Signin() {
         router.replace("/");
       } else {
         console.error(JSON.stringify(signInAttempt, null, 2));
+        setError("Erro ao tentar entrar. Verifique suas credenciais.");
       }
     } catch (err: any) {
       console.error(JSON.stringify(err, null, 2));
+      setError("Erro ao tentar entrar. Verifique suas credenciais.");
+    } finally {
+      setLoading(false);
     }
   }, [isLoaded, emailAddress, password]);
 
   return (
-    <View className="flex flex-col justify-between h-full p-8 bg-gray-50">
-      <View className="flex flex-col gap-4">
-        <View className="flex items-center justify-center ">
-          <Image source={logo} className="w-28 h-28 mt-9" />
+    <View className="flex-1 bg-white">
+      <View className="justify-between flex-1 p-6">
+        {/* Header Section */}
+        <View className="items-center mt-12 mb-8">
+          <Image source={logo} className="w-32 h-32 mb-4" />
+          <Text className="text-3xl font-bold text-[#2f855a] mb-2">
+            Muscle AI
+          </Text>
+          <Text className="text-center text-gray-600">
+            Entre para acessar sua conta
+          </Text>
         </View>
-        <Text className="mb-8 text-5xl font-bold text-center">Muscle AI</Text>
-        <View>
-          <InputGreen
-            value={emailAddress}
-            setValue={setEmailAddress}
-            placeholder="johndoe@example.com"
-          />
+
+        {/* Form Section */}
+        <View className="space-y-4">
+          <View>
+            <Text className="mb-2 font-medium text-gray-800">Email</Text>
+            <TextInput
+              value={emailAddress}
+              onChangeText={setEmailAddress}
+              className="p-4 border border-gray-200 bg-gray-50 rounded-xl"
+              placeholder="seu@email.com"
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+          </View>
+
+          <View>
+            <Text className="mb-2 font-medium text-gray-800">Senha</Text>
+            <TextInput
+              value={password}
+              onChangeText={setPassword}
+              className="p-4 border border-gray-200 bg-gray-50 rounded-xl"
+              placeholder="Sua senha"
+              secureTextEntry
+            />
+          </View>
+
+          {error && <Text className="text-center text-red-500">{error}</Text>}
+
+          <TouchableOpacity
+            onPress={onSignInPress}
+            disabled={loading}
+            className="mt-6 bg-[#2f855a] py-4 rounded-xl"
+          >
+            {loading ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <Text className="text-lg font-medium text-center text-white">
+                Entrar
+              </Text>
+            )}
+          </TouchableOpacity>
         </View>
-        <View>
-          <InputGreen
-            value={password}
-            setValue={setPassword}
-            placeholder="**********"
-            secureTextEntry
-          />
-        </View>
-      </View>
-      <View className="flex gap-4 ">
-        <Button
-          label="Entrar"
-          variant={"secondary"}
-          onPress={onSignInPress}
-          className="text-white bg-green-800 rounded-full h-14 color-white"
-        />
-        <View>
-          <Button
-            label="Criar conta"
-            variant={"secondary"}
+
+        {/* Footer Section */}
+        <View className="mt-8">
+          <TouchableOpacity
             onPress={() => router.push("/signup")}
-            className="bg-green-200 rounded-full h-14 color-white"
-          />
+            className="p-4"
+          >
+            <Text className="text-center text-[#2f855a]">
+              Não tem uma conta? Cadastre-se
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
