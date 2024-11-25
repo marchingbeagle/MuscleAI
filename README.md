@@ -22,7 +22,7 @@ O Muscle AI é um aplicativo de treino de musculação que ajuda os Personal Tra
 3. Clerk
 
 ### Apresentação de slides
-https://pitchdeck.hypermatic.com/slides/m3xg4zhr72197/?token=R2UyUXgxTnNrYlUjeVg%3D
+[Apresentação](https://pitchdeck.hypermatic.com/slides/m3xg4zhr72197/?token=R2UyUXgxTnNrYlUjeVg%3D)
 
 ## Como rodar o projeto localmente
 
