@@ -4,6 +4,13 @@
 
 O Muscle AI é um aplicativo de treino de musculação que ajuda os Personal Trainers a gerenciarem e gerarem treinos para seus alunos. Ele utiliza o modelo de linguagem GPT para gerar respostas personalizadas e adaptadas para as necessidades de cada aluno. O Muscle AI é uma ferramenta valiosa para ajudar os Personal Trainers a aumentar a eficiência no seu processo de ensinamento de treinos.
 
+<div style="display: flex; flex-direction: row; align-items: center; justify-content: center">
+    <img height="500" src='./src/assets/tela_inicial.png' />
+    <img height="500" src='./src/assets/home.png' />
+    <img height="500" src='./src/assets/tela_alunos.png' />
+    <img height="500" src='./src/assets/tela_treino.png' />
+</div>
+
 ## Tecnologias utilizadas
 
 1. React Native (Expo)
