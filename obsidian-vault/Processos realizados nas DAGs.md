@@ -56,3 +56,39 @@ Este código implementa o processo ETL da camada bronze para silver, realizando 
 - Validações específicas por domínio
 
 Isso garante que os dados na camada silver estejam limpos, enriquecidos e prontos para análise, seguindo regras de negócio específicas para cada domínio.
+
+# Silver to Gold
+
+Este trecho de código implementa a transformação final dos dados para análise na camada gold, criando um modelo dimensional e views analíticas.
+
+### Principais aspectos:
+
+Define 3 tipos principais de estruturas:
+- Dimensões (localização, pessoas)
+- Fatos (locação)
+- Views analíticas (média de aluguel por região, top corretores)
+
+Este processo implementa um modelo dimensional (Star Schema) e views otimizadas para análise de negócio.
+
+### Principais recursos:
+
+- Criação de modelo dimensional:
+    - [dim_localizacao](vscode-file://vscode-app/c:/Users/eriks/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html): Combina informações geográficas
+    - [dim_pessoas](vscode-file://vscode-app/c:/Users/eriks/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html): Dados de pessoas envolvidas
+    - [fact_locacao](vscode-file://vscode-app/c:/Users/eriks/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html): Métricas de locação
+- Views analíticas:
+    - Média de aluguel por região
+    - Ranking de corretores
+    - Tendências de locação
+- Aspectos técnicos:
+    - Uso de Delta Lake para persistência
+    - Tratamento de exceções
+    - Gerenciamento de sessão Spark
+    - Otimização de joins e agregações
+
+Isso garante que os dados na camada gold estejam:
+
+- Modelados para análise eficiente
+- Agregados conforme necessidades do negócio
+- Otimizados para consultas
+- Prontos para consumo em dashboards e relatórios

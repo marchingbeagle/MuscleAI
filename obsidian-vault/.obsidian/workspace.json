@@ -36,30 +36,6 @@
             }
           },
           {
-            "id": "cbeeba4afea512fd",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.7.4"
-              },
-              "icon": "lucide-file",
-              "title": "Release Notes 1.7.4"
-            }
-          },
-          {
-            "id": "640c6ee497d0119b",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.7.7"
-              },
-              "icon": "lucide-file",
-              "title": "Release Notes 1.7.7"
-            }
-          },
-          {
             "id": "4dbdf0bcb5b97705",
             "type": "leaf",
             "state": {
@@ -74,7 +50,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -216,7 +192,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4dbdf0bcb5b97705",
+  "active": "ced348b600baa27c",
   "lastOpenFiles": [
     "Processos realizados nas DAGs.md",
     "Telas futuras para o app.md",
