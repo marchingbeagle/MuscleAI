@@ -57,38 +57,39 @@ Este código implementa o processo ETL da camada bronze para silver, realizando 
 
 Isso garante que os dados na camada silver estejam limpos, enriquecidos e prontos para análise, seguindo regras de negócio específicas para cada domínio.
 
-# Silver to Gold
+# Silver to Gold - Main Execution Flow
 
-Este trecho de código implementa a transformação final dos dados para análise na camada gold, criando um modelo dimensional e views analíticas.
+Este trecho de código implementa a execução principal do processo ETL da camada silver para gold, realizando a criação do modelo dimensional e views analíticas.
 
 ### Principais aspectos:
 
-Define 3 tipos principais de estruturas:
-- Dimensões (localização, pessoas)
-- Fatos (locação)
-- Views analíticas (média de aluguel por região, top corretores)
+Define 3 etapas principais de processamento:
+1. Criação das dimensões e fatos
+2. Persistência das tabelas dimensionais
+3. Geração de views analíticas e KPIs
 
-Este processo implementa um modelo dimensional (Star Schema) e views otimizadas para análise de negócio.
+### Fluxo de execução:
+1. Cria tabelas dimensionais:
+    - [dim_localizacao](vscode-file://vscode-app/c:/Users/eriks/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html)
+    - [dim_pessoas](vscode-file://vscode-app/c:/Users/eriks/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html)
+2. Cria tabela fato:
+    - [fact_locacao](vscode-file://vscode-app/c:/Users/eriks/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html)
+3. Persiste em formato Delta:
+    - Salva dimensões
+    - Salva fatos
+4. Gera views analíticas
+5. Gera KPIs
 
 ### Principais recursos:
+- Tratamento de exceções
+- Gerenciamento de sessão Spark
+- Persistência em Delta Lake
+- Logging de execução
+- Cleanup automático de recursos
 
-- Criação de modelo dimensional:
-    - [dim_localizacao](vscode-file://vscode-app/c:/Users/eriks/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html): Combina informações geográficas
-    - [dim_pessoas](vscode-file://vscode-app/c:/Users/eriks/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html): Dados de pessoas envolvidas
-    - [fact_locacao](vscode-file://vscode-app/c:/Users/eriks/AppData/Local/Programs/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html): Métricas de locação
-- Views analíticas:
-    - Média de aluguel por região
-    - Ranking de corretores
-    - Tendências de locação
-- Aspectos técnicos:
-    - Uso de Delta Lake para persistência
-    - Tratamento de exceções
-    - Gerenciamento de sessão Spark
-    - Otimização de joins e agregações
-
-Isso garante que os dados na camada gold estejam:
-
-- Modelados para análise eficiente
-- Agregados conforme necessidades do negócio
-- Otimizados para consultas
-- Prontos para consumo em dashboards e relatórios
+Isso garante:
+- Execução confiável do processo
+- Rastreabilidade de erros
+- Gestão adequada de recursos
+- Consistência dos dados na camada gold
+- Disponibilidade para consumo em dashboards
