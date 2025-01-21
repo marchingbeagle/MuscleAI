@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Telas desenvolvimento inicial.md",
+                "file": "Telas futuras para o app.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Telas desenvolvimento inicial"
+              "title": "Telas futuras para o app"
             }
           }
         ],
@@ -108,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Telas desenvolvimento inicial.md",
+                "file": "Telas futuras para o app.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Telas desenvolvimento inicial"
+              "title": "Backlinks for Telas futuras para o app"
             }
           },
           {
@@ -178,11 +178,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4c8ea2de2a793a66",
+  "active": "ced348b600baa27c",
   "lastOpenFiles": [
+    "Telas desenvolvimento inicial.md",
     "Processos realizados nas DAGs.md",
     "Telas futuras para o app.md",
-    "Telas desenvolvimento inicial.md",
     "docs/Backend/extra01-criando_repositorio_remoto.pdf",
     "docs/Backend/backend-2024-1-main/links.txt",
     "docs/Backend/backend-2024-1-main/exemplos/semana13/turma02/exemplo-crud/exemplo-crud/src/main/java/com/example/exemplocrud/services/WeaponService.java",
