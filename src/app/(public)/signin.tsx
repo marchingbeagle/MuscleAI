@@ -36,14 +36,20 @@ export default function Signin() {
 
       if (signInAttempt.status === "complete") {
         await setActive({ session: signInAttempt.createdSessionId });
-        router.replace("/");
+        router.replace("/(auth)/(tabs)/home");
       } else {
         console.error(JSON.stringify(signInAttempt, null, 2));
         setError("Erro ao tentar entrar. Verifique suas credenciais.");
       }
     } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2));
-      setError("Erro ao tentar entrar. Verifique suas credenciais.");
+      console.error("Sign in error:", JSON.stringify(err, null, 2));
+
+      if (err.errors && err.errors.length > 0) {
+        const errorMessage = err.errors[0].longMessage || err.errors[0].message;
+        setError(errorMessage);
+      } else {
+        setError("Erro ao tentar entrar. Verifique suas credenciais.");
+      }
     } finally {
       setLoading(false);
     }

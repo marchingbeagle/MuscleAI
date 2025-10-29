@@ -54,20 +54,28 @@ export default function AlunosPage() {
 
   const saveAluno = async () => {
     try {
+      const alunoData = {
+        nm_aluno: name,
+        peso: parseFloat(peso),
+        altura: parseFloat(altura),
+        deficiencias_aluno: deficiencia || null,
+        id_personal: userId as string,
+        email_aluno: email,
+        data_nascimento: dataNascimento,
+        genero_aluno: genero,
+      };
+
+      console.log("Tentando salvar aluno com dados:", alunoData);
+      console.log("Data de nascimento:", dataNascimento.toISOString());
+
       await prismaClient.aluno.create({
-        data: {
-          nm_aluno: name,
-          peso: parseFloat(peso),
-          altura: parseFloat(altura),
-          deficiencias_aluno: deficiencia,
-          id_personal: userId as string,
-          email_aluno: email,
-          data_nascimento: dataNascimento.toISOString(),
-          genero_aluno: genero,
-        },
+        data: alunoData,
       });
+
+      console.log("Aluno salvo com sucesso!");
     } catch (error) {
       console.error("Erro ao salvar no banco de dados:", error);
+      throw error;
     }
   };
 
@@ -112,13 +120,14 @@ export default function AlunosPage() {
         alert(validation.message);
         return;
       }
-      saveAluno();
+
+      await saveAluno();
       resetForm();
       alert("Aluno cadastrado com sucesso!");
-
       router.push("/alunos");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Erro ao salvar aluno:", error);
+      alert(`Erro ao salvar aluno: ${error.message || "Erro desconhecido"}`);
     }
   };
 

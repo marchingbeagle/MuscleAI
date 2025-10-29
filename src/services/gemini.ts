@@ -2,7 +2,7 @@ import axios from "axios";
 import { API_GEMINI } from "@env";
 
 const GEMINI_API_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent";
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent";
 
 export const generateWorkout = async (prompt: string): Promise<string> => {
   try {

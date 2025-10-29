@@ -12,7 +12,7 @@ model Aluno {
   id_aluno           String   @id @default(uuid())
   nm_aluno           String
   email_aluno        String   @unique
-  data_nascimento    DateTime 
+  data_nascimento    DateTime
   peso               Float    
   altura             Float    
   genero_aluno       String
