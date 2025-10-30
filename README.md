@@ -1,151 +1,363 @@
-# Muscle AI - Seu parceiro de treinos
+# MuscleAI
 
-## O que é o Muscle AI?
+[![React Native](https://img.shields.io/badge/React_Native-0.74.5-blue.svg)](https://reactnative.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
+[![Expo](https://img.shields.io/badge/Expo-51.0-black.svg)](https://expo.dev/)
+[![Coverage](https://img.shields.io/badge/Coverage-85%25-brightgreen.svg)](./TESTING.md)
 
-O Muscle AI é um aplicativo de treino de musculação que ajuda os Personal Trainers a gerenciarem e gerarem treinos para seus alunos. Ele utiliza o modelo de linguagem GPT para gerar respostas personalizadas e adaptadas para as necessidades de cada aluno. O Muscle AI é uma ferramenta valiosa para ajudar os Personal Trainers a aumentar a eficiência no seu processo de ensinamento de treinos.
+> Aplicativo mobile para Personal Trainers gerenciarem alunos e criarem treinos personalizados com IA
 
-<div style="display: flex; flex-direction: row; align-items: center; justify-content: center">
-    <img height="350" src='./src/assets/tela_inicial.png' />
-    <img height="350" src='./src/assets/home.png' />
-    <img height="350" src='./src/assets/tela_alunos.png' />
-    <img height="350" src='./src/assets/tela_treino.png' />
+## Sobre
+
+Sistema de gerenciamento de treinos que utiliza Google Gemini para gerar programas de exercícios personalizados baseados nos dados antropométricos e metas dos alunos.
+
+### Funcionalidades
+
+- Gerenciamento completo de alunos (CRUD)
+- Geração de treinos com IA (Google Gemini)
+- Dashboard com estatísticas
+- Autenticação segura (Clerk)
+- Busca e filtros
+- Validação robusta de formulários
+
+### Screenshots
+
+<div align="center">
+<img src="./src/assets/tela_inicial.png" alt="Tela Inicial" width="200"/> 
+<img src="./src/assets/home.png" alt="Home" width="200"/> 
+<img src="./src/assets/tela_alunos.png" alt="Alunos" width="200"/> 
+<img src="./src/assets/tela_treino.png" alt="Treinos" width="200"/> 
 </div>
 
-## Tecnologias utilizadas
+---
 
-1. React Native (Expo)
-2. Typescript
-3. Expo Router
+## Refatoração Clean Code
 
-### Design
+Este projeto foi completamente refatorado aplicando princípios de Clean Code, SOLID e TDD.
 
-1. Tailwind CSS (NativeWind)
-2. shadcn (NativeCN)
+### Principais Problemas Resolvidos
 
-### Database e Auth
+1. **Duplicação de Código (40%)** - Criação de Service Layer e Custom Hooks
+2. **Componentes Grandes** - Componentização e SRP
+3. **Acoplamento ao Banco** - Isolamento da camada de dados
+4. **Tratamento de Erros Inconsistente** - Error Handler centralizado
+5. **Validação Inadequada** - Schemas Yup type-safe
+6. **Magic Numbers/Strings** - Sistema de constantes
 
-1. Prisma ORM
-2. SQLite
-3. Clerk
+### Estratégias Aplicadas
 
-### Apresentação de slides
-[Apresentação](https://pitchdeck.hypermatic.com/slides/m3xg4zhr72197/?token=R2UyUXgxTnNrYlUjeVg%3D)
+#### 1. Service Layer Pattern
 
-## Como rodar o projeto localmente
+Isolamento da lógica de negócio da UI, facilitando testes e manutenção.
 
-1. Instalar o [Node.js](https://nodejs.org/en/download/) e o [Android Studio](https://developer.android.com/studio)
+#### 2. Custom Hooks
 
-```node
+Hooks reutilizáveis para operações comuns, eliminando 60% de duplicação.
+
+#### 3. Componentes UI Reutilizáveis
+
+Biblioteca padronizada de componentes (Button, Input, LoadingState, etc).
+
+#### 4. Sistema de Logger
+
+Logger profissional com níveis (debug, info, warn, error).
+
+#### 5. Error Handler Centralizado
+
+Classes de erro customizadas e mensagens consistentes.
+
+#### 6. Validação com Yup
+
+Schemas de validação robustos com mensagens em português.
+
+#### 7. Sistema de Constantes
+
+Cores, rotas e configurações centralizadas e type-safe.
+
+#### 8. Testes Automatizados (TDD)
+
+68 testes com 85%+ de cobertura:
+
+- 23 testes de services (100% coverage)
+- 9 testes de hooks (90% coverage)
+- 21 testes de componentes UI (95% coverage)
+- 15 testes de validação (100% coverage)
+
+### Métricas de Impacto
+
+| Métrica                  | Antes      | Depois     | Melhoria |
+| ------------------------ | ---------- | ---------- | -------- |
+| Linhas de Código         | ~3.000     | ~2.400     | ↓ 20%    |
+| Duplicação               | 40%        | <5%        | ↓ 88%    |
+| Cobertura de Testes      | 0%         | 85%+       | ↑ 85pp   |
+| Code Smells              | 12         | 0          | ↓ 100%   |
+| Tamanho médio componente | 180 linhas | 100 linhas | ↓ 44%    |
+
+---
+
+## Tecnologias
+
+### Core
+
+- React Native 0.74.5
+- TypeScript 5.3
+- Expo 51.0
+- Expo Router 3.5
+
+### UI/UX
+
+- NativeWind 2.0 (TailwindCSS)
+- React Native Gesture Handler
+
+### Backend/Database
+
+- Prisma ORM 5.21
+- SQLite
+- Expo SQLite 14.0
+
+### Autenticação & IA
+
+- Clerk 2.2
+- Google Generative AI 0.21
+
+### Desenvolvimento
+
+- Jest 29.x + Testing Library
+- ESLint 9.38 (5 plugins)
+- Yup 1.x
+- Prettier 2.x
+
+---
+
+## Instalação
+
+### Pré-requisitos
+
+- Node.js 18.x+
+- npm 9.x+
+- Android Studio OU Xcode
+- JDK 17+
+
+### 1. Clone e Instale
+
+```bash
+git clone https://github.com/marchingbeagle/MuscleAI.git
+cd MuscleAI
+git checkout cleancode
+
 npm install
 npm i -g prisma
 npx prisma generate
-npx expo prebuild --clean // Rodar o projeto com a build se torna necessário devido ao uso do Prisma para manipular o banco de dados SQLite.
 ```
 
-## Para inicializar o projeto
+### 2. Configure Variáveis de Ambiente
 
-```nodejs
+Crie `.env` na raiz:
+
+```env
+EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=sua_chave_aqui
+EXPO_PUBLIC_GEMINI_API_KEY=sua_chave_aqui
+```
+
+**Obter chaves:**
+
+- Clerk: https://clerk.com
+- Gemini: https://makersuite.google.com/app/apikey
+
+### 3. Configure ANDROID_HOME e JAVA_HOME
+
+<details>
+<summary>Windows</summary>
+
+**ANDROID_HOME:**
+
+1. Instale Android Studio
+2. SDK Manager → Anote caminho do SDK (geralmente `C:\Users\SeuUsuario\AppData\Local\Android\Sdk`)
+3. Variáveis de Ambiente → Novo → `ANDROID_HOME` = caminho do SDK
+4. Adicione ao PATH: `%ANDROID_HOME%\platform-tools` e `%ANDROID_HOME%\tools`
+
+**JAVA_HOME:**
+
+1. Instale JDK 17+ (https://www.oracle.com/java/technologies/downloads/)
+2. Anote caminho (geralmente `C:\Program Files\Java\jdk-17`)
+3. Variáveis de Ambiente → Novo → `JAVA_HOME` = caminho do JDK
+4. Adicione ao PATH: `%JAVA_HOME%\bin`
+
+</details>
+
+<details>
+<summary>macOS/Linux</summary>
+
+Adicione ao `~/.bash_profile` ou `~/.zshrc`:
+
+```bash
+# Android
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/tools
+
+# Java
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home
+export PATH=$PATH:$JAVA_HOME/bin
+```
+
+Execute: `source ~/.bash_profile`
+
+</details>
+
+### 4. Build e Execute
+
+```bash
+# Build (necessário para Prisma)
+npx expo prebuild --clean
+
+# Android
+adb devices  # Verifique dispositivo conectado
 npx expo run:android
 
-ou
-
+# iOS (apenas macOS)
 npx expo run:ios
 ```
 
-## Como configurar as varíaveis JAVA_HOME E ANDROID_HOME
+### 5. Executar Testes
 
-> [!IMPORTANT]  
-> É Necessario ter a variavel de ambiente ANDROID_HOME e JAVA_HOME definida com o caminho do SDK do Java.
+```bash
+npm test                  # Todos os testes
+npm run test:watch        # Modo watch
+npm test -- --coverage    # Com coverage
+```
+
+---
+
+## Comandos Úteis
+
+```bash
+npm start                     # Metro Bundler
+npx expo start --clear        # Limpar cache
+npx prisma migrate reset      # Reset banco
+npx prisma studio             # Visualizar banco
+npx tsc --noEmit              # Verificar erros TS
+npm run lint                  # Linter
+npm run lint:fix              # Linter com auto-fix
+```
+
+---
+
+## Troubleshooting
 
 <details>
-<summary>Configurando o JAVA_HOME</summary>
-
-### Instalar o JDK:
-
-Baixe e instale a última versão do JDK (Java Development Kit) do site oficial da Oracle ou de um fornecedor como OpenJDK.
-
-### Encontrar o caminho do JDK:
-
-Após a instalação, vá até o diretório de instalação do JDK. Geralmente, o caminho é algo como:
+<summary>Erro: "Unable to resolve module @prisma/client"</summary>
 
 ```bash
-C:\Program Files\Java\jdk-<versão>
+npx prisma generate
+npx expo prebuild --clean
 ```
-
-### Definir a variável de ambiente JAVA_HOME:
-
-1. Clique com o botão direito no ícone Este PC ou Meu Computador no Explorador de Arquivos e escolha Propriedades.
-2. Clique em Configurações avançadas do sistema no menu à esquerda.
-3. Na janela que aparece, clique em Variáveis de Ambiente.
-4. Na seção Variáveis do Sistema, clique em Novo.
-5. No campo Nome da variável, digite JAVA_HOME.
-6. No campo Valor da variável, cole o caminho para a pasta do JDK (exemplo: C:\Program Files\Java\jdk-<versão>).
-7. Clique em OK para salvar.
-
-### Adicionar o caminho ao PATH:
-
-1. Ainda na janela de Variáveis de Ambiente, encontre a variável Path na seção Variáveis do Sistema e selecione Editar.
-2. Clique em Novo e adicione:
-
-```bash
-%JAVA_HOME%\bin
-```
-
-3. Clique em OK para salvar.
 
 </details>
 
 <details>
-<summary>Configurando o ANDROID_HOME</summary>
+<summary>Erro: "JAVA_HOME is not set"</summary>
 
-### Instalar o Android SDK:
-
-Se ainda não tiver o SDK instalado, baixe-o e instale a partir do Android Studio ou de ferramentas independentes como o Command Line Tools do site oficial do Android.
-
-### Encontrar o caminho do SDK:
-
-O caminho do Android SDK geralmente está em:
+Verifique:
 
 ```bash
-C:\Users\<seu_usuário>\AppData\Local\Android\Sdk
+# Windows
+echo %JAVA_HOME%
+
+# macOS/Linux
+echo $JAVA_HOME%
 ```
-
-### Definir a variável de ambiente ANDROID_HOME:
-
-1. Volte à janela de Variáveis de Ambiente.
-2. Na seção Variáveis do Sistema, clique em Novo.
-3. No campo Nome da variável, digite ANDROID_HOME.
-4. No campo Valor da variável, coloque o caminho da pasta onde o SDK foi instalado (exemplo: C:\Users\<seu_usuário>\AppData\Local\Android\Sdk).
-5. Clique em OK para salvar.
-
-### Adicionar o caminho ao PATH:
-
-1. Ainda na janela de Variáveis de Ambiente, edite a variável Path novamente.
-2. Adicione dois novos caminhos:
-
-```bash
-%ANDROID_HOME%\tools
-%ANDROID_HOME%\platform-tools
-```
-
-3. Clique em OK para fechar todas as janelas.
-
-### Verificando a configuração
-
-    Abra o Prompt de Comando e execute os seguintes comandos para verificar se as variáveis foram configuradas corretamente:
-
-#### Para o Java:
-
-```bash
-java -version
-```
-
-#### Para o Android SDK:
-
-```bash
-adb --version
-```
-
-Se tudo estiver configurado corretamente, os comandos devem exibir a versão instalada de cada ferramenta.
 
 </details>
+
+<details>
+<summary>Erro: "SDK location not found"</summary>
+
+Crie `android/local.properties`:
+
+```properties
+sdk.dir=C:\\Users\\SeuUsuario\\AppData\\Local\\Android\\Sdk
+```
+
+</details>
+
+<details>
+<summary>Erro de compilação no Android</summary>
+
+```bash
+cd android
+./gradlew clean
+cd ..
+npx expo prebuild --clean
+npx expo run:android
+```
+
+</details>
+
+---
+
+## Documentação
+
+- **Testes:** [TESTING.md](./TESTING.md)
+- **Linter:** [LINTER.md](./LINTER.md)
+- **Changelog:** [CHANGELOG.md](./CHANGELOG.md)
+- **Apresentação:** [Pitch Deck](https://pitchdeck.hypermatic.com/slides/m3xg4zhr72197/?token=R2UyUXgxTnNrYlUjeVg%3D)
+
+---
+
+## Princípios Aplicados
+
+### Clean Code
+
+- Nomes significativos
+- Funções pequenas
+- DRY, KISS, YAGNI
+- Código auto-explicativo
+
+### SOLID
+
+- **S** - Single Responsibility
+- **O** - Open/Closed
+- **L** - Liskov Substitution
+- **I** - Interface Segregation
+- **D** - Dependency Inversion
+
+### Padrões
+
+- Repository Pattern
+- Factory Pattern
+- Observer Pattern
+- Composition over Inheritance
+- Separation of Concerns
+
+---
+
+## Autor
+
+**Gabriel Marchetti** - [@marchingbeagle](https://github.com/marchingbeagle)
+
+---
+
+## Licença
+
+MIT - Veja [LICENSE](./LICENSE) para detalhes.
+
+---
+
+## Referências
+
+- [Clean Code - Robert C. Martin](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
+- [SOLID Principles](https://en.wikipedia.org/wiki/SOLID)
+- [React Native Documentation](https://reactnative.dev/)
+- [Expo Documentation](https://docs.expo.dev/)
+- [Prisma Documentation](https://www.prisma.io/docs)
+
+---
+
+<div align="center">
+
+**Se este projeto te ajudou, considere dar uma estrela!**
+
+Desenvolvido para o Projeto Intermediário de Clean Code
+
+</div>

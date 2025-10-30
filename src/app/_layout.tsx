@@ -1,10 +1,10 @@
-import React from "react";
-import * as SecureStore from "expo-secure-store";
-import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
-import { StatusBar } from "react-native";
-import "../styles/global.css";
-import { Stack } from "expo-router";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import React from 'react';
+import * as SecureStore from 'expo-secure-store';
+import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo';
+import { StatusBar } from 'react-native';
+import '../styles/global.css';
+import { Stack } from 'expo-router';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function RootLayout() {
   const tokenCache = {
@@ -14,11 +14,11 @@ export default function RootLayout() {
         if (item) {
           console.log(`${key} was used 🔐 \n`);
         } else {
-          console.log("No values stored under key: " + key);
+          console.log('No values stored under key: ' + key);
         }
         return item;
       } catch (error) {
-        console.error("SecureStore get item error: ", error);
+        console.error('SecureStore get item error: ', error);
         await SecureStore.deleteItemAsync(key);
         return null;
       }
@@ -26,7 +26,7 @@ export default function RootLayout() {
     async saveToken(key: string, value: string) {
       try {
         return SecureStore.setItemAsync(key, value);
-      } catch (err) {
+      } catch {
         return;
       }
     },
@@ -36,7 +36,7 @@ export default function RootLayout() {
 
   if (!publishableKey) {
     throw new Error(
-      "Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env"
+      'Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env',
     );
   }
 

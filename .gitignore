@@ -60,6 +60,9 @@ ios/build/
 # Logs
 *.log
 
+# Test Coverage
+coverage/
+
 # IDE
 .vscode/
 .idea/

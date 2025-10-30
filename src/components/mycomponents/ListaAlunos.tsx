@@ -1,8 +1,8 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
-import React from "react";
-import { useRouter } from "expo-router";
-import { Aluno } from "@prisma/client";
-import { Ionicons } from "@expo/vector-icons";
+import { View, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { useRouter } from 'expo-router';
+import { Aluno } from '@prisma/client';
+import { Ionicons } from '@expo/vector-icons';
 
 interface Props {
   data: Aluno;
@@ -20,9 +20,7 @@ export default function ListaAlunos({ data }: Props) {
   };
 
   const handleDetalhesTreinoRoute = () => {
-    router.push(
-      `/detalhesTreino?nomeAluno=${data.nm_aluno}&idAluno=${data.id_aluno}`
-    );
+    router.push(`/detalhesTreino?nomeAluno=${data.nm_aluno}&idAluno=${data.id_aluno}`);
   };
 
   return (
@@ -37,9 +35,7 @@ export default function ListaAlunos({ data }: Props) {
 
       {/* Info Section */}
       <View className="flex-1">
-        <Text className="text-base font-medium text-gray-800">
-          {data.nm_aluno}
-        </Text>
+        <Text className="text-base font-medium text-gray-800">{data.nm_aluno}</Text>
       </View>
 
       {/* Action Buttons */}

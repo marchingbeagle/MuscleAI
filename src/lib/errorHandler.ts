@@ -3,8 +3,8 @@
  * Classes de erro customizadas e handler com mensagens amigáveis
  */
 
-import { Alert } from 'react-native';
-import Logger from './logger';
+import { Alert } from "react-native";
+import Logger from "./logger";
 
 /**
  * Erro relacionado ao banco de dados
@@ -12,7 +12,7 @@ import Logger from './logger';
 export class DatabaseError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = 'DatabaseError';
+    this.name = "DatabaseError";
   }
 }
 
@@ -22,7 +22,7 @@ export class DatabaseError extends Error {
 export class ValidationError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = 'ValidationError';
+    this.name = "ValidationError";
   }
 }
 
@@ -32,7 +32,7 @@ export class ValidationError extends Error {
 export class NetworkError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = 'NetworkError';
+    this.name = "NetworkError";
   }
 }
 
@@ -44,10 +44,10 @@ export class ErrorHandler {
    * Manipula erro mostrando mensagem ao usuário e registrando log
    */
   static handle(error: unknown, customMessage?: string) {
-    Logger.error('Erro capturado pelo ErrorHandler', error);
+    Logger.error("Erro capturado pelo ErrorHandler", error);
 
     const message = customMessage || this.getErrorMessage(error);
-    Alert.alert('Erro', message);
+    Alert.alert("Erro", message);
   }
 
   /**
@@ -55,21 +55,21 @@ export class ErrorHandler {
    */
   static getErrorMessage(error: unknown): string {
     if (error instanceof DatabaseError) {
-      return 'Erro ao acessar o banco de dados. Tente novamente.';
+      return "Erro ao acessar o banco de dados. Tente novamente.";
     }
-    
+
     if (error instanceof ValidationError) {
       return error.message;
     }
-    
+
     if (error instanceof NetworkError) {
-      return 'Erro de conexão. Verifique sua internet.';
+      return "Erro de conexão. Verifique sua internet.";
     }
 
     if (error instanceof Error) {
       return error.message;
     }
-    
-    return 'Ocorreu um erro inesperado. Tente novamente.';
+
+    return "Ocorreu um erro inesperado. Tente novamente.";
   }
 }

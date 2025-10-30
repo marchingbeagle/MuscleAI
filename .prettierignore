@@ -1,0 +1,16 @@
+# Dependências
+node_modules/
+
+# Build
+android/
+ios/
+dist/
+build/
+.expo/
+
+# Arquivos gerados
+*.log
+coverage/
+
+# Outros
+.DS_Store

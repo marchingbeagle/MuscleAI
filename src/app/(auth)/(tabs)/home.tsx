@@ -1,26 +1,33 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  ActivityIndicator,
-} from "react-native";
-import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import React, { useState } from "react";
 import { useUser } from "@clerk/clerk-expo";
-import { prismaClient } from "src/services/db";
-import { Aluno } from "@prisma/client";
 import { Ionicons } from "@expo/vector-icons";
 import AlunoHomePage from "src/components/mycomponents/AlunoHomePage";
-import { useRouter, useFocusEffect } from "expo-router";
+import { useRouter } from "expo-router";
+import { useAlunos } from "../../../hooks/useAlunos";
+import { LoadingState, EmptyState } from "../../../components/ui";
+import { ROUTES, COLORS } from "../../../constants/app.constants";
+import Logger from "../../../lib/logger";
+
+// Tipos para templates de treino
+interface TreinoTemplate {
+  title: string;
+  icon: string;
+  selected: boolean;
+}
 
 export default function Home() {
   const { user } = useUser();
   const router = useRouter();
-  const [alunos, setAlunos] = useState<Aluno[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [metaSelected, setMetaSelected] = useState("");
 
-  const [templatesTreino, setTemplatesTreino] = useState([
+  // ✅ Hook customizado busca todos os alunos
+  const { alunos: todosAlunos, loading, error } = useAlunos();
+
+  // Pega apenas os 4 mais recentes
+  const alunos = todosAlunos.slice(0, 4);
+
+  const [templatesTreino, setTemplatesTreino] = useState<TreinoTemplate[]>([
     {
       title: "Treino de Mobilidade e Flexibilidade",
       icon: "body-outline",
@@ -48,35 +55,18 @@ export default function Home() {
     },
   ]);
 
+  Logger.debug("Home: Renderizando", {
+    alunosCount: alunos.length,
+    loading,
+    error,
+    metaSelected,
+  });
+
   const handleVerTodosAlunos = () => {
-    return router.push("/alunos");
+    router.push(ROUTES.AUTH.ALUNOS);
   };
 
-  useFocusEffect(
-    React.useCallback(() => {
-      async function fetchLastAlunos() {
-        setIsLoading(true);
-        try {
-          const last4Alunos = await prismaClient.aluno.findMany({
-            take: 4,
-            orderBy: {
-              id_aluno: "desc",
-            },
-          });
-          setAlunos(last4Alunos);
-        } catch (error) {
-          console.error("Erro ao encontrar alunos:", error);
-          setAlunos([]);
-        } finally {
-          setIsLoading(false);
-        }
-      }
-
-      fetchLastAlunos();
-    }, [])
-  );
-
-  const handleTemplateTreino = (item: any) => {
+  const handleTemplateTreino = (item: TreinoTemplate) => {
     setTemplatesTreino((prev) =>
       prev.map((template) => ({
         ...template,
@@ -86,14 +76,20 @@ export default function Home() {
     setMetaSelected(item.title);
   };
 
-  return isLoading ? (
-    <View className="items-center justify-center flex-1 bg-white">
-      <ActivityIndicator size="large" color="#2f855a" />
-      <Text className="mt-4 text-gray-600">Carregando...</Text>
-    </View>
-  ) : (
+  // ✅ Estado de loading padronizado
+  if (loading) {
+    return <LoadingState message="Carregando dashboard..." />;
+  }
+
+  // ✅ Estado de loading padronizado
+  if (loading) {
+    return <LoadingState message="Carregando dashboard..." />;
+  }
+
+  return (
     <ScrollView className="flex-1 bg-white">
       <View className="p-6">
+        {/* Header */}
         <View className="flex-row items-center mb-8">
           <View className="flex-1">
             <Text className="mb-1 text-gray-600">Bem vindo de volta!</Text>
@@ -102,10 +98,15 @@ export default function Home() {
             </Text>
           </View>
           <TouchableOpacity className="items-center justify-center w-10 h-10 rounded-full bg-gray-50">
-            <Ionicons name="notifications-outline" size={24} color="#2f855a" />
+            <Ionicons
+              name="notifications-outline"
+              size={24}
+              color={COLORS.PRIMARY}
+            />
           </TouchableOpacity>
         </View>
 
+        {/* Opções de Treino */}
         <View className="mb-8">
           <View className="flex-row items-center justify-between mb-4">
             <Text className="text-lg font-bold text-gray-800">
@@ -130,7 +131,7 @@ export default function Home() {
                   <Ionicons
                     name={item.icon as any}
                     size={24}
-                    color={item.selected ? "#fff" : "#2f855a"}
+                    color={item.selected ? "#fff" : COLORS.PRIMARY}
                   />
                 </View>
                 <Text
@@ -143,13 +144,14 @@ export default function Home() {
                 <Ionicons
                   name="chevron-forward"
                   size={20}
-                  color={item.selected ? "#fff" : "#2f855a"}
+                  color={item.selected ? "#fff" : COLORS.PRIMARY}
                 />
               </TouchableOpacity>
             ))}
           </View>
         </View>
 
+        {/* Alunos Recentes */}
         <View>
           <View className="flex-row items-center justify-between mb-4">
             <Text className="text-lg font-bold text-gray-800">
@@ -162,11 +164,13 @@ export default function Home() {
 
           <View className="flex-row flex-wrap justify-between">
             {alunos.length === 0 ? (
-              <View className="items-center w-full p-6 bg-gray-50 rounded-xl">
-                <Ionicons name="people-outline" size={32} color="#9ca3af" />
-                <Text className="mt-2 text-gray-500">
-                  Nenhum Aluno Encontrado
-                </Text>
+              // ✅ EmptyState padronizado
+              <View className="w-full">
+                <EmptyState
+                  icon="people-outline"
+                  message="Nenhum Aluno Encontrado"
+                  description="Cadastre seu primeiro aluno para começar"
+                />
               </View>
             ) : (
               alunos.map((item, index) => (
