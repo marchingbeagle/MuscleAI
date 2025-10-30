@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="./src/assets/logo.png" alt="MuscleAI Logo" width="200"/>
+</div>
+
 # MuscleAI
 
 [![React Native](https://img.shields.io/badge/React_Native-0.74.5-blue.svg)](https://reactnative.dev/)
