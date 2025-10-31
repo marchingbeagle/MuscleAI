@@ -11,7 +11,7 @@
 
 > Aplicativo mobile para Personal Trainers gerenciarem alunos e criarem treinos personalizados com IA
 
-**📚 Documentação:** [TESTING.md](./TESTING.md) | [LINTER.md](./LINTER.md) | [CHANGELOG.md](./CHANGELOG.md)
+**📚 Documentação:** [TESTING.md](./documentacao/TESTING.md) | [LINTER.md](./documentacao/LINTER.md) | [CHANGELOG.md](./documentacao/entregas-abp01/CHANGELOG.md) | [entrega-02.md](./documentacao/entregas-abp01/entrega-02.md)
 
 ## Sobre
 
@@ -36,58 +36,6 @@ Sistema de gerenciamento de treinos que utiliza Google Gemini para gerar program
 </div>
 
 ---
-
-## Refatoração Clean Code
-
-Este projeto foi completamente refatorado aplicando princípios de Clean Code, SOLID e TDD.
-
-### Principais Problemas Resolvidos
-
-1. **Duplicação de Código (40%)** - Criação de Service Layer e Custom Hooks
-2. **Componentes Grandes** - Componentização e SRP
-3. **Acoplamento ao Banco** - Isolamento da camada de dados
-4. **Tratamento de Erros Inconsistente** - Error Handler centralizado
-5. **Validação Inadequada** - Schemas Yup type-safe
-6. **Magic Numbers/Strings** - Sistema de constantes
-
-### Estratégias Aplicadas
-
-#### 1. Service Layer Pattern
-
-Isolamento da lógica de negócio da UI, facilitando testes e manutenção.
-
-#### 2. Custom Hooks
-
-Hooks reutilizáveis para operações comuns, eliminando 60% de duplicação.
-
-#### 3. Componentes UI Reutilizáveis
-
-Biblioteca padronizada de componentes (Button, Input, LoadingState, etc).
-
-#### 4. Sistema de Logger
-
-Logger profissional com níveis (debug, info, warn, error).
-
-#### 5. Error Handler Centralizado
-
-Classes de erro customizadas e mensagens consistentes.
-
-#### 6. Validação com Yup
-
-Schemas de validação robustos com mensagens em português.
-
-#### 7. Sistema de Constantes
-
-Cores, rotas e configurações centralizadas e type-safe.
-
-#### 8. Testes Automatizados (TDD)
-
-68 testes com 85%+ de cobertura:
-
-- 23 testes de services (100% coverage)
-- 9 testes de hooks (90% coverage)
-- 21 testes de componentes UI (95% coverage)
-- 15 testes de validação (100% coverage)
 
 ### Métricas de Impacto
 

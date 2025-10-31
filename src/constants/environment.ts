@@ -8,13 +8,13 @@
  */
 export const ENV = {
   // Clerk (Autenticação)
-  CLERK_PUBLISHABLE_KEY: process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY || "",
-  CLERK_FRONTEND_API: process.env.EXPO_PUBLIC_CLERK_FRONTEND_API || "",
+  CLERK_PUBLISHABLE_KEY: process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY || '',
+  CLERK_FRONTEND_API: process.env.EXPO_PUBLIC_CLERK_FRONTEND_API || '',
 
   // Gemini AI
-  GEMINI_API_KEY: process.env.API_GEMINI || "",
+  GEMINI_API_KEY: process.env.API_GEMINI || '',
   GEMINI_API_URL:
-    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent",
+    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent',
 
   // Ambiente
   IS_DEV: __DEV__,
@@ -40,8 +40,8 @@ export function validateEnvironment() {
 
   if (missing.length > 0) {
     throw new Error(
-      `Variáveis de ambiente faltando: ${missing.join(", ")}\n` +
-        "Configure o arquivo .env na raiz do projeto."
+      `Variáveis de ambiente faltando: ${missing.join(', ')}\n` +
+        'Configure o arquivo .env na raiz do projeto.',
     );
   }
 }
