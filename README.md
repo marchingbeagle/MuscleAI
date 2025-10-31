@@ -11,6 +11,8 @@
 
 > Aplicativo mobile para Personal Trainers gerenciarem alunos e criarem treinos personalizados com IA
 
+**📚 Documentação:** [TESTING.md](./TESTING.md) | [LINTER.md](./LINTER.md) | [CHANGELOG.md](./CHANGELOG.md)
+
 ## Sobre
 
 Sistema de gerenciamento de treinos que utiliza Google Gemini para gerar programas de exercícios personalizados baseados nos dados antropométricos e metas dos alunos.
@@ -333,12 +335,6 @@ npx expo run:android
 - Observer Pattern
 - Composition over Inheritance
 - Separation of Concerns
-
----
-
-## Autor
-
-**Gabriel Marchetti** - [@marchingbeagle](https://github.com/marchingbeagle)
 
 ---
 
