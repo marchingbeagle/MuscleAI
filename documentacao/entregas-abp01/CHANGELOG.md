@@ -2,14 +2,11 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
-O formato é baseado em [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
 ## [2.1.0] - 2025-10-30
 
 ### Adicionado
 
-#### Linter e Qualidade de Código
+#### Linter e Qualidade de Códigoentrega-02
 
 - **ESLint 9.38.0** configurado com flat config format
   - `@typescript-eslint/parser` e `@typescript-eslint/eslint-plugin`
@@ -44,10 +41,6 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Atualizado
 
-- **anotacoes.md** - Seção "Finalização" marcada como completa
-  - Código duplicado removido
-  - Documentação atualizada
-  - Code review completo
 - **LINTER.md** - Status atualizado para 50 warnings
   - Item "Remover imports não utilizados" marcado como concluído
   - Melhorias aplicadas documentadas
@@ -251,14 +244,6 @@ Refatoração massiva do projeto MuscleAI aplicando princípios de Clean Code, S
 - **Liskov Substitution:** Componentes substituíveis
 - **Interface Segregation:** Interfaces específicas (DTOs)
 - **Dependency Inversion:** UI depende de abstrações (services)
-
-## Referências
-
-- [Clean Code - Robert C. Martin](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
-- [SOLID Principles](https://en.wikipedia.org/wiki/SOLID)
-- [Jest Documentation](https://jestjs.io/)
-- [Yup Validation](https://github.com/jquense/yup)
-- [React Native Testing Library](https://callstack.github.io/react-native-testing-library/)
 
 ---
 
