@@ -11,7 +11,7 @@
 
 > Aplicativo mobile para Personal Trainers gerenciarem alunos e criarem treinos personalizados com IA
 
-**📚 Documentação:** [TESTING.md](./documentacao/TESTING.md) | [LINTER.md](./documentacao/LINTER.md) | [CHANGELOG.md](./documentacao/entregas-abp01/CHANGELOG.md) | [entrega-02.md](./documentacao/entregas-abp01/entrega-02.md)
+**📚 Documentação:** [TESTING.md](./documentacao/TESTING.md) | [LINTER.md](./documentacao/LINTER.md) | [Interface Fluente](./documentacao/interface_fluente.md) | [CHANGELOG.md](./documentacao/entregas-abp01/CHANGELOG.md) | [entrega-02.md](./documentacao/entregas-abp01/entrega-02.md)
 
 ## Sobre
 
@@ -252,10 +252,23 @@ npx expo run:android
 
 ## Documentação
 
-- **Testes:** [TESTING.md](./TESTING.md)
-- **Linter:** [LINTER.md](./LINTER.md)
-- **Changelog:** [CHANGELOG.md](./CHANGELOG.md)
+- **Testes:** [TESTING.md](./documentacao/TESTING.md) - Guia completo de testes e cobertura
+- **Linter:** [LINTER.md](./documentacao/LINTER.md) - Configuração e regras do ESLint
+- **Interface Fluente:** [interface_fluente.md](./documentacao/interface_fluente.md) - Sugestões de padrões de interface fluente
+- **Changelog:** [CHANGELOG.md](./documentacao/entregas-abp01/CHANGELOG.md)
 - **Apresentação:** [Pitch Deck](https://pitchdeck.hypermatic.com/slides/m3xg4zhr72197/?token=R2UyUXgxTnNrYlUjeVg%3D)
+
+### Melhorias Futuras - Interface Fluente
+
+O projeto documenta sugestões de implementação de **interface fluente** para melhorar a legibilidade e flexibilidade do código:
+
+- 🎯 **Gemini Builder** (Prioridade Alta) - Builder para configuração de prompts e geração de treinos
+- 🔍 **Query Builder** (Prioridade Média) - Builder para queries complexas de treinos
+- ✅ **Schema Builder** (Prioridade Média) - Builder para construção de schemas de validação
+- 📝 **Form Builder** (Prioridade Baixa) - Builder para construção de formulários
+- 🔔 **Alert Builder** (Prioridade Baixa) - Builder para notificações e alertas
+
+Veja detalhes em [interface_fluente.md](./documentacao/interface_fluente.md)
 
 ---
 
@@ -283,6 +296,7 @@ npx expo run:android
 - Observer Pattern
 - Composition over Inheritance
 - Separation of Concerns
+- **Interface Fluente** (sugerido - ver [documentação](./documentacao/interface_fluente.md))
 
 ---
 
