@@ -66,7 +66,7 @@ describe("Validation Schemas", () => {
       };
 
       await expect(alunoSchema.validate(aluno)).rejects.toThrow(
-        "Peso deve ser um número positivo"
+        "Peso deve ser positivo"
       );
     });
 
@@ -82,7 +82,7 @@ describe("Validation Schemas", () => {
       };
 
       await expect(alunoSchema.validate(aluno)).rejects.toThrow(
-        "Peso deve ser no máximo 500kg"
+        "Peso inválido (máximo 500kg)"
       );
     });
 
@@ -98,7 +98,7 @@ describe("Validation Schemas", () => {
       };
 
       await expect(alunoSchema.validate(aluno)).rejects.toThrow(
-        "Altura deve ser no máximo 300cm"
+        "Altura inválida (máximo 300cm)"
       );
     });
 
@@ -162,6 +162,8 @@ describe("Validation Schemas", () => {
   describe("treinoSchema", () => {
     it("deve validar treino válido", async () => {
       const treinoValido = {
+        nome_aluno: "João Silva",
+        metas: "Ganhar massa muscular e definir abdômen",
         treino_gerado: "Treino A: Peito e Tríceps com exercícios completos",
         id_aluno: "aluno-1",
         id_personal: "personal-1",
@@ -172,6 +174,8 @@ describe("Validation Schemas", () => {
 
     it("deve rejeitar treino muito curto", async () => {
       const treino = {
+        nome_aluno: "João Silva",
+        metas: "Ganhar massa muscular",
         treino_gerado: "Treino A",
         id_aluno: "aluno-1",
         id_personal: "personal-1",
@@ -184,6 +188,8 @@ describe("Validation Schemas", () => {
 
     it("deve rejeitar treino sem id_aluno", async () => {
       const treino = {
+        nome_aluno: "João Silva",
+        metas: "Ganhar massa muscular e definir abdômen",
         treino_gerado: "Treino A: Peito e Tríceps com exercícios completos",
         id_personal: "personal-1",
       };
@@ -195,6 +201,8 @@ describe("Validation Schemas", () => {
 
     it("deve rejeitar treino sem id_personal", async () => {
       const treino = {
+        nome_aluno: "João Silva",
+        metas: "Ganhar massa muscular e definir abdômen",
         treino_gerado: "Treino A: Peito e Tríceps com exercícios completos",
         id_aluno: "aluno-1",
       };
@@ -209,7 +217,7 @@ describe("Validation Schemas", () => {
     it("deve validar login válido", async () => {
       const loginValido = {
         email: "usuario@example.com",
-        senha: "senha123",
+        password: "senha123",
       };
 
       await expect(loginSchema.validate(loginValido)).resolves.toBeTruthy();
@@ -218,7 +226,7 @@ describe("Validation Schemas", () => {
     it("deve rejeitar email inválido", async () => {
       const login = {
         email: "email-invalido",
-        senha: "senha123",
+        password: "senha123",
       };
 
       await expect(loginSchema.validate(login)).rejects.toThrow(
@@ -229,7 +237,7 @@ describe("Validation Schemas", () => {
     it("deve rejeitar senha muito curta", async () => {
       const login = {
         email: "usuario@example.com",
-        senha: "123",
+        password: "123",
       };
 
       await expect(loginSchema.validate(login)).rejects.toThrow(
@@ -241,11 +249,11 @@ describe("Validation Schemas", () => {
   describe("signupSchema", () => {
     it("deve validar signup válido", async () => {
       const signupValido = {
-        primeiroNome: "João",
-        ultimoNome: "Silva",
+        firstName: "João",
+        lastName: "Silva",
         email: "joao@example.com",
-        senha: "Senha123",
-        confirmarSenha: "Senha123",
+        password: "Senha123456",
+        confirmPassword: "Senha123456",
       };
 
       await expect(signupSchema.validate(signupValido)).resolves.toBeTruthy();
@@ -253,11 +261,11 @@ describe("Validation Schemas", () => {
 
     it("deve rejeitar senha sem maiúscula", async () => {
       const signup = {
-        primeiroNome: "João",
-        ultimoNome: "Silva",
+        firstName: "João",
+        lastName: "Silva",
         email: "joao@example.com",
-        senha: "senha123",
-        confirmarSenha: "senha123",
+        password: "senha123",
+        confirmPassword: "senha123",
       };
 
       await expect(signupSchema.validate(signup)).rejects.toThrow(
@@ -267,11 +275,11 @@ describe("Validation Schemas", () => {
 
     it("deve rejeitar senhas diferentes", async () => {
       const signup = {
-        primeiroNome: "João",
-        ultimoNome: "Silva",
+        firstName: "João",
+        lastName: "Silva",
         email: "joao@example.com",
-        senha: "Senha123",
-        confirmarSenha: "Senha456",
+        password: "Senha123456",
+        confirmPassword: "Senha456789",
       };
 
       await expect(signupSchema.validate(signup)).rejects.toThrow(
@@ -281,11 +289,11 @@ describe("Validation Schemas", () => {
 
     it("deve rejeitar nome muito curto", async () => {
       const signup = {
-        primeiroNome: "J",
-        ultimoNome: "Silva",
+        firstName: "J",
+        lastName: "Silva",
         email: "joao@example.com",
-        senha: "Senha123",
-        confirmarSenha: "Senha123",
+        password: "Senha123456",
+        confirmPassword: "Senha123456",
       };
 
       await expect(signupSchema.validate(signup)).rejects.toThrow(

@@ -6,25 +6,46 @@ Este projeto possui testes automatizados para garantir a qualidade e confiabilid
 
 ### Arquivos Testados
 
-- **Services** (100% coverage)
+- **Services** (69.6% coverage)
 
   - `alunoService.test.ts` - 12 testes
   - `treinoService.test.ts` - 11 testes
+  - `gemini.test.ts` - 6 testes
 
-- **Hooks** (90% coverage)
+- **Hooks** (97.31% coverage)
 
   - `useAlunos.test.ts` - 4 testes
   - `useAluno.test.ts` - 5 testes
+  - `useFormValidation.test.ts` - 9 testes
+  - `useTreinoForm.test.ts` - 10 testes
+  - `useTreinos.test.ts` - 7 testes
 
-- **Componentes UI** (95% coverage)
+- **Componentes UI** (100% coverage)
 
   - `Button.test.tsx` - 8 testes
   - `Input.test.tsx` - 13 testes
+  - `EmptyState.test.tsx` - 5 testes
+  - `ErrorState.test.tsx` - 4 testes
+  - `LoadingState.test.tsx` - 6 testes
+  - `ValidationSummary.test.tsx` - 8 testes
 
-- **Validação** (100% coverage)
+- **Componentes MyComponents** (30% coverage)
+
+  - `ListaAlunos.test.tsx` - 5 testes
+
+- **Libs** (96.66% coverage)
+
+  - `utils.test.ts` - 7 testes
+  - `errorHandler.test.ts` - 12 testes
+  - `logger.test.ts` - 8 testes
+
+- **Validação** (87.5% coverage)
   - `schemas.test.ts` - 15 testes para 4 schemas
 
-**Total: 68 testes**
+### Resumo
+
+- **Total de arquivos de teste:** 19
+- **Total de testes:** 162
 
 ## Comandos
 
@@ -62,28 +83,46 @@ npm run test:ci
 
 O projeto está configurado para exigir um mínimo de 70% de cobertura em:
 
-- ✅ **Branches:** 70%+
-- ✅ **Functions:** 70%+
-- ✅ **Lines:** 70%+
-- ✅ **Statements:** 70%+
+- ✅ **Statements:** 83.33% (threshold: 70%)
+- ✅ **Branches:** 80% (threshold: 70%)
+- ✅ **Functions:** 82.85% (threshold: 70%)
+- ✅ **Lines:** 83.72% (threshold: 70%)
+
+**Cobertura atual está acima do threshold em todas as métricas!**
 
 ## 🧪 Estrutura dos Testes
 
-```
+```text
 src/
 ├── services/
 │   └── __tests__/
 │       ├── alunoService.test.ts
-│       └── treinoService.test.ts
+│       ├── treinoService.test.ts
+│       └── gemini.test.ts
 ├── hooks/
 │   └── __tests__/
 │       ├── useAlunos.test.ts
-│       └── useAluno.test.ts
+│       ├── useAluno.test.ts
+│       ├── useFormValidation.test.ts
+│       ├── useTreinoForm.test.ts
+│       └── useTreinos.test.ts
 ├── components/
-│   └── ui/
+│   ├── ui/
+│   │   └── __tests__/
+│   │       ├── Button.test.tsx
+│   │       ├── Input.test.tsx
+│   │       ├── EmptyState.test.tsx
+│   │       ├── ErrorState.test.tsx
+│   │       ├── LoadingState.test.tsx
+│   │       └── ValidationSummary.test.tsx
+│   └── mycomponents/
 │       └── __tests__/
-│           ├── Button.test.tsx
-│           └── Input.test.tsx
+│           └── ListaAlunos.test.tsx
+├── lib/
+│   └── __tests__/
+│       ├── utils.test.ts
+│       ├── errorHandler.test.ts
+│       └── logger.test.ts
 └── validation/
     └── __tests__/
         └── schemas.test.ts
@@ -161,7 +200,15 @@ Configurações globais:
 - Mocks do Expo Router
 - Mocks do Clerk (autenticação)
 - Mocks do Prisma Client
+- Mocks do Ionicons (@expo/vector-icons)
 - Silenciamento de logs durante testes
+
+### jest.setup.before.js
+
+Setup inicial que roda antes do jest-expo:
+
+- Mock de NativeModules do React Native
+- Inicialização de módulos nativos
 
 ## Boas Práticas
 
@@ -179,7 +226,8 @@ Configurações globais:
 - Testes de integração para fluxos completos
 - Snapshot testing para componentes visuais
 - Testes de performance
-- Aumentar coverage para 90%+
+- Aumentar coverage de services (alunoService, treinoService) para 80%+
+- Adicionar testes para componentes restantes (AlunoHomePage, ConfigItem)
 
 ## Referências
 
@@ -189,4 +237,4 @@ Configurações globais:
 
 ---
 
-**Última atualização:** 29 de Outubro de 2025
+**Última atualização:** 04 de Novembro de 2025

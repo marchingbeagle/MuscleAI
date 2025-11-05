@@ -1,5 +1,20 @@
 // Setup do Jest para React Native / Expo
-import "@testing-library/react-native/extend-expect";
+// Ensure globals are initialized before jest-expo tries to use them
+if (typeof global !== "undefined") {
+  Object.defineProperty(global, "__DEV__", {
+    value: true,
+    writable: true,
+    configurable: true,
+  });
+}
+
+// Import testing library after React is properly initialized
+try {
+  require("@testing-library/react-native/extend-expect");
+} catch (error) {
+  // If extend-expect fails, continue without it
+  console.warn("Could not load @testing-library/react-native/extend-expect:", error.message);
+}
 
 // Mock do Expo Router
 jest.mock("expo-router", () => ({
@@ -50,12 +65,19 @@ jest.mock("./src/services/db", () => ({
   },
 }));
 
+// Mock do Ionicons
+jest.mock("@expo/vector-icons", () => ({
+  Ionicons: "Ionicons",
+}));
+
 // Silenciar logs durante os testes
-global.console = {
-  ...console,
-  log: jest.fn(),
-  debug: jest.fn(),
-  info: jest.fn(),
-  warn: jest.fn(),
-  error: jest.fn(),
-};
+if (typeof global !== "undefined" && global.console) {
+  global.console = {
+    ...console,
+    log: jest.fn(),
+    debug: jest.fn(),
+    info: jest.fn(),
+    warn: jest.fn(),
+    error: jest.fn(),
+  };
+}

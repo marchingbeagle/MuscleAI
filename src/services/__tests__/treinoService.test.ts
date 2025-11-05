@@ -216,6 +216,7 @@ describe("TreinoService", () => {
       expect(result).toEqual(mockTreinos);
       expect(prismaClient.treino.findMany).toHaveBeenCalledWith({
         where: { id_aluno: "aluno-1" },
+        orderBy: { id_treino: "desc" },
       });
     });
 
