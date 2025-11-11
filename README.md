@@ -110,8 +110,11 @@ Crie `.env` na raiz:
 
 ```env
 EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=sua_chave_aqui
-EXPO_PUBLIC_GEMINI_API_KEY=sua_chave_aqui
+API_GEMINI=sua_chave_aqui
+GEMINI_API_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent
 ```
+
+**Nota:** A `GEMINI_API_URL` é opcional. Se não fornecida, será usada a URL padrão do Gemini.
 
 **Obter chaves:**
 

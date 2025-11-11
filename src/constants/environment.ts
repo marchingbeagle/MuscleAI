@@ -14,7 +14,8 @@ export const ENV = {
   // Gemini AI
   GEMINI_API_KEY: process.env.API_GEMINI || '',
   GEMINI_API_URL:
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent',
+    process.env.GEMINI_API_URL ||
+    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent',
 
   // Ambiente
   IS_DEV: __DEV__,
